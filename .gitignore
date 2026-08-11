@@ -10,3 +10,13 @@ data/event_study_final.csv
 __pycache__/
 *.pyc
 .DS_Store
+
+# Deliverable 3 (ML prediction pass) -- kept local only, not published.
+# Tested whether ML beats the simple net-dollar-value baseline (it doesn't);
+# see conversation notes rather than the repo for that analysis.
+src/ml_signal.py
+src/ml_backtest.py
+src/fix_price_outliers.py
+data/ml_features.csv
+data/ml_predictions_*.csv
+data/ml_portfolio_*.csv
