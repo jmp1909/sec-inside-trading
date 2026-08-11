@@ -1,0 +1,12 @@
+# Large generated pipeline outputs -- regenerate via the scripts in src/,
+# see README for the run order. Kept out of version control because several
+# of these are 15-90MB (SEC bulk data + full price history).
+data/prices.csv
+data/form4_transactions_raw.csv
+data/form4_transactions_clean.csv
+data/form4_with_returns.csv
+data/event_study_final.csv
+
+__pycache__/
+*.pyc
+.DS_Store
