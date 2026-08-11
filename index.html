@@ -8,31 +8,26 @@
     /* data face: same typewriter family as headlines -- tables read like typed evidence logs */
     --mono: "SF Mono", "Cascadia Mono", "Cascadia Code", Consolas, "Roboto Mono", "Liberation Mono", monospace;
 
-    --bg: #E9DFC3;
-    --surface: #F8F4E8;
-    --surface-2: #EEE4C8;
-    --ink: #241C10;
-    --ink-2: #5C4E34;
-    --ink-3: #8C7C56;
-    --border: #C7B685;
-    --accent: #2C3E63;
-    --accent-ink: #F8F4E8;
-    --pos: #2B6146;
-    --pos-soft: #DCE7D3;
-    --neg: #A3392A;
-    --neg-soft: #F1DFD5;
-    --shadow: 0 1px 2px rgba(40,28,10,0.14), 0 10px 24px rgba(40,28,10,0.12);
+    --bg: #E7E3D6;
+    --surface: #FBFAF5;
+    --surface-2: #EFEBDD;
+    --ink: #24211A;
+    --ink-2: #5A5645;
+    --ink-3: #8B8570;
+    --border: #D2CBB4;
+    --accent: #29354F;
+    --accent-ink: #FBFAF5;
+    --pos: #2C6249;
+    --pos-soft: #DEE6DA;
+    --neg: #9B3B2E;
+    --neg-soft: #EFDFD8;
+    --shadow: 0 1px 2px rgba(30,26,16,0.07), 0 4px 14px rgba(30,26,16,0.05);
   }
 
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
-    background-color: var(--bg);
-    background-image:
-      radial-gradient(rgba(36,28,16,0.05) 0.6px, transparent 0.6px),
-      radial-gradient(rgba(36,28,16,0.035) 0.6px, transparent 0.6px);
-    background-size: 3px 3px, 5px 5px;
-    background-position: 0 0, 1.5px 2.5px;
+    background: var(--bg);
     color: var(--ink);
     font-family: var(--sans);
     font-size: 16px;
@@ -79,28 +74,26 @@
     color: var(--ink-2);
     font-family: var(--mono);
     font-size: 12.5px;
-    padding: 7px 12px 7px 14px;
-    border-radius: 3px 8px 8px 3px;
+    padding: 7px 12px 7px 12px;
+    border-radius: 3px;
     background: var(--surface-2);
     border: 1px solid var(--border);
     border-left: 3px solid var(--ink-3);
     display: block;
   }
   @media (max-width: 900px) {
-    .rail a { border-radius: 8px 8px 3px 3px; border-left: 1px solid var(--border); border-top: 3px solid var(--ink-3); flex: 0 0 auto; }
+    .rail a { border-left: 1px solid var(--border); border-top: 3px solid var(--ink-3); flex: 0 0 auto; }
   }
   .rail a:hover { color: var(--ink); background: var(--surface); border-left-color: var(--accent); }
 
   main { min-width: 0; }
 
   /* ---------- Masthead ---------- */
-  .masthead { padding-bottom: 28px; border-bottom: 3px double var(--ink-3); margin-bottom: 40px; }
+  .masthead { padding-bottom: 28px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
   .eyebrow {
     font-family: var(--serif); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--accent); font-weight: 700; margin-bottom: 18px; display: inline-block;
-    border: 2px solid var(--accent); border-radius: 2px; padding: 5px 12px;
-    transform: rotate(-1.4deg); position: relative;
-    box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px rgba(44,62,99,0.35);
+    border: 1px solid var(--accent); border-radius: 2px; padding: 5px 12px;
   }
   h1.title {
     font-family: var(--serif); font-weight: 700; font-size: clamp(24px, 4vw, 38px);
@@ -109,17 +102,11 @@
   .subtitle { font-size: 16.5px; color: var(--ink-2); max-width: 62ch; margin: 0 0 22px; }
   .byline { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); }
 
-  .chips { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 28px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
   .chip {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 3px;
-    padding: 12px 18px 10px; box-shadow: var(--shadow); min-width: 128px; position: relative;
+    background: var(--surface); border: 1px solid var(--border); border-left: 2px solid var(--accent);
+    border-radius: 3px; padding: 12px 18px 10px; box-shadow: var(--shadow); min-width: 128px;
   }
-  .chip::before {
-    content: ""; position: absolute; top: -6px; left: 14px; width: 10px; height: 10px;
-    background: var(--bg); border: 1.5px solid var(--ink-3); border-radius: 50%;
-  }
-  .chip:nth-child(odd) { transform: rotate(-0.6deg); }
-  .chip:nth-child(even) { transform: rotate(0.6deg); }
   .chip .num { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
   .chip .num.pos { color: var(--pos); }
   .chip .label { font-size: 10.5px; color: var(--ink-3); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.04em; }
@@ -160,7 +147,7 @@
     font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--surface); background: var(--ink-2); border-bottom: 1px solid var(--border); font-weight: 700;
   }
-  tbody tr { border-bottom: 1px dashed var(--border); }
+  tbody tr { border-bottom: 1px solid var(--border); }
   tbody tr:nth-child(even) { background: var(--surface-2); }
   tbody tr:last-child { border-bottom: none; }
   td.pos { color: var(--pos); font-weight: 600; }
@@ -168,8 +155,8 @@
   tr.highlight td { background: var(--surface-2); font-weight: 700; }
 
   .ticker {
-    font-family: var(--mono); background: var(--surface); color: var(--ink);
-    border: 1px solid var(--ink-3); border-radius: 2px; padding: 1px 6px; font-size: 12px; font-weight: 700;
+    font-family: var(--mono); background: var(--surface-2); color: var(--ink);
+    border-radius: 2px; padding: 1px 6px; font-size: 12px; font-weight: 700;
   }
 
   /* ---------- Bar charts (CSS-driven) ---------- */
@@ -205,13 +192,8 @@
     opacity: 0; transition: opacity 0.08s; white-space: nowrap; z-index: 5; transform: translate(-50%, -110%);
   }
   .callout {
-    border: 1px solid var(--border); border-left: 4px solid var(--accent); background: var(--surface);
-    border-radius: 2px; padding: 18px 20px 16px; margin: 26px 0 20px; box-shadow: var(--shadow); position: relative;
-  }
-  .callout::before {
-    content: ""; position: absolute; top: -10px; left: 28px; width: 46px; height: 18px;
-    background: rgba(199,182,133,0.55); border: 1px solid rgba(140,124,86,0.4);
-    transform: rotate(-3deg);
+    border: 1px solid var(--border); border-left: 3px solid var(--accent); background: var(--surface);
+    border-radius: 2px; padding: 18px 20px 16px; margin: 20px 0; box-shadow: var(--shadow);
   }
   .callout.warn { border-left-color: var(--neg); }
   .callout h4 {
@@ -224,9 +206,8 @@
   @media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } }
 
   .foot {
-    margin-top: 70px; padding: 14px 18px; border: 2px solid var(--ink-3); border-radius: 2px;
-    font-family: var(--serif); font-size: 11px; color: var(--ink-2); letter-spacing: 0.03em;
-    text-transform: uppercase; display: inline-block; transform: rotate(-0.6deg);
+    margin-top: 70px; padding-top: 18px; border-top: 1px solid var(--border);
+    font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); letter-spacing: 0.02em;
   }
 
   .kv { display: grid; grid-template-columns: max-content 1fr; gap: 9px 18px; font-size: 13.5px; }
@@ -577,8 +558,8 @@
 
   function sharpeColor(s) {
     var t = (s - minSharpe) / (maxSharpe - minSharpe);
-    // interpolate a light->accent amber ramp using CSS var isn't directly possible in JS, use fixed amber hex ramp
-    var stops = [[240,235,224],[224,190,130],[201,141,53],[156,106,31]];
+    // interpolate a light->accent navy ramp using CSS var isn't directly possible in JS, use fixed hex ramp
+    var stops = [[239,235,221],[196,201,203],[122,133,153],[41,53,79]];
     var seg = t * (stops.length - 1);
     var i0 = Math.floor(seg), i1 = Math.min(stops.length - 1, i0 + 1);
     var f = seg - i0;
@@ -597,7 +578,7 @@
     sizes.forEach(function(sz) {
       var rec = grid.find(function(g) { return g.window_months === w && g.portfolio_size === sz; });
       var bg = sharpeColor(rec.port_sharpe);
-      var textColor = rec.port_sharpe > (minSharpe + (maxSharpe-minSharpe)*0.55) ? "#2A1D08" : "var(--ink)";
+      var textColor = rec.port_sharpe > (minSharpe + (maxSharpe-minSharpe)*0.55) ? "#F5F3EA" : "var(--ink)";
       rowsHtml += "<td class='cell' style='background:" + bg + "; color:" + textColor + ";'>" +
         "<div class='sharpe'>" + rec.port_sharpe.toFixed(2) + "</div>" +
         "<div class='sub' style='color:" + textColor + "; opacity:0.75;'>" + signedPct(rec.port_ann_return, 1) + " ann.</div>" +
