@@ -8,20 +8,20 @@
     /* data face: same typewriter family as headlines -- tables read like typed evidence logs */
     --mono: "SF Mono", "Cascadia Mono", "Cascadia Code", Consolas, "Roboto Mono", "Liberation Mono", monospace;
 
-    --bg: #E7E3D6;
-    --surface: #FBFAF5;
-    --surface-2: #EFEBDD;
-    --ink: #24211A;
-    --ink-2: #5A5645;
-    --ink-3: #8B8570;
-    --border: #D2CBB4;
+    --bg: #F3F3F2;
+    --surface: #FFFFFF;
+    --surface-2: #EAEAE8;
+    --ink: #141414;
+    --ink-2: #454542;
+    --ink-3: #78776F;
+    --border: #DCDBD6;
     --accent: #29354F;
-    --accent-ink: #FBFAF5;
-    --pos: #2C6249;
-    --pos-soft: #DEE6DA;
-    --neg: #9B3B2E;
-    --neg-soft: #EFDFD8;
-    --shadow: 0 1px 2px rgba(30,26,16,0.07), 0 4px 14px rgba(30,26,16,0.05);
+    --accent-ink: #FFFFFF;
+    --pos: #29604A;
+    --pos-soft: #E1EBE4;
+    --neg: #93372B;
+    --neg-soft: #F1E1DC;
+    --shadow: 0 1px 2px rgba(0,0,0,0.06), 0 4px 14px rgba(0,0,0,0.05);
   }
 
   * { box-sizing: border-box; }
@@ -559,7 +559,7 @@
   function sharpeColor(s) {
     var t = (s - minSharpe) / (maxSharpe - minSharpe);
     // interpolate a light->accent navy ramp using CSS var isn't directly possible in JS, use fixed hex ramp
-    var stops = [[239,235,221],[196,201,203],[122,133,153],[41,53,79]];
+    var stops = [[240,240,239],[187,193,201],[112,124,144],[41,53,79]];
     var seg = t * (stops.length - 1);
     var i0 = Math.floor(seg), i1 = Math.min(stops.length - 1, i0 + 1);
     var f = seg - i0;
@@ -578,7 +578,7 @@
     sizes.forEach(function(sz) {
       var rec = grid.find(function(g) { return g.window_months === w && g.portfolio_size === sz; });
       var bg = sharpeColor(rec.port_sharpe);
-      var textColor = rec.port_sharpe > (minSharpe + (maxSharpe-minSharpe)*0.55) ? "#F5F3EA" : "var(--ink)";
+      var textColor = rec.port_sharpe > (minSharpe + (maxSharpe-minSharpe)*0.55) ? "#FAFAFA" : "var(--ink)";
       rowsHtml += "<td class='cell' style='background:" + bg + "; color:" + textColor + ";'>" +
         "<div class='sharpe'>" + rec.port_sharpe.toFixed(2) + "</div>" +
         "<div class='sub' style='color:" + textColor + "; opacity:0.75;'>" + signedPct(rec.port_ann_return, 1) + " ann.</div>" +
