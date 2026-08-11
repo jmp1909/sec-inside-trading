@@ -1,9 +1,11 @@
 # Does Insider Buying Predict Returns?
 
-An event study and monthly-rebalanced portfolio backtest of open-market insider
-purchases and sales (SEC Form 4) across the S&P MidCap 400, built entirely on
-free, verified data sources: SEC EDGAR's bulk structured filings and Yahoo
-Finance daily prices.
+An end-to-end quantitative research project testing whether corporate insiders'
+disclosed stock purchases and sales (SEC Form 4) predict future returns, using
+87,500+ transactions across the S&P MidCap 400 (2018-2026). Includes an event
+study, a monthly-rebalanced portfolio backtest, a live signal tool, and a
+machine-learning validation pass, built entirely on free, verified data
+sources: SEC EDGAR's bulk structured filings and Yahoo Finance daily prices.
 
 **[Read the full report](https://jmp1909.github.io/sec-inside-trading/)**
 (interactive charts, full methodology, all results)
