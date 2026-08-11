@@ -8,6 +8,9 @@ Finance daily prices.
 **[Read the full report](https://jmp1909.github.io/sec-inside-trading/)**
 (interactive charts, full methodology, all results)
 
+**[See today's live signal](https://jmp1909.github.io/sec-inside-trading/live-signal.html)**
+(rerunnable snapshot, ranked by trailing 90-day net insider dollar value)
+
 ## The short version
 
 Insider buying predicts returns, but it's a modest tilt, not a golden signal.
@@ -56,7 +59,9 @@ src/
   portfolio_backtest_v2.py  # signal comparison (dollar value / buyer count / concentration)
   live_signal.py          # live, rerunnable insider-buying signal (see below)
 data/                      # pipeline outputs (large raw files gitignored -- see below)
+  live/                     # dated live-signal snapshots, one per run
 index.html                 # the published report, self-contained, served via GitHub Pages
+live-signal.html            # live signal dashboard, same design system, also on GitHub Pages
 ```
 
 ## Running it

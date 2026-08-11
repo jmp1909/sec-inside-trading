@@ -1,0 +1,257 @@
+<title>Live Insider Buying Signal</title>
+<style>
+  :root {
+    --serif: "Courier New", "Cascadia Mono", Consolas, "Liberation Mono", monospace;
+    --sans: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif;
+    --mono: "SF Mono", "Cascadia Mono", "Cascadia Code", Consolas, "Roboto Mono", "Liberation Mono", monospace;
+
+    --bg: #E9DFC3;
+    --surface: #F8F4E8;
+    --surface-2: #EEE4C8;
+    --ink: #241C10;
+    --ink-2: #5C4E34;
+    --ink-3: #8C7C56;
+    --border: #C7B685;
+    --accent: #2C3E63;
+    --accent-ink: #F8F4E8;
+    --pos: #2B6146;
+    --pos-soft: #DCE7D3;
+    --neg: #A3392A;
+    --neg-soft: #F1DFD5;
+    --shadow: 0 1px 2px rgba(40,28,10,0.14), 0 10px 24px rgba(40,28,10,0.12);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(rgba(36,28,16,0.05) 0.6px, transparent 0.6px),
+      radial-gradient(rgba(36,28,16,0.035) 0.6px, transparent 0.6px);
+    background-size: 3px 3px, 5px 5px;
+    background-position: 0 0, 1.5px 2.5px;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  a { color: var(--accent); }
+
+  .page { max-width: 900px; margin: 0 auto; padding: 40px 24px 100px; }
+  @media (max-width: 700px) { .page { padding: 20px 16px 70px; } }
+
+  .backlink {
+    font-family: var(--serif); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;
+    text-decoration: none; color: var(--ink-2); display: inline-flex; align-items: center; gap: 6px;
+    margin-bottom: 22px;
+  }
+  .backlink:hover { color: var(--accent); }
+
+  .masthead { padding-bottom: 28px; border-bottom: 3px double var(--ink-3); margin-bottom: 36px; }
+  .eyebrow {
+    font-family: var(--serif); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 18px; display: inline-block;
+    border: 2px solid var(--accent); border-radius: 2px; padding: 5px 12px;
+    transform: rotate(-1.4deg); position: relative;
+    box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px rgba(44,62,99,0.35);
+  }
+  h1.title {
+    font-family: var(--serif); font-weight: 700; font-size: clamp(24px, 4.4vw, 36px);
+    line-height: 1.18; margin: 0 0 14px; text-wrap: balance; letter-spacing: -0.01em;
+  }
+  .subtitle { font-size: 16px; color: var(--ink-2); max-width: 64ch; margin: 0 0 20px; }
+  .byline { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 26px; }
+  .chip {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 3px;
+    padding: 12px 18px 10px; box-shadow: var(--shadow); min-width: 118px; position: relative;
+  }
+  .chip::before {
+    content: ""; position: absolute; top: -6px; left: 14px; width: 10px; height: 10px;
+    background: var(--bg); border: 1.5px solid var(--ink-3); border-radius: 50%;
+  }
+  .chip:nth-child(odd) { transform: rotate(-0.6deg); }
+  .chip:nth-child(even) { transform: rotate(0.6deg); }
+  .chip .num { font-family: var(--mono); font-size: 19px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .chip .num.pos { color: var(--pos); }
+  .chip .num.neg { color: var(--neg); }
+  .chip .label { font-size: 10.5px; color: var(--ink-3); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  section { margin-bottom: 48px; }
+  .section-head {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+    background: var(--ink); border-radius: 3px; padding: 10px 16px;
+  }
+  .section-head h2 {
+    color: var(--surface); text-transform: uppercase; letter-spacing: 0.04em;
+    font-family: var(--serif); font-weight: 700; font-size: 18px; margin: 0;
+  }
+  .section-badge {
+    font-family: var(--mono); font-size: 12px; color: var(--bg); background: var(--accent);
+    border-radius: 2px; padding: 3px 7px; font-weight: 700;
+  }
+  .section-badge.buy { background: var(--pos); }
+  .section-badge.sell { background: var(--neg); }
+
+  p { max-width: 72ch; color: var(--ink); }
+  .prose-note { color: var(--ink-2); font-size: 14.5px; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
+    padding: 24px; box-shadow: var(--shadow); margin: 18px 0;
+  }
+  .scrollx { overflow-x: auto; }
+
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  table.data { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  th, td { padding: 9px 12px; text-align: right; white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; font-family: var(--sans); }
+  thead th {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--surface); background: var(--ink-2); border-bottom: 1px solid var(--border); font-weight: 700;
+  }
+  tbody tr { border-bottom: 1px dashed var(--border); }
+  tbody tr:nth-child(even) { background: var(--surface-2); }
+  tbody tr:last-child { border-bottom: none; }
+  td.pos { color: var(--pos); font-weight: 600; }
+  td.neg { color: var(--neg); font-weight: 600; }
+  .rank { font-family: var(--mono); color: var(--ink-3); font-size: 11.5px; }
+
+  .ticker {
+    font-family: var(--mono); background: var(--surface); color: var(--ink);
+    border: 1px solid var(--ink-3); border-radius: 2px; padding: 1px 6px; font-size: 12px; font-weight: 700;
+  }
+
+  .callout {
+    border: 1px solid var(--border); border-left: 4px solid var(--accent); background: var(--surface);
+    border-radius: 2px; padding: 18px 20px 16px; margin: 26px 0 20px; box-shadow: var(--shadow); position: relative;
+  }
+  .callout::before {
+    content: ""; position: absolute; top: -10px; left: 28px; width: 46px; height: 18px;
+    background: rgba(199,182,133,0.55); border: 1px solid rgba(140,124,86,0.4);
+    transform: rotate(-3deg);
+  }
+  .callout h4 {
+    margin: 0 0 6px; font-size: 12.5px; font-family: var(--serif); font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-2);
+  }
+  .callout p { margin: 0; font-size: 14px; color: var(--ink-2); }
+
+  .foot {
+    margin-top: 70px; padding: 14px 18px; border: 2px solid var(--ink-3); border-radius: 2px;
+    font-family: var(--serif); font-size: 11px; color: var(--ink-2); letter-spacing: 0.03em;
+    text-transform: uppercase; display: inline-block; transform: rotate(-0.6deg);
+  }
+</style>
+
+<div class="page">
+  <a class="backlink" href="index.html">&larr; Back to the full report</a>
+
+  <div class="masthead">
+    <div class="eyebrow">Field Report &middot; Live Signal</div>
+    <h1 class="title">Today's Insider Buying Signal</h1>
+    <p class="subtitle">A rerunnable snapshot of the same net-dollar-value ranking validated in the backtest
+      (3-month trailing window, see <a href="index.html#portfolio">the full report</a>), scraped directly from
+      individual SEC Form&nbsp;4 filings rather than the lagged quarterly bulk files. That's really the only way
+      to get anything resembling "current" data, since the bulk files run about a quarter behind.</p>
+    <div class="byline" id="byline"></div>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <div class="callout">
+    <h4>How to read this</h4>
+    <p>This is a point-in-time snapshot, not a live feed. It reflects whatever was true when
+      <span class="ticker">src/live_signal.py</span> was last run. Rerun it (weekly is a reasonable cadence,
+      matching the reporting lag insiders are legally allowed) and republish this file to refresh it. Past
+      snapshots aren't overwritten: each run is saved separately in <span class="ticker">data/live/</span>,
+      so a track record builds up over time.</p>
+  </div>
+
+  <section id="buys">
+    <div class="section-head"><span class="section-badge buy">&uarr;</span><h2>Strongest net buying</h2></div>
+    <p class="prose-note">Ranked by trailing net insider dollar value (purchases minus sales). A single large
+      block trade from one insider can dominate this. That's a feature of the raw signal, not a bug in
+      this table (see the report's note on why "value per buyer" refinements didn't help).</p>
+    <div class="card scrollx">
+      <table class="data">
+        <thead><tr><th>#</th><th>Ticker</th><th>Net $ value</th><th>Purchases</th><th>Sales</th><th>Distinct insiders</th></tr></thead>
+        <tbody id="buys-table"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="sells">
+    <div class="section-head"><span class="section-badge sell">&darr;</span><h2>Strongest net selling</h2></div>
+    <p class="prose-note">The other end of the same ranking. Note this isn't necessarily bearish:
+      insiders sell for all kinds of mundane reasons (taxes, diversification, planned 10b5-1 programs), which is
+      exactly why the report's event study treats sales as a weaker, noisier signal than purchases.</p>
+    <div class="card scrollx">
+      <table class="data">
+        <thead><tr><th>#</th><th>Ticker</th><th>Net $ value</th><th>Purchases</th><th>Sales</th><th>Distinct insiders</th></tr></thead>
+        <tbody id="sells-table"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="foot" id="foot"></div>
+</div>
+
+<script>
+(function() {
+  var DATA_DATE = "2026-08-11";
+  var LOOKBACK_DAYS = 90;
+  var signal = [{"ticker": "JEF", "net_dollar_value": 318717006.32, "n_purchases": 1, "n_sales": 0, "n_distinct_insiders": 1}, {"ticker": "FBIN", "net_dollar_value": 30638622.148500003, "n_purchases": 7, "n_sales": 1, "n_distinct_insiders": 3}, {"ticker": "FOUR", "net_dollar_value": 15943101.7, "n_purchases": 2, "n_sales": 0, "n_distinct_insiders": 1}, {"ticker": "HLNE", "net_dollar_value": 14241108.14, "n_purchases": 10, "n_sales": 0, "n_distinct_insiders": 3}, {"ticker": "RYAN", "net_dollar_value": 4568609.120999999, "n_purchases": 6, "n_sales": 0, "n_distinct_insiders": 5}, {"ticker": "ADC", "net_dollar_value": 2907343.45, "n_purchases": 4, "n_sales": 0, "n_distinct_insiders": 4}, {"ticker": "ACI", "net_dollar_value": 2515542.299, "n_purchases": 4, "n_sales": 0, "n_distinct_insiders": 3}, {"ticker": "FCN", "net_dollar_value": 2076583.8, "n_purchases": 4, "n_sales": 0, "n_distinct_insiders": 3}, {"ticker": "PSN", "net_dollar_value": 1972073.36, "n_purchases": 4, "n_sales": 0, "n_distinct_insiders": 2}, {"ticker": "CXT", "net_dollar_value": 1160078.0, "n_purchases": 2, "n_sales": 0, "n_distinct_insiders": 2}, {"ticker": "VFC", "net_dollar_value": 1007762.12, "n_purchases": 2, "n_sales": 0, "n_distinct_insiders": 2}, {"ticker": "KBR", "net_dollar_value": 945165.6, "n_purchases": 4, "n_sales": 0, "n_distinct_insiders": 4}, {"ticker": "RLI", "net_dollar_value": 858955.0, "n_purchases": 6, "n_sales": 0, "n_distinct_insiders": 4}, {"ticker": "HOG", "net_dollar_value": 790676.0892, "n_purchases": 1, "n_sales": 5, "n_distinct_insiders": 3}, {"ticker": "CELH", "net_dollar_value": 716358.0, "n_purchases": 3, "n_sales": 0, "n_distinct_insiders": 3}, {"ticker": "PNFP", "net_dollar_value": 704675.3300000001, "n_purchases": 1, "n_sales": 1, "n_distinct_insiders": 2}, {"ticker": "ACM", "net_dollar_value": 699391.02, "n_purchases": 3, "n_sales": 0, "n_distinct_insiders": 3}, {"ticker": "MTDR", "net_dollar_value": 681443.26, "n_purchases": 10, "n_sales": 0, "n_distinct_insiders": 6}, {"ticker": "ELAN", "net_dollar_value": 533557.3049999999, "n_purchases": 4, "n_sales": 0, "n_distinct_insiders": 4}, {"ticker": "XRAY", "net_dollar_value": 515799.41153, "n_purchases": 5, "n_sales": 0, "n_distinct_insiders": 5}, {"ticker": "CMC", "net_dollar_value": 504499.0, "n_purchases": 1, "n_sales": 0, "n_distinct_insiders": 1}, {"ticker": "WCC", "net_dollar_value": 351254.4, "n_purchases": 1, "n_sales": 0, "n_distinct_insiders": 1}, {"ticker": "VVV", "net_dollar_value": 336837.0, "n_purchases": 3, "n_sales": 1, "n_distinct_insiders": 4}, {"ticker": "EEFT", "net_dollar_value": 255748.6, "n_purchases": 2, "n_sales": 0, "n_distinct_insiders": 1}, {"ticker": "PLNT", "net_dollar_value": 247700.0, "n_purchases": 1, "n_sales": 0, "n_distinct_insiders": 1}, {"ticker": "DTM", "net_dollar_value": 240472.60000000003, "n_purchases": 3, "n_sales": 0, "n_distinct_insiders": 2}, {"ticker": "SON", "net_dollar_value": 234161.8555, "n_purchases": 1, "n_sales": 1, "n_distinct_insiders": 2}, {"ticker": "FLS", "net_dollar_value": 231615.0, "n_purchases": 2, "n_sales": 0, "n_distinct_insiders": 2}, {"ticker": "AMH", "net_dollar_value": 117021.16, "n_purchases": 9, "n_sales": 0, "n_distinct_insiders": 1}, {"ticker": "CNM", "net_dollar_value": 95110.938, "n_purchases": 1, "n_sales": 0, "n_distinct_insiders": 1}, {"ticker": "FIVE", "net_dollar_value": 93309.15, "n_purchases": 1, "n_sales": 0, "n_distinct_insiders": 1}, {"ticker": "OLED", "net_dollar_value": 92840.0, "n_purchases": 1, "n_sales": 0, "n_distinct_insiders": 1}, {"ticker": "FFIN", "net_dollar_value": 57603.0, "n_purchases": 2, "n_sales": 0, "n_distinct_insiders": 2}, {"ticker": "TTEK", "net_dollar_value": 50179.0, "n_purchases": 1, "n_sales": 0, "n_distinct_insiders": 1}, {"ticker": "RBA", "net_dollar_value": 26588.75, "n_purchases": 1, "n_sales": 1, "n_distinct_insiders": 2}, {"ticker": "ENS", "net_dollar_value": 24674.76, "n_purchases": 1, "n_sales": 0, "n_distinct_insiders": 1}, {"ticker": "KNSL", "net_dollar_value": 22527.5, "n_purchases": 1, "n_sales": 1, "n_distinct_insiders": 2}, {"ticker": "GPK", "net_dollar_value": 0.0, "n_purchases": 1, "n_sales": 0, "n_distinct_insiders": 1}, {"ticker": "DT", "net_dollar_value": -10420.93, "n_purchases": 0, "n_sales": 4, "n_distinct_insiders": 1}, {"ticker": "IRT", "net_dollar_value": -24800.0, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 1}, {"ticker": "MZTI", "net_dollar_value": -35358.51000000001, "n_purchases": 1, "n_sales": 1, "n_distinct_insiders": 2}, {"ticker": "DAR", "net_dollar_value": -39342.54999999999, "n_purchases": 2, "n_sales": 1, "n_distinct_insiders": 2}, {"ticker": "VIAV", "net_dollar_value": -59605.15, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "OSK", "net_dollar_value": -67599.3, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "TREX", "net_dollar_value": -70000.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "POR", "net_dollar_value": -79662.70999999999, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "OC", "net_dollar_value": -84497.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "LPX", "net_dollar_value": -89237.60999999999, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "COLB", "net_dollar_value": -92810.68, "n_purchases": 1, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "ESAB", "net_dollar_value": -95000.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "EGP", "net_dollar_value": -98668.08, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "RGLD", "net_dollar_value": -107925.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "CFR", "net_dollar_value": -124119.567, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "CACI", "net_dollar_value": -132100.32, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "BIO", "net_dollar_value": -135597.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "SAIA", "net_dollar_value": -136880.84, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "RRC", "net_dollar_value": -140000.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "TEX", "net_dollar_value": -142945.35, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 1}, {"ticker": "GLPI", "net_dollar_value": -144960.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "DOCS", "net_dollar_value": -147523.61, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 1}, {"ticker": "ITT", "net_dollar_value": -150174.57, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "SSD", "net_dollar_value": -156496.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "LAD", "net_dollar_value": -157387.19999999998, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 3}, {"ticker": "KRG", "net_dollar_value": -161374.5, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "AVAV", "net_dollar_value": -162544.0, "n_purchases": 0, "n_sales": 4, "n_distinct_insiders": 2}, {"ticker": "INGR", "net_dollar_value": -170039.22, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "NOV", "net_dollar_value": -184300.74, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "RGEN", "net_dollar_value": -185785.0, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 1}, {"ticker": "AN", "net_dollar_value": -198000.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "AA", "net_dollar_value": -215372.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "SR", "net_dollar_value": -228229.22000000003, "n_purchases": 2, "n_sales": 1, "n_distinct_insiders": 2}, {"ticker": "ARWR", "net_dollar_value": -228333.6, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "PEGA", "net_dollar_value": -229616.09, "n_purchases": 0, "n_sales": 5, "n_distinct_insiders": 2}, {"ticker": "LECO", "net_dollar_value": -232214.45, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "LIVN", "net_dollar_value": -232578.0, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 1}, {"ticker": "NJR", "net_dollar_value": -233441.745, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "JLL", "net_dollar_value": -240239.0955, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 1}, {"ticker": "FAF", "net_dollar_value": -243924.35906890003, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 1}, {"ticker": "GGG", "net_dollar_value": -257486.661, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "ALK", "net_dollar_value": -263256.3, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "ENSG", "net_dollar_value": -267692.52, "n_purchases": 0, "n_sales": 5, "n_distinct_insiders": 4}, {"ticker": "GNTX", "net_dollar_value": -272899.4256, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "FLR", "net_dollar_value": -276200.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "VMI", "net_dollar_value": -294881.84, "n_purchases": 1, "n_sales": 1, "n_distinct_insiders": 2}, {"ticker": "BKH", "net_dollar_value": -304969.5691, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "BRKR", "net_dollar_value": -317820.0, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 1}, {"ticker": "OGE", "net_dollar_value": -352339.65, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "VOYA", "net_dollar_value": -359460.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "SF", "net_dollar_value": -372233.0, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 1}, {"ticker": "VLY", "net_dollar_value": -372991.85, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "GME", "net_dollar_value": -406591.137, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 2}, {"ticker": "IDA", "net_dollar_value": -424463.4, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "FNB", "net_dollar_value": -430108.475, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "HOMB", "net_dollar_value": -431830.0, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "ALLY", "net_dollar_value": -431876.0, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 1}, {"ticker": "ST", "net_dollar_value": -437351.0085, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "HLI", "net_dollar_value": -440808.5, "n_purchases": 1, "n_sales": 1, "n_distinct_insiders": 2}, {"ticker": "SGI", "net_dollar_value": -445538.9939, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 1}, {"ticker": "AM", "net_dollar_value": -458510.0, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "FTI", "net_dollar_value": -462216.50000000006, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "CLH", "net_dollar_value": -473557.8, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "MLI", "net_dollar_value": -489460.124, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 2}, {"ticker": "PAG", "net_dollar_value": -495807.654, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "XPO", "net_dollar_value": -517471.92, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "HR", "net_dollar_value": -524873.79, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "AEIS", "net_dollar_value": -552629.9, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "WBS", "net_dollar_value": -573376.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "DINO", "net_dollar_value": -573884.6, "n_purchases": 2, "n_sales": 5, "n_distinct_insiders": 7}, {"ticker": "POST", "net_dollar_value": -649839.2999999999, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "M", "net_dollar_value": -667003.9173000001, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "CDE", "net_dollar_value": -714636.75, "n_purchases": 1, "n_sales": 1, "n_distinct_insiders": 2}, {"ticker": "IBOC", "net_dollar_value": -720000.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "WTS", "net_dollar_value": -802589.74, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "COLM", "net_dollar_value": -825514.5, "n_purchases": 0, "n_sales": 4, "n_distinct_insiders": 3}, {"ticker": "ONB", "net_dollar_value": -844035.8596, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "UGI", "net_dollar_value": -852494.1519999999, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "CRBG", "net_dollar_value": -946824.0, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 1}, {"ticker": "ARMK", "net_dollar_value": -974227.9999, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 1}, {"ticker": "TLN", "net_dollar_value": -988000.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "AVT", "net_dollar_value": -1023120.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "VC", "net_dollar_value": -1023776.0, "n_purchases": 0, "n_sales": 4, "n_distinct_insiders": 3}, {"ticker": "EXPO", "net_dollar_value": -1062099.1496, "n_purchases": 0, "n_sales": 9, "n_distinct_insiders": 5}, {"ticker": "AYI", "net_dollar_value": -1068098.64, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "EXP", "net_dollar_value": -1068397.5213, "n_purchases": 0, "n_sales": 4, "n_distinct_insiders": 1}, {"ticker": "DUOL", "net_dollar_value": -1073853.8518, "n_purchases": 0, "n_sales": 7, "n_distinct_insiders": 3}, {"ticker": "CRS", "net_dollar_value": -1090949.125, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "TXRH", "net_dollar_value": -1115864.33, "n_purchases": 0, "n_sales": 6, "n_distinct_insiders": 6}, {"ticker": "PB", "net_dollar_value": -1124136.4457, "n_purchases": 0, "n_sales": 62, "n_distinct_insiders": 2}, {"ticker": "NLY", "net_dollar_value": -1144500.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "CDP", "net_dollar_value": -1152575.254, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "BILL", "net_dollar_value": -1204663.335, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 1}, {"ticker": "EXLS", "net_dollar_value": -1213427.23, "n_purchases": 0, "n_sales": 4, "n_distinct_insiders": 2}, {"ticker": "CHWY", "net_dollar_value": -1220381.24, "n_purchases": 0, "n_sales": 4, "n_distinct_insiders": 2}, {"ticker": "SIRI", "net_dollar_value": -1239614.2884, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 3}, {"ticker": "AIT", "net_dollar_value": -1268427.05, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "PR", "net_dollar_value": -1282998.36, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "KRC", "net_dollar_value": -1315740.564, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 3}, {"ticker": "CGNX", "net_dollar_value": -1343456.6074, "n_purchases": 0, "n_sales": 4, "n_distinct_insiders": 1}, {"ticker": "MOG.A", "net_dollar_value": -1350047.28, "n_purchases": 0, "n_sales": 4, "n_distinct_insiders": 2}, {"ticker": "TTC", "net_dollar_value": -1377408.568485, "n_purchases": 1, "n_sales": 9, "n_distinct_insiders": 5}, {"ticker": "NYT", "net_dollar_value": -1377871.971, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 3}, {"ticker": "R", "net_dollar_value": -1399160.25, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "PRI", "net_dollar_value": -1404386.46, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 2}, {"ticker": "RBC", "net_dollar_value": -1434882.179, "n_purchases": 0, "n_sales": 5, "n_distinct_insiders": 5}, {"ticker": "WEX", "net_dollar_value": -1448405.29, "n_purchases": 1, "n_sales": 11, "n_distinct_insiders": 5}, {"ticker": "MANH", "net_dollar_value": -1451421.5035, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 3}, {"ticker": "AHR", "net_dollar_value": -1485492.5, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 2}, {"ticker": "WH", "net_dollar_value": -1495978.3742000002, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 1}, {"ticker": "RGA", "net_dollar_value": -1563030.85, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 2}, {"ticker": "SIGI", "net_dollar_value": -1608155.82, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "HQY", "net_dollar_value": -1651280.0, "n_purchases": 0, "n_sales": 5, "n_distinct_insiders": 3}, {"ticker": "ORI", "net_dollar_value": -1709567.8, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 3}, {"ticker": "EPR", "net_dollar_value": -1734143.8517, "n_purchases": 0, "n_sales": 8, "n_distinct_insiders": 5}, {"ticker": "SLAB", "net_dollar_value": -1739843.9200000002, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "HWC", "net_dollar_value": -1756834.64, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "FHI", "net_dollar_value": -1776213.8295, "n_purchases": 0, "n_sales": 8, "n_distinct_insiders": 4}, {"ticker": "FN", "net_dollar_value": -1779775.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "WFRD", "net_dollar_value": -1873965.87, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 2}, {"ticker": "RS", "net_dollar_value": -1876872.02, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 2}, {"ticker": "CBSH", "net_dollar_value": -1947334.767, "n_purchases": 0, "n_sales": 6, "n_distinct_insiders": 6}, {"ticker": "PCTY", "net_dollar_value": -1972512.44, "n_purchases": 0, "n_sales": 6, "n_distinct_insiders": 4}, {"ticker": "CHE", "net_dollar_value": -2001568.51, "n_purchases": 0, "n_sales": 4, "n_distinct_insiders": 4}, {"ticker": "GMED", "net_dollar_value": -2019072.5, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "CPRI", "net_dollar_value": -2056085.2626, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "RNR", "net_dollar_value": -2104922.165, "n_purchases": 0, "n_sales": 4, "n_distinct_insiders": 2}, {"ticker": "SMG", "net_dollar_value": -2154819.8689, "n_purchases": 0, "n_sales": 4, "n_distinct_insiders": 3}, {"ticker": "BC", "net_dollar_value": -2165062.0600000005, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "TKR", "net_dollar_value": -2185675.8, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "NXST", "net_dollar_value": -2189398.8456, "n_purchases": 1, "n_sales": 39, "n_distinct_insiders": 13}, {"ticker": "SYNA", "net_dollar_value": -2219590.04, "n_purchases": 0, "n_sales": 19, "n_distinct_insiders": 4}, {"ticker": "STRL", "net_dollar_value": -2220000.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "AFG", "net_dollar_value": -2255038.64, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 3}, {"ticker": "KEX", "net_dollar_value": -2328748.7700000005, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 3}, {"ticker": "CCK", "net_dollar_value": -2402175.0, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 1}, {"ticker": "DLB", "net_dollar_value": -2405944.5012000003, "n_purchases": 0, "n_sales": 10, "n_distinct_insiders": 5}, {"ticker": "MTZ", "net_dollar_value": -2412605.0, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "ALV", "net_dollar_value": -2548929.6070000003, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "IDCC", "net_dollar_value": -2653037.08, "n_purchases": 0, "n_sales": 12, "n_distinct_insiders": 8}, {"ticker": "CHRD", "net_dollar_value": -2655577.72, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 3}, {"ticker": "NTNX", "net_dollar_value": -2666778.2505, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 1}, {"ticker": "EVR", "net_dollar_value": -2678594.5216, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "HIMS", "net_dollar_value": -2713716.4793, "n_purchases": 1, "n_sales": 9, "n_distinct_insiders": 6}, {"ticker": "LSTR", "net_dollar_value": -2750328.1614, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "CLF", "net_dollar_value": -2874641.7888, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "EHC", "net_dollar_value": -2958550.47, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 1}, {"ticker": "CHH", "net_dollar_value": -3034483.89, "n_purchases": 0, "n_sales": 6, "n_distinct_insiders": 2}, {"ticker": "ANF", "net_dollar_value": -3150000.0, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 1}, {"ticker": "NOVT", "net_dollar_value": -3271857.06, "n_purchases": 0, "n_sales": 13, "n_distinct_insiders": 1}, {"ticker": "SSB", "net_dollar_value": -3378553.52, "n_purchases": 0, "n_sales": 5, "n_distinct_insiders": 1}, {"ticker": "ALGM", "net_dollar_value": -3419562.5805, "n_purchases": 0, "n_sales": 7, "n_distinct_insiders": 7}, {"ticker": "MOH", "net_dollar_value": -3429913.3200000003, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "DOCU", "net_dollar_value": -3476076.71, "n_purchases": 0, "n_sales": 13, "n_distinct_insiders": 8}, {"ticker": "LSCC", "net_dollar_value": -3546550.0277, "n_purchases": 0, "n_sales": 19, "n_distinct_insiders": 3}, {"ticker": "BWA", "net_dollar_value": -3564276.25, "n_purchases": 0, "n_sales": 6, "n_distinct_insiders": 5}, {"ticker": "GATX", "net_dollar_value": -3584610.5316, "n_purchases": 0, "n_sales": 5, "n_distinct_insiders": 2}, {"ticker": "MUSA", "net_dollar_value": -3689902.33, "n_purchases": 0, "n_sales": 4, "n_distinct_insiders": 4}, {"ticker": "KNX", "net_dollar_value": -3767242.0, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "WAL", "net_dollar_value": -3777203.44, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 2}, {"ticker": "CROX", "net_dollar_value": -3860284.0012, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 1}, {"ticker": "MSA", "net_dollar_value": -3898217.9248, "n_purchases": 1, "n_sales": 2, "n_distinct_insiders": 3}, {"ticker": "TRU", "net_dollar_value": -3934484.21, "n_purchases": 0, "n_sales": 9, "n_distinct_insiders": 5}, {"ticker": "SANM", "net_dollar_value": -3950100.42, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 2}, {"ticker": "DBX", "net_dollar_value": -3993851.5613, "n_purchases": 0, "n_sales": 20, "n_distinct_insiders": 8}, {"ticker": "CW", "net_dollar_value": -4158611.183238, "n_purchases": 1, "n_sales": 5, "n_distinct_insiders": 4}, {"ticker": "EWBC", "net_dollar_value": -4177736.0, "n_purchases": 0, "n_sales": 5, "n_distinct_insiders": 2}, {"ticker": "GWRE", "net_dollar_value": -4180571.943, "n_purchases": 0, "n_sales": 20, "n_distinct_insiders": 5}, {"ticker": "ATR", "net_dollar_value": -4477776.1007, "n_purchases": 0, "n_sales": 10, "n_distinct_insiders": 5}, {"ticker": "DKS", "net_dollar_value": -4581338.07, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 1}, {"ticker": "CUBE", "net_dollar_value": -4601625.3692, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "VNO", "net_dollar_value": -4815016.0, "n_purchases": 4, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "CRUS", "net_dollar_value": -5097780.1, "n_purchases": 0, "n_sales": 10, "n_distinct_insiders": 5}, {"ticker": "CNO", "net_dollar_value": -5202051.9704, "n_purchases": 0, "n_sales": 6, "n_distinct_insiders": 2}, {"ticker": "ORA", "net_dollar_value": -5266289.045, "n_purchases": 0, "n_sales": 10, "n_distinct_insiders": 7}, {"ticker": "ASB", "net_dollar_value": -5429570.4755, "n_purchases": 0, "n_sales": 10, "n_distinct_insiders": 6}, {"ticker": "UMBF", "net_dollar_value": -5655922.6752, "n_purchases": 0, "n_sales": 15, "n_distinct_insiders": 9}, {"ticker": "AAL", "net_dollar_value": -5669689.2788, "n_purchases": 0, "n_sales": 9, "n_distinct_insiders": 3}, {"ticker": "AMG", "net_dollar_value": -5691065.0, "n_purchases": 1, "n_sales": 1, "n_distinct_insiders": 2}, {"ticker": "AMKR", "net_dollar_value": -5767747.0, "n_purchases": 0, "n_sales": 11, "n_distinct_insiders": 6}, {"ticker": "FCFS", "net_dollar_value": -5917013.5, "n_purchases": 0, "n_sales": 7, "n_distinct_insiders": 4}, {"ticker": "ENTG", "net_dollar_value": -6186636.58, "n_purchases": 0, "n_sales": 8, "n_distinct_insiders": 5}, {"ticker": "ZION", "net_dollar_value": -6283805.015, "n_purchases": 0, "n_sales": 8, "n_distinct_insiders": 3}, {"ticker": "WWD", "net_dollar_value": -6337143.5200000005, "n_purchases": 0, "n_sales": 9, "n_distinct_insiders": 3}, {"ticker": "EXEL", "net_dollar_value": -6555230.63, "n_purchases": 0, "n_sales": 6, "n_distinct_insiders": 6}, {"ticker": "SFM", "net_dollar_value": -6683776.2932, "n_purchases": 0, "n_sales": 7, "n_distinct_insiders": 2}, {"ticker": "SMTC", "net_dollar_value": -6884937.3904, "n_purchases": 0, "n_sales": 23, "n_distinct_insiders": 8}, {"ticker": "CVLT", "net_dollar_value": -6972070.319, "n_purchases": 0, "n_sales": 20, "n_distinct_insiders": 5}, {"ticker": "ULS", "net_dollar_value": -7109924.1776, "n_purchases": 4, "n_sales": 16, "n_distinct_insiders": 6}, {"ticker": "FNF", "net_dollar_value": -7153734.5832, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "HALO", "net_dollar_value": -7737315.465, "n_purchases": 0, "n_sales": 27, "n_distinct_insiders": 3}, {"ticker": "JAZZ", "net_dollar_value": -7968950.83, "n_purchases": 0, "n_sales": 9, "n_distinct_insiders": 6}, {"ticker": "RRX", "net_dollar_value": -8305644.77, "n_purchases": 0, "n_sales": 10, "n_distinct_insiders": 4}, {"ticker": "MTG", "net_dollar_value": -8366517.771, "n_purchases": 0, "n_sales": 7, "n_distinct_insiders": 4}, {"ticker": "THG", "net_dollar_value": -8415430.96, "n_purchases": 0, "n_sales": 14, "n_distinct_insiders": 7}, {"ticker": "KTOS", "net_dollar_value": -8415683.4284, "n_purchases": 0, "n_sales": 52, "n_distinct_insiders": 9}, {"ticker": "EQH", "net_dollar_value": -8698929.310697, "n_purchases": 12, "n_sales": 19, "n_distinct_insiders": 7}, {"ticker": "GEF", "net_dollar_value": -8813492.920761, "n_purchases": 0, "n_sales": 12, "n_distinct_insiders": 7}, {"ticker": "LEA", "net_dollar_value": -9440430.546, "n_purchases": 0, "n_sales": 12, "n_distinct_insiders": 5}, {"ticker": "CART", "net_dollar_value": -9478717.4658, "n_purchases": 0, "n_sales": 7, "n_distinct_insiders": 4}, {"ticker": "SARO", "net_dollar_value": -9496463.0225, "n_purchases": 0, "n_sales": 9, "n_distinct_insiders": 1}, {"ticker": "ESNT", "net_dollar_value": -9593934.27, "n_purchases": 0, "n_sales": 7, "n_distinct_insiders": 3}, {"ticker": "BYD", "net_dollar_value": -10141058.11, "n_purchases": 0, "n_sales": 4, "n_distinct_insiders": 4}, {"ticker": "RMBS", "net_dollar_value": -10373056.0344, "n_purchases": 0, "n_sales": 9, "n_distinct_insiders": 6}, {"ticker": "ARW", "net_dollar_value": -10547220.065, "n_purchases": 0, "n_sales": 6, "n_distinct_insiders": 3}, {"ticker": "TCBI", "net_dollar_value": -10566137.3486555, "n_purchases": 1, "n_sales": 4, "n_distinct_insiders": 4}, {"ticker": "QLYS", "net_dollar_value": -10690340.0371, "n_purchases": 0, "n_sales": 55, "n_distinct_insiders": 6}, {"ticker": "TOST", "net_dollar_value": -10802596.161, "n_purchases": 0, "n_sales": 19, "n_distinct_insiders": 6}, {"ticker": "THC", "net_dollar_value": -11018123.22, "n_purchases": 0, "n_sales": 13, "n_distinct_insiders": 8}, {"ticker": "BJ", "net_dollar_value": -11041491.41, "n_purchases": 0, "n_sales": 9, "n_distinct_insiders": 2}, {"ticker": "ELF", "net_dollar_value": -11924400.2855, "n_purchases": 0, "n_sales": 22, "n_distinct_insiders": 7}, {"ticker": "HGV", "net_dollar_value": -12709002.715, "n_purchases": 0, "n_sales": 5, "n_distinct_insiders": 3}, {"ticker": "BURL", "net_dollar_value": -13069894.45, "n_purchases": 0, "n_sales": 23, "n_distinct_insiders": 4}, {"ticker": "CYTK", "net_dollar_value": -13154148.45, "n_purchases": 0, "n_sales": 21, "n_distinct_insiders": 6}, {"ticker": "TOL", "net_dollar_value": -13328824.533100002, "n_purchases": 0, "n_sales": 2, "n_distinct_insiders": 2}, {"ticker": "FND", "net_dollar_value": -13593174.7, "n_purchases": 0, "n_sales": 1, "n_distinct_insiders": 1}, {"ticker": "SNX", "net_dollar_value": -13977948.94, "n_purchases": 0, "n_sales": 52, "n_distinct_insiders": 3}, {"ticker": "TNL", "net_dollar_value": -14259189.2, "n_purchases": 0, "n_sales": 9, "n_distinct_insiders": 7}, {"ticker": "MORN", "net_dollar_value": -14432771.7681, "n_purchases": 0, "n_sales": 57, "n_distinct_insiders": 3}, {"ticker": "AAON", "net_dollar_value": -15000029.52, "n_purchases": 0, "n_sales": 10, "n_distinct_insiders": 5}, {"ticker": "LFUS", "net_dollar_value": -15781973.23, "n_purchases": 0, "n_sales": 18, "n_distinct_insiders": 7}, {"ticker": "KRYS", "net_dollar_value": -15946982.3042, "n_purchases": 0, "n_sales": 24, "n_distinct_insiders": 3}, {"ticker": "MEDP", "net_dollar_value": -16203053.9, "n_purchases": 0, "n_sales": 4, "n_distinct_insiders": 3}, {"ticker": "NVT", "net_dollar_value": -16387500.61856, "n_purchases": 0, "n_sales": 7, "n_distinct_insiders": 3}, {"ticker": "SEIC", "net_dollar_value": -16749298.506, "n_purchases": 0, "n_sales": 14, "n_distinct_insiders": 8}, {"ticker": "KBH", "net_dollar_value": -17872340.17, "n_purchases": 0, "n_sales": 9, "n_distinct_insiders": 4}, {"ticker": "PINS", "net_dollar_value": -18577344.9785, "n_purchases": 0, "n_sales": 24, "n_distinct_insiders": 4}, {"ticker": "MKSI", "net_dollar_value": -19624871.895, "n_purchases": 0, "n_sales": 22, "n_distinct_insiders": 11}, {"ticker": "IPGP", "net_dollar_value": -19738441.53, "n_purchases": 0, "n_sales": 36, "n_distinct_insiders": 7}, {"ticker": "RH", "net_dollar_value": -20024728.2373, "n_purchases": 3, "n_sales": 15, "n_distinct_insiders": 3}, {"ticker": "TTMI", "net_dollar_value": -20911916.63, "n_purchases": 0, "n_sales": 240, "n_distinct_insiders": 10}, {"ticker": "OKTA", "net_dollar_value": -22040184.7724, "n_purchases": 0, "n_sales": 24, "n_distinct_insiders": 5}, {"ticker": "NXT", "net_dollar_value": -22782153.41, "n_purchases": 0, "n_sales": 13, "n_distinct_insiders": 6}, {"ticker": "PFGC", "net_dollar_value": -23481140.39, "n_purchases": 0, "n_sales": 32, "n_distinct_insiders": 5}, {"ticker": "APPF", "net_dollar_value": -26171752.74, "n_purchases": 0, "n_sales": 183, "n_distinct_insiders": 5}, {"ticker": "MTSI", "net_dollar_value": -27732036.2056, "n_purchases": 0, "n_sales": 58, "n_distinct_insiders": 6}, {"ticker": "ATI", "net_dollar_value": -28232244.69, "n_purchases": 0, "n_sales": 20, "n_distinct_insiders": 1}, {"ticker": "SCI", "net_dollar_value": -28423918.4778, "n_purchases": 0, "n_sales": 4, "n_distinct_insiders": 3}, {"ticker": "H", "net_dollar_value": -30164403.9, "n_purchases": 0, "n_sales": 22, "n_distinct_insiders": 7}, {"ticker": "ROKU", "net_dollar_value": -32463533.92, "n_purchases": 0, "n_sales": 46, "n_distinct_insiders": 9}, {"ticker": "AGCO", "net_dollar_value": -56996782.1612, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 2}, {"ticker": "MP", "net_dollar_value": -57155898.54000001, "n_purchases": 2, "n_sales": 16, "n_distinct_insiders": 2}, {"ticker": "NBIX", "net_dollar_value": -62449069.65889999, "n_purchases": 0, "n_sales": 27, "n_distinct_insiders": 9}, {"ticker": "IESC", "net_dollar_value": -99698965.16, "n_purchases": 0, "n_sales": 25, "n_distinct_insiders": 2}, {"ticker": "P", "net_dollar_value": -105101612.18, "n_purchases": 0, "n_sales": 59, "n_distinct_insiders": 6}, {"ticker": "APG", "net_dollar_value": -110811336.35, "n_purchases": 0, "n_sales": 9, "n_distinct_insiders": 4}, {"ticker": "VICR", "net_dollar_value": -174324713.2032, "n_purchases": 0, "n_sales": 553, "n_distinct_insiders": 11}, {"ticker": "ROIV", "net_dollar_value": -209891746.64, "n_purchases": 0, "n_sales": 25, "n_distinct_insiders": 7}, {"ticker": "TWLO", "net_dollar_value": -210981053.3143, "n_purchases": 0, "n_sales": 32, "n_distinct_insiders": 4}, {"ticker": "PBF", "net_dollar_value": -238118505.994, "n_purchases": 0, "n_sales": 32, "n_distinct_insiders": 6}, {"ticker": "CAVA", "net_dollar_value": -277911099.94, "n_purchases": 4, "n_sales": 12, "n_distinct_insiders": 9}, {"ticker": "ILMN", "net_dollar_value": -304026124.79, "n_purchases": 0, "n_sales": 53, "n_distinct_insiders": 4}, {"ticker": "BROS", "net_dollar_value": -359231534.6108, "n_purchases": 1, "n_sales": 37, "n_distinct_insiders": 5}, {"ticker": "SITM", "net_dollar_value": -366017740.41, "n_purchases": 0, "n_sales": 19, "n_distinct_insiders": 9}, {"ticker": "UTHR", "net_dollar_value": -407611775.9046, "n_purchases": 1, "n_sales": 801, "n_distinct_insiders": 5}, {"ticker": "DOCN", "net_dollar_value": -505133976.44000006, "n_purchases": 0, "n_sales": 6, "n_distinct_insiders": 4}, {"ticker": "SN", "net_dollar_value": -563325390.49, "n_purchases": 0, "n_sales": 10, "n_distinct_insiders": 5}, {"ticker": "SHC", "net_dollar_value": -772676197.4399999, "n_purchases": 0, "n_sales": 3, "n_distinct_insiders": 2}, {"ticker": "BTSG", "net_dollar_value": -1734371748.526, "n_purchases": 0, "n_sales": 6, "n_distinct_insiders": 5}];
+
+  function fmtMoney(v) {
+    var sign = v < 0 ? "-" : "+";
+    var abs = Math.abs(v);
+    if (abs >= 1e6) return sign + "$" + (abs/1e6).toFixed(2) + "M";
+    if (abs >= 1e3) return sign + "$" + (abs/1e3).toFixed(0) + "K";
+    return sign + "$" + abs.toFixed(0);
+  }
+
+  document.getElementById("byline").textContent =
+    "As of " + DATA_DATE + " · trailing " + LOOKBACK_DAYS + "-day window · S&P MidCap 400 universe";
+
+  var nPos = signal.filter(function(d) { return d.net_dollar_value > 0; }).length;
+  var nNeg = signal.filter(function(d) { return d.net_dollar_value < 0; }).length;
+  var totalP = signal.reduce(function(a, d) { return a + d.n_purchases; }, 0);
+  var totalS = signal.reduce(function(a, d) { return a + d.n_sales; }, 0);
+
+  var chipsHtml =
+    "<div class='chip'><div class='num'>" + signal.length + "</div><div class='label'>companies with activity</div></div>" +
+    "<div class='chip'><div class='num pos'>" + nPos + "</div><div class='label'>net buyers</div></div>" +
+    "<div class='chip'><div class='num neg'>" + nNeg + "</div><div class='label'>net sellers</div></div>" +
+    "<div class='chip'><div class='num'>" + totalP + " / " + totalS + "</div><div class='label'>purchases / sales</div></div>";
+  document.getElementById("chips").innerHTML = chipsHtml;
+
+  var sorted = signal.slice().sort(function(a, b) { return b.net_dollar_value - a.net_dollar_value; });
+  var buys = sorted.slice(0, 25);
+  var sells = sorted.slice(-25).reverse();
+
+  function renderRows(rows, tbodyId) {
+    var tbody = document.getElementById(tbodyId);
+    var html = "";
+    rows.forEach(function(r, i) {
+      var cls = r.net_dollar_value >= 0 ? "pos" : "neg";
+      html += "<tr>" +
+        "<td class='rank'>" + (i + 1) + "</td>" +
+        "<td><span class='ticker'>" + r.ticker + "</span></td>" +
+        "<td class='" + cls + "'>" + fmtMoney(r.net_dollar_value) + "</td>" +
+        "<td>" + r.n_purchases + "</td>" +
+        "<td>" + r.n_sales + "</td>" +
+        "<td>" + r.n_distinct_insiders + "</td>" +
+      "</tr>";
+    });
+    tbody.innerHTML = html;
+  }
+  renderRows(buys, "buys-table");
+  renderRows(sells, "sells-table");
+
+  document.getElementById("foot").textContent =
+    "sec-inside-trading · live signal snapshot · not investment advice";
+})();
+</script>
