@@ -5,7 +5,7 @@ purchases and sales (SEC Form 4) across the S&P MidCap 400, built entirely on
 free, verified data sources: SEC EDGAR's bulk structured filings and Yahoo
 Finance daily prices.
 
-**[Read the full report](https://claude.ai/code/artifact/7714f1a5-98b7-41ee-a607-2c89c98afa73)**
+**[Read the full report](https://jmp1909.github.io/sec-inside-trading/)**
 (interactive charts, full methodology, all results)
 
 ## The short version
@@ -54,9 +54,9 @@ src/
   event_study.py          # P vs S vs benchmark, by horizon
   portfolio_backtest.py   # monthly-rebalanced portfolio grid backtest
   portfolio_backtest_v2.py  # signal comparison (dollar value / buyer count / concentration)
+  live_signal.py          # live, rerunnable insider-buying signal (see below)
 data/                      # pipeline outputs (large raw files gitignored -- see below)
-report/
-  index.html               # the published report, self-contained
+index.html                 # the published report, self-contained, served via GitHub Pages
 ```
 
 ## Running it
