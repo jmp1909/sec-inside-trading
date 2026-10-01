@@ -1,43 +1,43 @@
 # Does Insider Buying Predict Returns?
 
-An end-to-end quantitative research project testing whether corporate insiders'
-disclosed stock purchases and sales (SEC Form 4) predict future returns, using
-87,500+ transactions across the S&P MidCap 400 (2018-2026). Includes an event
-study, a monthly-rebalanced portfolio backtest, a live signal tool, and a
-machine-learning validation pass, built entirely on free, verified data
-sources: SEC EDGAR's bulk structured filings and Yahoo Finance daily prices.
+A research project testing whether open-market stock purchases and sales by
+company insiders, as disclosed on SEC Form 4, predict later returns. It covers
+about 87,500 transactions in S&P MidCap 400 companies from 2018 to 2026 and
+includes an event study, a monthly-rebalanced portfolio backtest and a script
+that produces a current snapshot of the same ranking. Data come from SEC EDGAR's
+bulk filings and Yahoo Finance daily prices.
 
-**[Read the full report](https://jmp1909.github.io/sec-inside-trading/)**
-(interactive charts, full methodology, all results)
+**[Report](https://jmp1909.github.io/sec-inside-trading/)** &middot;
+**[Latest insider-buying snapshot](https://jmp1909.github.io/sec-inside-trading/live-signal.html)** &middot;
+[Changelog](CHANGELOG.md)
 
-**[See today's live signal](https://jmp1909.github.io/sec-inside-trading/live-signal.html)**
-(rerunnable snapshot, ranked by trailing 90-day net insider dollar value)
+## Current status
 
-## The short version
+The published results come from the first version of the analysis (August 2026).
+A review found several problems that probably flatter them: survivorship bias in
+the stock list, no trading costs, a Sharpe ratio without a risk-free rate, no
+factor adjustment, and statistics that treat related trades as independent. The
+code has been revised to address each of these (see
+[Methodology revisions](#methodology-revisions)) but **has not been re-run yet**,
+so there are no revised numbers. After running `./run_pipeline.sh`,
+`src/build_report.py` regenerates the report from the new results.
 
-> **Methodology revision in progress.** The numbers below (and in the published
-> report) come from the original backtest, which used today's index members for
-> the whole period, ignored trading costs and the risk-free rate, and did no factor
-> adjustment. The pipeline has since been rebuilt to fix those issues (see
-> [Methodology revisions](#methodology-revisions)); the report will be updated
-> with the re-run results. Until then, read the figures below with those caveats
-> in mind.
+## First-version results (preliminary)
 
-Insider buying predicts returns, but it's a modest tilt, not a golden signal.
-
-- Open-market purchases beat an unconditional benchmark at every horizon
-  tested (1 day to 2 years), with strong statistical significance
-  (p < 0.02 everywhere, mostly p < 0.0001). Sales underperform the same
-  benchmark just as consistently.
-- Turned into an actual monthly-rebalanced portfolio (rank the universe by
-  trailing 3-month net insider dollar buying, hold the top 50, equal-weight),
-  it beats a diversified buy-and-hold on both raw return (24.0% vs 19.1%
-  annualized) and risk-adjusted return (Sharpe 0.86 vs 0.83).
-- The edge is thin, though: only the more diversified configurations
-  survive risk-adjustment. A concentrated "top 10 highest-conviction bets"
-  portfolio posts a flashier raw return but a *worse* Sharpe ratio than just
-  holding the market, because concentration adds drawdown faster than it
-  adds return.
+- Open-market purchases were followed by higher returns than an average
+  index stock on an average day at every horizon from 1 day to 2 years
+  (t-test p < 0.02 at every horizon, below 0.0001 at most). Sales were followed
+  by lower returns than that benchmark at every horizon. The p-values treat each
+  transaction row as independent, which overstates the evidence.
+- A portfolio of the 50 stocks with the most net insider buying over the previous
+  3 months, rebalanced monthly, returned 24.2% a year (February 2019 to July 2026)
+  against 19.1% for an equal-weighted portfolio of all 400 stocks, also
+  rebalanced monthly. Its Sharpe ratio was 0.86 vs 0.83, and its worst drawdown
+  was deeper (-43% vs -37%). No trading costs were deducted.
+- This was the only one of the nine look-back / portfolio-size combinations with
+  a higher Sharpe ratio than the benchmark. The 10-stock portfolios had higher
+  returns but clearly lower Sharpe ratios, and every combination had a deeper
+  drawdown than the benchmark.
 
 ## Methodology revisions
 
@@ -89,13 +89,18 @@ src/
   portfolio_backtest.py   # monthly-rebalanced portfolio grid backtest, with costs
   portfolio_backtest_v2.py  # signal comparison (dollar value / buyer count / concentration)
   robustness.py           # factor alphas, placebo, drawdowns, regimes, survivorship
-  live_signal.py          # live, rerunnable insider-buying signal (see below)
+  build_report.py         # writes index.html from the pipeline outputs
+  live_signal.py          # current insider-buying snapshot from recent Form 4 filings
+  build_live_page.py      # writes live-signal.html from the latest snapshot
+  report_html.py          # table / chart helpers shared by the two page builders
 data/                      # pipeline outputs (large raw files gitignored -- see below)
   ticker_overrides.csv      # hand-checked ticker renames / reused tickers for the universe
   live/                     # dated live-signal snapshots, one per run
 run_pipeline.sh            # runs everything below in order
-index.html                 # the published report, self-contained, served via GitHub Pages
-live-signal.html            # live signal dashboard, same design system, also on GitHub Pages
+index.html                 # the report (GitHub Pages); generated, don't edit by hand
+live-signal.html           # the latest snapshot page (GitHub Pages); generated
+style.css                  # plain stylesheet shared by both pages
+CHANGELOG.md               # what changed and when, including corrections
 ## Running it
 
 ```
@@ -118,6 +123,14 @@ python src/event_study.py          --universe current   #   "
 python src/portfolio_backtest.py   --universe current   #   "
 python src/portfolio_backtest_v2.py --universe current  #   "
 python src/robustness.py
+python src/build_report.py
+```
+
+To refresh the snapshot page:
+
+```
+python src/live_signal.py
+python src/build_live_page.py
 ```
 
 `--universe pit` (the default) is the point-in-time universe used for the main

@@ -22,3 +22,4 @@ for u in current pit; do
   python src/portfolio_backtest_v2.py --universe "$u"
 done
 python src/robustness.py --universe pit   # reads both grids for the survivorship comparison
+python src/build_report.py                # regenerates index.html from the results
