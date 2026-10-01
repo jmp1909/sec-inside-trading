@@ -64,6 +64,7 @@ def check_bankruptcy(cik_padded: str, ticker: str):
 
 def main():
     universe = pd.read_csv("data/universe.csv", dtype={"cik_padded": str})
+    universe = universe[universe["cik_padded"].notna()]
     print(f"Scanning {len(universe)} companies for Item 1.03 (bankruptcy) 8-Ks since {START_DATE}...", flush=True)
 
     t0 = time.time()

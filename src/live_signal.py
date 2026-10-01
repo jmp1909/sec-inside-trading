@@ -129,6 +129,10 @@ def main():
     args = parser.parse_args()
 
     universe = pd.read_csv("data/universe.csv", dtype={"cik_padded": str})
+    # universe.csv also lists companies that left the index during the backtest window;
+    # the live signal only ranks today's constituents
+    if "current_member" in universe.columns:
+        universe = universe[universe["current_member"] & universe["cik_padded"].notna()]
     start_date = (date.today() - timedelta(days=args.lookback_days)).isoformat()
     today = date.today().isoformat()
 

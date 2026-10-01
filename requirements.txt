@@ -1,4 +1,6 @@
 pandas
+numpy
 requests
 scipy
+statsmodels
 lxml

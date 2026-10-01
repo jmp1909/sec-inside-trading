@@ -6,6 +6,9 @@ data/form4_transactions_raw.csv
 data/form4_transactions_clean.csv
 data/form4_with_returns.csv
 data/event_study_final.csv
+data/event_study_final_current.csv
+data/sec_bulk/
+data/ff_factors_daily.csv
 
 __pycache__/
 *.pyc
