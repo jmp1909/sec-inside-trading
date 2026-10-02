@@ -1,5 +1,17 @@
 # Changelog
 
+## 2 October 2026: documentation sweep
+
+- README: transaction and company counts updated to the revised study (about
+  152,000 transactions, 749 companies; it still said 87,500), all four data
+  sources named in the intro, the repo-structure code block closed (everything
+  below it was rendering as code on GitHub), the hand-checked data files listed,
+  and the limitations updated (break-even costs, configuration chosen after the
+  first version, where the medians are).
+- CHANGELOG: an entry still said the snapshot page calls the results
+  "preliminary"; it now says the corrected backtest found no edge.
+- Code comments in `portfolio_backtest_v2.py` and `live_signal.py` updated.
+
 ## 2 October 2026: snapshot refresh
 
 - New insider-activity snapshot (`data/live/live_signal_2026-10-02.csv`, 277
@@ -134,8 +146,9 @@ Fixes made while running on real data:
 - The snapshot page said the event study "treats sales as a weaker, noisier
   signal". It doesn't; the net-dollar ranking weighs purchases and sales
   equally.
-- The snapshot page called the ranking "validated in the backtest". Given the
-  problems above, it now says the backtest results are preliminary.
+- The snapshot page called the ranking "validated in the backtest". It now
+  says the corrected backtest found no edge, so the snapshot is information,
+  not a trading signal.
 
 ### Report design
 

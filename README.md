@@ -2,10 +2,12 @@
 
 A research project testing whether open-market stock purchases and sales by
 company insiders, as disclosed on SEC Form 4, predict later returns. It covers
-about 87,500 transactions in S&P MidCap 400 companies from 2018 to 2026 and
-includes an event study, a monthly-rebalanced portfolio backtest and a script
-that produces a current snapshot of the same ranking. Data come from SEC EDGAR's
-bulk filings and Yahoo Finance daily prices.
+about 152,000 transactions in the 749 companies that were in the S&P MidCap
+400 at some point between 2018 and 2026, and includes an event study, a
+monthly-rebalanced portfolio backtest with robustness checks, and a script that
+produces a current snapshot of the same ranking. Data come from SEC EDGAR,
+Yahoo Finance, Wikipedia's index-change history and Kenneth French's factor
+library.
 
 **[Report](https://jmp1909.github.io/sec-inside-trading/)** &middot;
 **[Latest insider-buying snapshot](https://jmp1909.github.io/sec-inside-trading/live-signal.html)** &middot;
@@ -46,7 +48,7 @@ Each of the main objections to the first version, and what the pipeline now does
 
 | Concern | Fix | Where |
 |---|---|---|
-| **Survivorship bias**: today's 400 members used for all 8 years | Point-in-time membership rebuilt from Wikipedia's index-change history (walked back from today's list, renames / reused tickers handled in `data/ticker_overrides.csv`). A stock only counts as an event, a portfolio candidate, or a benchmark member on days it was actually in the index. Removed / acquired names are kept: CIKs come from the Form 4 issuer symbols, and a held stock that delists stays in the portfolio at its last price instead of dropping out. `--universe current` re-runs the old setup so the size of the bias is reported directly. | `build_universe.py`, `collect_form4.py`, `collect_prices.py`, `common.py` |
+| **Survivorship bias**: today's 400 members used for all 8 years | Point-in-time membership rebuilt from Wikipedia's index-change history (walked back from today's list, renames / reused tickers handled in `data/ticker_overrides.csv`, renamed companies' CIKs in `data/cik_overrides.csv`). A stock only counts as an event, a portfolio candidate, or a benchmark member on days it was actually in the index. Removed / acquired names are kept: CIKs come from the Form 4 issuer symbols, and a held stock that delists stays in the portfolio at its last price instead of dropping out. `--universe current` re-runs the old setup so the size of the bias is reported directly. | `build_universe.py`, `collect_form4.py`, `collect_prices.py`, `common.py` |
 | **Sharpe without a risk-free rate; no trading costs** | Sharpe and Sortino are now on excess returns over the 1-month T-bill (Fama-French RF, compounded over each exact holding period). Turnover is tracked from drifted vs target weights; every result is reported at 0 / 10 / 25 / 50 bps one-way, with 25 bps as the headline, plus the break-even cost at which the edge over the benchmark disappears. | `portfolio_backtest.py` |
 | **Deeper drawdown than the benchmark** | Drawdown is reported next to an investable benchmark (MDY ETF) and the EW benchmark. `robustness.py` adds the strategy's return in every benchmark drawdown episode, a volatility-matched version (same vol as the benchmark), and a market-hedged version (short beta x MDY). | `robustness.py` |
 | **No factor adjustment** | Monthly excess returns regressed on CAPM, FF3, FF5 and FF5 + momentum (Newey-West t-stats), for the strategy, the strategy minus its benchmark, and purchases-only portfolios. | `collect_factors.py`, `robustness.py` |
@@ -98,13 +100,20 @@ src/
   build_live_page.py      # writes live-signal.html from the latest snapshot
   report_html.py          # table / chart helpers shared by the two page builders
 data/                      # pipeline outputs (large raw files gitignored -- see below)
-  ticker_overrides.csv      # hand-checked ticker renames / reused tickers for the universe
-  live/                     # dated live-signal snapshots, one per run
+  ticker_overrides.csv      # hand-checked: ticker renames and reused tickers
+  cik_overrides.csv         # hand-checked: renamed companies whose SEC name no longer matches
+  bankruptcy_false_positives.csv  # hand-checked: 8-K item 1.03 hits that aren't the company's own Chapter 11
+  universe.csv              # every company in the index at some point in the window, with CIK
+  universe_membership.csv   # membership intervals [start_date, end_date)
+  price_coverage.csv        # how many member-days have prices, per company
+  live/                     # dated insider-activity snapshots, one per run
 run_pipeline.sh            # runs everything below in order
 index.html                 # the report (GitHub Pages); generated, don't edit by hand
 live-signal.html           # the latest snapshot page (GitHub Pages); generated
 style.css                  # plain stylesheet shared by both pages
 CHANGELOG.md               # what changed and when, including corrections
+```
+
 ## Running it
 
 ```
@@ -165,11 +174,15 @@ regenerated by the pipeline above. The smaller summary outputs (`universe.csv`,
   Wikipedia change history only reaches 2012, so the 2008 crisis can't be added
   without another constituent source.
 - **Transaction costs are assumed, not measured**: a flat cost per dollar traded,
-  with no market-impact model. The break-even cost column shows how much room
-  there is.
-- **Mean vs. median**: headline mean returns, especially at the 1&ndash;2yr
-  horizons, are pulled up by a fat right tail of large winners. Medians are
-  reported alongside every mean for this reason.
+  with no market-impact model. The break-even cost in the grid is the cost at
+  which a portfolio's return falls to the benchmark's; it is 0 for most
+  combinations because they trail the benchmark even before costs.
+- **Configuration chosen after the fact**: the headline look-back (3 months) and
+  portfolio size (50) were picked after seeing the first version's results. The
+  full grid and the random-portfolio test are reported for that reason.
+- **Mean vs. median**: raw returns at the 1&ndash;2 year horizons are pulled up
+  by a few very large winners. The event study's main figures are means of
+  market-adjusted returns; medians are in `data/report_event_study.csv`.
 - **Yahoo Finance's price API is unofficial and undocumented.** Widely used
   in practice, but not an SLA-backed source the way SEC EDGAR is.
 

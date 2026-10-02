@@ -11,8 +11,9 @@ directly, but only within the trailing window, which keeps it fast: a few
 thousand filings across 400 companies, not the ~165,000 a full 8-year scrape
 would require.
 
-Run this periodically (e.g. weekly) to get a fresh signal. Each run is saved
-as a dated snapshot in data/live/, so re-running builds a track record.
+Run this periodically (e.g. weekly), then build_live_page.py to refresh
+live-signal.html. Each run is saved as a dated snapshot in data/live/, so
+re-running builds a history.
 """
 import argparse
 import threading

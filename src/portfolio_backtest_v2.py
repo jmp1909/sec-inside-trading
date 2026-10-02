@@ -44,8 +44,8 @@ def main():
     args = parser.parse_args()
 
     data = BacktestData(args.universe)
-    # focus on the window/size that had the best risk-adjusted result in v1 (3mo, top 50),
-    # plus top 20 for comparison, across all three signals
+    # the headline configuration (3mo, top 50) plus top 20 for comparison, across all
+    # three signals; 3mo / top 50 was the best risk-adjusted result in the first version
     configs = [(3, 20), (3, 50)]
 
     results = []
