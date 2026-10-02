@@ -11,33 +11,34 @@ bulk filings and Yahoo Finance daily prices.
 **[Latest insider-buying snapshot](https://jmp1909.github.io/sec-inside-trading/live-signal.html)** &middot;
 [Changelog](CHANGELOG.md)
 
-## Current status
+## Results (revised method, October 2026)
 
-The published results come from the first version of the analysis (August 2026).
-A review found several problems that probably flatter them: survivorship bias in
-the stock list, no trading costs, a Sharpe ratio without a risk-free rate, no
-factor adjustment, and statistics that treat related trades as independent. The
-code has been revised to address each of these (see
-[Methodology revisions](#methodology-revisions)) but **has not been re-run yet**,
-so there are no revised numbers. After running `./run_pipeline.sh`,
-`src/build_report.py` regenerates the report from the new results.
+After correcting the method, **there is no evidence that following insider
+buying beat the market in S&P MidCap 400 stocks over 2019-2026.**
 
-## First-version results (preliminary)
+- A portfolio of the 50 stocks with the most net insider buying over the
+  previous 3 months, rebalanced monthly, returned 8.6% a year after
+  25 bps trading costs, against 12.2% for an equal-weighted portfolio
+  of all index members and 11.8% for the MDY index fund. Its Sharpe
+  ratio was 0.34 (benchmarks 0.50 and 0.50) and its worst
+  drawdown -44% (-37% and -34%). None of the 9 look-back / size
+  combinations beat the benchmark after costs.
+- Factor-adjusted alpha (Fama-French 5 factors + momentum): -2.9% a
+  year, t = -1.4. Against 1,000 random 50-stock portfolios, p = 0.17.
+- One year after an insider purchase, stocks beat the average index member over
+  the same days by 4.4% (95% interval -2.4% to 11.2%), which is not
+  statistically significant.
+- The first version's edge came mostly from survivorship bias. On today's
+  members, as before, the same portfolio returns 24.1% a year before
+  costs against 19.1% for its benchmark; on the members at each date,
+  10.9% against 12.5%. The event-study numbers were also inflated by
+  counting related trades separately, comparing with returns from different
+  dates (insiders bought heavily in the March 2020 crash), and entering on the
+  filing day itself.
 
-- Open-market purchases were followed by higher returns than an average
-  index stock on an average day at every horizon from 1 day to 2 years
-  (t-test p < 0.02 at every horizon, below 0.0001 at most). Sales were followed
-  by lower returns than that benchmark at every horizon. The p-values treat each
-  transaction row as independent, which overstates the evidence.
-- A portfolio of the 50 stocks with the most net insider buying over the previous
-  3 months, rebalanced monthly, returned 24.2% a year (February 2019 to July 2026)
-  against 19.1% for an equal-weighted portfolio of all 400 stocks, also
-  rebalanced monthly. Its Sharpe ratio was 0.86 vs 0.83, and its worst drawdown
-  was deeper (-43% vs -37%). No trading costs were deducted.
-- This was the only one of the nine look-back / portfolio-size combinations with
-  a higher Sharpe ratio than the benchmark. The 10-stock portfolios had higher
-  returns but clearly lower Sharpe ratios, and every combination had a deeper
-  drawdown than the benchmark.
+The report has the full tables, and `data/robustness_summary.md` has every
+check. The [changelog](CHANGELOG.md) lists what changed and the corrections to
+the first version.
 
 ## Methodology revisions
 
@@ -68,7 +69,7 @@ tried and dropped after failing that check.
 | [Wikipedia: List of S&P 400 companies](https://en.wikipedia.org/wiki/List_of_S%26P_400_companies) | Current constituents + index change history (point-in-time universe) |
 | [SEC `company_tickers.json`](https://www.sec.gov/files/company_tickers.json) | Ticker &rarr; CIK mapping |
 | [SEC insider transactions bulk data sets](https://www.sec.gov/data-research/sec-markets-data/insider-transactions-data-sets) | Form 4 purchase/sale transactions, 2018Q3&ndash;2026Q1 |
-| [SEC EDGAR submissions API](https://data.sec.gov/submissions/) | 8-K Item 1.03 scan (bankruptcy exclusions) |
+| [SEC EDGAR submissions API](https://data.sec.gov/submissions/) | 8-K Item 1.03 scan (Chapter 11 filings) |
 | [Yahoo Finance chart API](https://query1.finance.yahoo.com/v8/finance/chart/) | Daily adjusted close prices, incl. the MDY ETF benchmark |
 | [Kenneth French data library](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html) | Daily Fama-French 5 factors, momentum, risk-free rate |
 
@@ -80,7 +81,7 @@ src/
   build_universe.py       # point-in-time S&P 400 membership -> tickers -> CIKs
   collect_form4.py        # pull SEC bulk quarterly Form 4 data (+ CIKs for delisted names)
   clean_form4.py          # parse dates, compute reporting lag
-  find_bankruptcies.py    # scan for Chapter 11 (8-K Item 1.03) exclusions
+  find_bankruptcies.py    # find Chapter 11 filings (8-K Item 1.03), minus hand-checked false positives
   collect_prices.py       # daily prices for the universe + MDY, price coverage report
   collect_factors.py      # Fama-French 5 factors + momentum + risk-free rate
   compute_returns.py      # forward + market-adjusted returns at 7 horizons
@@ -148,11 +149,11 @@ regenerated by the pipeline above. The smaller summary outputs (`universe.csv`,
 
 - **Residual survivorship gap**: the point-in-time universe includes companies
   that left the index, but Yahoo Finance has no history for many acquired or
-  delisted tickers. Those member-days can't be priced and drop out;
-  `data/price_coverage.csv` reports exactly how much. Companies that filed for
-  Chapter 11 are still excluded (their pre/post-reorganization price series aren't
-  continuous). Both gaps would need a survivorship-free price database (e.g. CRSP)
-  to close fully.
+  delisted tickers. Those member-days can't be priced and drop out (13% of all
+  member-days; `data/price_coverage.csv` has the detail). Chapter 11 filers get
+  a flat -30% delisting return at the petition date, an average from the
+  literature rather than each company's actual loss. Closing these gaps fully
+  needs a survivorship-free price database such as CRSP.
 - **Wikipedia as the constituent history**: the change table is labelled
   "selected" changes. The reconstruction is checked by requiring the member count
   to stay at ~400 through the whole window, but a missed change would go unnoticed.

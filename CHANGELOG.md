@@ -1,12 +1,51 @@
 # Changelog
 
-## October 2026: methodology revision (code changed, not yet re-run)
+## 2 October 2026: revised results
 
-The first version's results are still the ones published. The code below has
-been tested on synthetic data but not yet run on the real data, because the
-data sources weren't reachable from the environment the changes were made in.
-Run `./run_pipeline.sh` to produce the revised results; it ends by regenerating
-`index.html`.
+The revised pipeline was run on the real data. Main results (point-in-time
+universe, 25 bps costs, Feb 2019 to Jul 2026):
+
+- The insider-buying portfolio (3-month look-back, top 50) returned 8.6% a
+  year against 12.2% for the equal-weighted index members and 11.8% for MDY.
+  Sharpe 0.34 vs 0.50; max drawdown -44% vs -37%. None of the 9 combinations
+  beat the benchmark after costs.
+- FF5 + momentum alpha -2.9% a year (t = -1.4); random-portfolio p = 0.17.
+- Market-adjusted return one year after a purchase: +4.4% (95% interval -2.4%
+  to +11.2%), not significant.
+- On today's members (the first version's setup) the same portfolio returns
+  24.1% a year before costs, close to the first version's 24.2%, which confirms
+  the pipeline reproduces it. On the members at each date it returns 10.9%.
+  The equal-weighted benchmark falls from 19.1% to 12.5%, close to what MDY
+  actually earned, which supports the point-in-time reconstruction.
+
+Fixes made while running on real data:
+
+- **Renamed companies.** The name check wrongly rejected CIKs or prices for
+  Casey's (apostrophe), Wabtec, AMC Networks, Mednax/Pediatrix, Prestige Brands,
+  CMC Materials and Allscripts/Veradigm. Apostrophes are now ignored, and
+  `data/cik_overrides.csv` lists hand-verified renames, which also skip the
+  Yahoo name check.
+- **One CIK, two tickers.** Chemical Financial (CHFC) took the TCF name in 2019.
+  Trades are now assigned to whichever ticker was the index member on the filing
+  date. (`compute_returns.py`)
+- **Bankruptcies.** On the full point-in-time list the 8-K scan found 20
+  companies. Reading each filing showed three were not the company's own
+  Chapter 11: LendingTree and EchoStar (subsidiary filings) and Granite
+  (a note exchange tagged as item 1.03). They are listed in
+  `data/bankruptcy_false_positives.csv`. The remaining 17 are no longer dropped
+  from the study, since dropping them removes some of the worst outcomes.
+  Their prices end at the petition with a -30% delisting return.
+  (`common.load_prices_long`)
+- `collect_form4.py` now resolves every CIK before filtering transactions. A
+  clean run had lost 290 trades of delisted companies whose filings spelled the
+  ticker differently in some quarters.
+- `find_bankruptcies.py` used "today minus 8 years" as its start date, which
+  missed the start of the study window. It now uses the study dates.
+- Coverage: 87% of point-in-time member-days have prices; 203 of the 349
+  companies that left the index are priced. The rest, mostly acquired
+  companies, are missing (see Limitations in the README).
+
+## 1 October 2026: methodology revision
 
 ### Method
 
@@ -94,8 +133,6 @@ Run `./run_pipeline.sh` to produce the revised results; it ends by regenerating
 - Both pages were rewritten in plainer language and a simpler single-column
   layout with one shared stylesheet (`style.css`). Both are now generated from
   the data (`build_report.py`, `build_live_page.py`) instead of edited by hand.
-  Until the revised pipeline is run, `index.html` shows the first version's
-  results with a status note.
 
 ## August 2026: first version
 

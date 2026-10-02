@@ -1,0 +1,768 @@
+ticker,name,start_date,end_date
+AA,Alcoa,2021-12-20,
+AAL,American Airlines Group,2024-09-23,
+AAON,AAON,2024-05-03,
+ACC,American Campus Communities,,2022-08-10
+ACHC,Acadia Healthcare,,2025-09-22
+ACI,Albertsons,2025-03-11,
+ACIW,ACI Worldwide,,2023-11-13
+ACM,AECOM,,
+ADC,Agree Realty,2023-02-06,
+ADNT,Adient,2018-08-22,2024-09-23
+AEIS,Advanced Energy,2026-02-02,
+AEO,American Eagle Outfitters,,2022-09-19
+AFG,American Financial Group,,
+AGCO,AGCO,,
+AHL,Aspen Insurance Holdings,,2019-02-21
+AHR,American Healthcare REIT,2026-02-02,
+AIRC,Apartment Income REIT,2020-12-21,2024-06-28
+AIT,Applied Industrial Technologies,2024-03-18,
+ALE,"Allete, Inc.",2018-03-07,2025-12-17
+ALEX,Alexander & Baldwin,,2020-02-07
+ALGM,Allegro MicroSystems,2022-12-19,
+ALK,Alaska Air Group,2025-03-24,
+ALLY,Ally Financial,2023-09-18,
+ALSN,Allison Transmission,2026-07-06,
+ALTM,Arcadium Lithium,2024-01-02,2025-03-06
+ALTR,Altair Engineering,2024-06-24,2025-03-31
+ALV,Autoliv,2023-03-20,
+AM,Antero Midstream,2019-09-23,
+AMCX,AMC Networks,,2020-12-02
+AMED,Amedisys,2019-02-21,2025-08-19
+AMG,Affiliated Managers Group,2019-12-13,
+AMH,American Homes 4 Rent,2024-03-01,
+AMKR,Amkor Technology,2021-02-16,
+AN,AutoNation,,
+ANF,Abercrombie & Fitch,2024-07-22,
+APG,APi Group,2025-06-24,
+APPF,AppFolio,2024-04-01,
+APPS,Digital Turbine,2021-09-07,2022-06-29
+AR,Antero Resources,2022-10-20,
+ARMK,Aramark,2023-03-20,
+ARRS,Arris International,,2019-04-11
+ARW,Arrow Electronics,,
+ARWR,Arrowhead Pharmaceuticals,2019-12-13,2025-01-27
+ARWR,Arrowhead Pharmaceuticals,2026-02-09,
+ASB,Associated Bank,,
+ASGN,ASGN Inc.,2018-10-11,2026-03-23
+ASH,Ashland Global,,
+ATGE,Adtalem Global Education,,2021-07-07
+ATI,ATI Inc.,2025-03-24,
+ATI,ATI Inc.,,2020-09-21
+ATR,AptarGroup,,
+AVAV,AeroVironment,2025-07-18,
+AVNS,Avanos Medical,,2021-05-17
+AVNT,Avient,,
+AVT,Avnet,,
+AVTR,Avantor,2024-07-26,
+AXON,Axon Enterprise,2019-07-01,2023-05-04
+AXTA,Axalta,2023-03-20,
+AYI,Acuity Brands,2018-06-18,
+AZPN,Aspen Technology,2021-05-17,2025-03-11
+AZTA,Azenta,2021-01-07,2024-11-25
+BAH,Booz Allen Hamilton,2025-12-22,
+BBBY,Bed Bath & Beyond,,2020-06-22
+BBWI,"Bath & Body Works, Inc.",2025-03-24,
+BC,Brunswick,,
+BCO,Brink's,2017-09-18,
+BDC,Belden Inc.,,
+BERY,Berry Global,2023-06-19,2025-05-01
+BFH,Bread Financial,2020-06-22,2022-11-02
+BHF,Brighthouse Financial,2019-04-03,
+BID,Sotheby's,,2019-10-03
+BIG,Big Lots,,2019-03-18
+BILL,Bill Holdings,2024-12-23,
+BIO,Bio-Rad Laboratories,2024-09-23,
+BIO,Bio-Rad Laboratories,,2020-06-22
+BJ,BJ's Wholesale Club,2019-10-30,
+BKH,Black Hills Corporation,,
+BLD,TopBuild Corp.,2020-06-30,2026-07-01
+BLDR,Builders FirstSource,2020-08-17,2023-12-18
+BLKB,Blackbaud,,2026-06-22
+BMRN,BioMarin Pharmaceutical,2024-06-24,
+BMS,Bemis Company,,2019-06-07
+BOH,Bank of Hawaii,,2023-06-01
+BRBR,BellRing Brands,2022-03-14,2026-06-22
+BRKR,Bruker,2021-12-02,
+BRO,Brown & Brown,,2021-09-20
+BROS,Dutch Bros Inc.,2026-02-02,
+BRX,Brixmor Property Group,2019-02-06,
+BSY,Bentley Systems,2025-10-06,
+BTSG,BrightSpring Health Services,2026-07-17,
+BURL,Burlington Stores,2023-11-07,
+BWA,BorgWarner,2025-12-22,
+BWXT,BWX Technologies,2023-06-19,
+BYD,Boyd Gaming,2018-02-13,
+CABO,Cable One,,2024-04-22
+CACI,CACI International,2018-12-03,
+CADE,Cadence Bank,,2026-02-02
+CAKE,Cheesecake Factory,,2020-06-22
+CALX,Calix,2022-01-04,2024-03-18
+CAR,Avis Budget Group,,
+CARS,Cars.com,,2019-09-23
+CART,Maplebear Inc.,2025-01-14,
+CASY,Casey's,,2026-04-09
+CATY,Cathay Bank,,2023-09-18
+CAVA,Cava Group,2025-03-31,
+CBRL,Cracker Barrel,,2023-03-20
+CBSH,Commerce Bancshares,,
+CBT,Cabot Corp,,
+CC,Chemours,,2025-03-24
+CCK,Crown Holdings,2023-06-19,
+CCMP,CMC Materials,2019-12-02,2022-07-07
+CDAY,Ceridian,2019-10-30,2021-09-20
+CDE,Coeur Mining,2026-06-22,
+CDK,CDK Global,,2022-07-06
+CDP,COPT Defense Properties,,
+CELH,Celsius Holdings,2022-08-10,
+CFR,Frost Bank,,
+CG,Carlyle Group (The),2023-11-30,
+CGNX,Cognex,,
+CHDN,Churchill Downs Inc.,,
+CHE,Chemed Corp.,2018-06-18,
+CHFC,Chemical Financial,,2019-08-01
+CHH,Choice Hotels,2019-12-10,
+CHRD,Chord Energy,2023-03-20,
+CHWY,Chewy,2024-11-06,
+CHX,ChampionX,2018-05-10,2025-07-18
+CIEN,Ciena,,2026-02-09
+CIT,CIT Group,2020-01-21,2022-01-04
+CIVI,Civitas Resources,2023-09-29,2026-01-30
+CLB,Core Laboratories,,2020-04-27
+CLF,Cleveland-Cliffs,2021-03-01,
+CLGX,CoreLogic,,2021-06-09
+CLH,Clean Harbors,,
+CLI,Mack-Cali Realty,,2020-09-21
+CMA,Comerica,2024-12-23,2026-02-02
+CMC,Commercial Metals,,
+CMD,Cantel Medical Corporation,2018-03-19,2021-06-02
+CMP,Compass Minerals,,2022-02-01
+CNH,CNH Industrial,2024-09-23,
+CNK,Cinemark Holdings,,2021-08-30
+CNM,Core & Main,2023-11-13,
+CNO,CNO Financial Group,,
+CNX,CNX Resources,,
+CNXC,Concentrix,2020-12-01,2026-06-22
+COHR,Coherent Corp.,2019-09-26,2026-03-23
+COHR~2022,Coherent,,2022-07-05
+COKE,Coca-Cola Consolidated,2022-07-20,
+COLB,Columbia Banking System,2023-03-01,
+COLM,Columbia Sportswear,2019-12-17,
+CONE,CyrusOne,,2022-03-30
+COR,CoreSite,,2021-12-28
+COTY,Coty,2020-09-21,2026-06-22
+CPE,Callon Petroleum,2017-09-18,2019-09-26
+CPRI,Capri Holdings,2021-01-07,2026-09-21
+CPT,Camden,,2022-04-04
+CR,Crane,2023-04-04,
+CRBG,Corebridge Financial,2025-12-17,
+CRI,Carter's,,2024-12-23
+CRL,Charles River Laboratories,,2021-05-14
+CRNC,Cerence,2021-07-07,2022-03-14
+CROX,Crocs,2021-06-02,
+CRS,Carpenter Technology,2024-12-23,
+CRS,Carpenter Technology,,2020-08-03
+CRUS,Cirrus Logic,,
+CSL,Carlisle Companies,,
+CTLT,Catalent,,2020-09-21
+CTRE,CareTrust REIT,2026-03-23,
+CUBE,CubeSmart,2022-12-19,
+CUZ,Cousins Properties,,
+CVET,Covetrus,2019-02-11,2019-10-30
+CVG,Convergys,,2018-10-10
+CVLT,CommVault Systems,,
+CW,Curtiss-Wright,,
+CXT,Crane NXT,,
+CXW,CoreCivic,,2020-08-17
+CY,Cypress Semiconductor,,2020-04-13
+CYTK,Cytokinetics,2024-03-18,
+CZR,Caesars Entertainment,2018-08-20,2021-03-22
+CZR~2020,Caesars Entertainment,2019-02-04,2020-07-24
+DAN,Dana Incorporated,,2023-06-19
+DAR,Darling Ingredients,2020-01-29,
+DBX,Dropbox,2023-06-19,
+DCI,Donaldson Company,,
+DCT,DCT Industrial Trust,,2018-08-22
+DDS,Dillard's,,2020-06-22
+DECK,Deckers Brands,,2024-03-18
+DEI,Douglas Emmett,,2023-06-19
+DHC,Diversified Healthcare Trust,,2020-05-27
+DINO,HF Sinclair,2021-06-04,
+DKS,Dick's Sporting Goods,,
+DLB,Dolby,2023-08-22,
+DLPH,Delphi Technologies,2017-12-06,2020-10-07
+DLX,Deluxe Corporation,,2020-08-03
+DNB,Dun & Bradstreet Corp,,2019-02-11
+DNKN,Dunkin' Brands,,2020-12-21
+DNOW,DNOW Inc.,,2020-06-22
+DO,Diamond Offshore Drilling,,2019-03-18
+DOC,Physicians Realty Trust,2020-05-18,2024-03-01
+DOCN,DigitalOcean,2026-04-09,
+DOCS,Doximity,2023-06-19,
+DOCU,Docusign,2024-10-11,
+DPZ,Domino's Pizza,,2020-05-06
+DRQ,Dril-Quip,,2019-02-04
+DT,Dynatrace,2022-09-19,
+DTM,DT Midstream,2021-07-02,
+DUOL,Duolingo,2024-04-22,
+DY,Dycom Industries,2025-12-22,
+DY,Dycom Industries,,2023-03-20
+EAT,Brinker International,,2020-06-25
+EBS,Emergent BioSolutions,2020-07-24,2021-11-30
+EDR,Education Realty Trust,,2018-09-20
+EEFT,Euronet Worldwide,2022-02-01,
+EGN,Energen,,2018-12-03
+EGP,EastGroup Properties,2019-05-07,
+EHC,Encompass Health,2018-01-02,
+ELAN,Elanco,2025-09-02,
+ELF,e.l.f. Beauty,2024-01-23,
+ELS,Equity Lifestyle Properties,2023-07-24,
+EME,Emcor,,2025-09-22
+ENOV,Enovis,2019-03-18,2025-01-14
+ENPH,Enphase Energy,2020-04-27,2021-01-07
+ENR,Energizer,,2023-09-18
+ENS,EnerSys,,
+ENSG,Ensign Group,2024-10-01,
+ENTG,Entegris,2025-03-06,
+ENV,Envestnet,2021-06-09,2023-11-07
+EPC,Edgewell Personal Care,,2021-03-22
+EPR,EPR Properties,,
+EQH,Equitable Holdings,2023-12-18,
+EQT,EQT Corporation,2018-11-13,2022-10-03
+ERIE,Erie Indemnity,2023-08-08,2024-09-23
+ESAB,ESAB,2022-04-05,
+ESL,Esterline Technologies,,2019-03-18
+ESNT,Essent Group Ltd.,2020-05-26,
+ETRN,Equitrans Midstream,2018-11-13,2024-07-22
+ETSY,Etsy,2019-09-23,2020-09-21
+EV,Eaton Vance,,2021-03-01
+EVR,Evercore,2018-03-26,
+EWBC,East West Bancorp,,
+EXE,Expand Energy,2018-03-19,2020-02-27
+EXE,Expand Energy,2023-08-21,2025-03-24
+EXEL,Exelixis,2018-07-02,
+EXLS,EXL Service,2022-10-03,
+EXP,Eagle Materials,,
+EXPO,"Exponent, Inc.",2023-03-22,
+FAF,First American Financial Corporation,,
+FBIN,Fortune Brands Innovations,2022-12-19,
+FCFS,FirstCash,2019-09-23,
+FCN,FTI Consulting,2019-10-24,
+FDS,FactSet,,2021-12-20
+FFIN,First Financial Bankshares,2019-03-22,
+FHI,Federated Hermes,,
+FHN,First Horizon,,
+FICO,Fair Isaac,,2023-03-20
+FIVE,Five Below,2018-04-19,
+FIX,Comfort Systems USA,2023-12-18,2025-12-22
+FL,Foot Locker,2019-08-09,2023-09-18
+FLEX,Flex Ltd.,2024-11-25,2026-06-22
+FLG,Flagstar Bank,,
+FLO,Flowers Foods,,2026-05-18
+FLR,Fluor,2019-06-04,
+FLS,Flowserve,2021-03-22,
+FN,Fabrinet,2024-09-23,
+FNB,FNB Corporation,,
+FND,Floor & Decor,2023-10-20,
+FNF,Fidelity National Financial,2023-09-18,
+FOUR,Shift4,2024-11-20,
+FOXF,Fox Factory,2020-09-21,2024-04-03
+FR,First Industrial Realty Trust,,
+FSLR,First Solar,,2022-12-19
+FTI,TechnipFMC,2025-09-12,
+FTNT,Fortinet,,2018-10-11
+FULT,Fulton Financial Corporation,,2023-06-19
+FYBR,Frontier Communications,2022-10-03,2026-01-22
+G,Genpact,2021-05-03,
+GAP,Gap Inc.,2022-02-03,
+GATX,GATX,,
+GBCI,Glacier Bancorp,2020-06-22,
+GDDY,GoDaddy,2023-09-18,2024-06-24
+GDOT,Green Dot Corp,2019-01-18,2020-01-31
+GEF,"Greif, Inc.",,
+GEO,GEO Group,,2020-11-13
+GGG,Graco Inc.,,
+GHC,Graham Holdings,,
+GLPI,Gaming and Leisure Properties,2023-09-18,
+GME,GameStop,2021-08-04,
+GMED,Globus Medical,,
+GNRC,Generac Holdings,2020-02-07,2021-03-22
+GNTX,Gentex,,
+GNW,Genworth Financial,,2021-05-03
+GO,Grocery Outlet,2020-06-25,2024-06-24
+GPK,Graphic Packaging,2023-06-19,
+GPOR,Gulfport Energy Corp,,2018-12-12
+GRUB,Grubhub,2019-08-09,2021-06-15
+GT,Goodyear Tire & Rubber,2019-02-27,2026-07-06
+GTLS,Chart Industries,2022-03-30,2026-07-17
+GTM,ZoomInfo,2023-06-19,2026-03-23
+GVA,Granite Construction,,2019-12-13
+GWR,Genesee & Wyoming,,2019-12-26
+GWRE,Guidewire Software,2025-01-27,
+GXO,GXO Logistics,2021-08-02,
+H,Hyatt,2023-10-12,
+HAE,Haemonetics,2018-06-18,
+HAIN,Hain Celestial Group,,2022-10-03
+HALO,Halozyme,2020-11-13,
+HBI,Hanesbrands,2021-12-20,2023-03-20
+HCSG,Healthcare Services Group,2018-02-05,2021-09-20
+HE,Hawaiian Electric Industries,,2023-09-18
+HELE,Helen of Troy Limited,,2024-09-23
+HGV,Hilton Grand Vacations,2023-03-20,
+HIMS,Hims & Hers Health,2025-03-24,
+HIW,Highwoods Properties,,2023-09-18
+HL,Hecla Mining,2025-12-22,
+HLI,Houlihan Lokey,2023-12-18,
+HLNE,Hamilton Lane,2024-09-23,
+HNI,HNI Corporation,,2021-02-16
+HOG,Harley-Davidson,2020-06-22,
+HOMB,Home BancShares,,
+HPP,Hudson Pacific Properties,2020-05-27,2022-09-19
+HQY,HealthEquity,2018-09-17,
+HR,Healthcare Realty Trust,2022-07-21,
+HRB,H&R Block,2020-09-21,
+HRC,Hillrom,,2021-12-20
+HR~2022,Healthcare Realty Trust,,2022-07-21
+HTZ,Hertz,2023-03-20,2024-06-24
+HUBB,Hubbell Incorporated,,2023-10-18
+HWC,Hancock Whitney,,
+HXL,Hexcel,2020-06-22,
+IAA,"IAA, Inc.",2020-08-03,2023-03-22
+IART,Integra LifeSciences,2018-06-05,2024-06-24
+IBKR,Interactive Brokers,2018-01-02,2025-08-28
+IBOC,Intl Bancshares Corp,,
+ICUI,ICU Medical,2018-03-19,2023-11-30
+IDA,Idacorp,,
+IDCC,InterDigital,2026-03-23,
+IDCC,InterDigital,,2021-04-12
+IDTI,Integrated Device Technology,,2019-04-01
+IESC,IES Holdings,2026-07-01,
+IEX,IDEX Corp.,,2019-08-09
+ILG,"ILG, Inc.",2017-09-18,2018-09-04
+ILMN,"Illumina, Inc.",2024-06-24,2026-09-21
+INGN,Inogen,,2019-09-18
+INGR,Ingredion,,
+INT,World Fuel Services,,2021-08-04
+IPGP,IPG Photonics,2022-06-21,
+IRDM,Iridium Communications,2021-02-12,2025-12-22
+IRT,Independence Realty Trust,2022-05-19,
+ISCA,International Speedway,,2019-10-18
+ITT,ITT Inc.,,
+JACK,Jack in the Box,,2022-02-03
+JAZZ,Jazz Pharmaceuticals,2020-09-21,
+JBGS,JBG Smith,,2023-03-20
+JBL,Jabil,,2023-12-18
+JBLU,JetBlue,,2023-09-18
+JEF,Jefferies,2019-09-26,
+JHG,Janus Henderson,,2026-07-01
+JKHY,Jack Henry & Associates,,2018-11-13
+JLL,Jones Lang LaSalle,,
+JWN,Nordstrom,2020-06-22,2025-05-22
+KAR,KAR Auction Services,2019-09-23,2021-12-02
+KBH,KB Home,,
+KBR,"KBR, Inc.",,
+KD,Kyndryl,2021-11-05,
+KEX,Kirby Corporation,,
+KEYS,Keysight Technologies,,2018-11-13
+KLXI,KLX Inc.,,2018-09-18
+KMPR,Kemper Corporation,,2026-03-23
+KMT,Kennametal,,2023-03-20
+KNF,Knife River Corporation,2023-06-01,
+KNSL,Kinsale Capital Group,2020-12-29,
+KNX,Knight-Swift,,
+KRC,Kilroy Realty Corp,,
+KRG,Kite Realty Group Trust,2021-10-22,
+KRYS,Krystal Biotech,2026-07-24,
+KSS,Kohl's,2020-09-21,2023-10-03
+KTOS,Kratos Defense & Security Solutions,2025-09-22,
+LAD,Lithia Motors,2020-09-01,
+LAMR,Lamar Advertising Company,,
+LDOS,Leidos Holdings,,2019-08-09
+LEA,Lear,2019-12-13,
+LECO,Lincoln Electric,,
+LEG,Leggett & Platt,2021-12-20,2024-06-24
+LFUS,Littelfuse,,
+LGND,Ligand Pharmaceuticals,2018-11-13,2021-09-07
+LHCG,LHC Group,2020-04-13,2023-02-23
+LHO,LaSalle Hotel Properties,,2018-12-03
+LII,Lennox International,,2024-12-23
+LITE,Lumentum,2018-04-04,2026-03-23
+LIVN,LivaNova,,
+LM,Legg Mason,,2020-08-03
+LNTH,Lantheus Holdings,2022-10-12,
+LNW,Light & Wonder,2018-01-03,2025-11-13
+LOGM,LogMeIn,,2020-09-01
+LOPE,Grand Canyon Education,2019-12-13,
+LPNT,LifePoint Health Inc.,,2018-11-06
+LPT,Liberty Property Trust,,2020-01-29
+LPX,Louisiana-Pacific,,
+LSCC,Lattice Semiconductor,2021-04-20,
+LSI,Life Storage,,2023-07-24
+LSTR,Landstar System,,
+LW,Lamb Weston Holdings,,2018-12-03
+LYV,Live Nation Entertainment,,2019-12-13
+M,Macy's,2021-12-20,
+MAC,Macerich,2019-12-13,2023-06-19
+MAN,ManpowerGroup,,2025-09-22
+MANH,Manhattan Associates,,
+MASI,Masimo,,2026-06-11
+MAT,Mattel,2019-06-07,
+MBFI,MB Financial,,2019-03-22
+MCY,Mercury General,,2022-09-19
+MD,Mednax,,2020-11-13
+MDP,Meredith Corp,,2020-04-27
+MDR,McDermott International,2018-05-10,2019-09-23
+MDRX,Allscripts Healthcare Solutions,,2020-06-22
+MDSO,Medidata Solutions,,2019-10-24
+MDU,MDU Resources,,2024-10-11
+MEDP,Medpace,2020-09-21,
+MIDD,Middleby,2020-06-22,
+MIK,The Michaels Companies,,2019-09-23
+MIME,Mimecast,2021-08-30,2022-05-19
+MKSI,MKS Instruments,2017-11-22,
+MKTX,MarketAxess,,2019-07-01
+MLI,Mueller Industries,2024-11-26,
+MLKN,MillerKnoll,,2022-10-18
+MMS,Maximus Inc.,,
+MNK,Mallinckrodt,,2019-09-23
+MODG,Topgolf Callaway Brands,2021-06-15,2023-12-18
+MOG.A,Moog Inc.,2026-03-23,
+MOH,Molina Healthcare,2026-07-22,
+MOH,Molina Healthcare,,2022-03-02
+MORN,"Morningstar, Inc.",2023-09-18,
+MP,MP Materials,2022-07-27,2024-09-23
+MP,MP Materials,2025-09-22,
+MPW,Medical Properties Trust,,2024-03-18
+MPWR,Monolithic Power Systems,,2021-02-12
+MRCY,Mercury Systems,2019-10-08,2023-08-21
+MSA,MSA Safety,,
+MSM,MSC Industrial Direct,,
+MTDR,Matador Resources,2022-04-04,
+MTDR,Matador Resources,,2020-06-22
+MTG,MGIC Investment Corporation,2020-11-13,
+MTN,Vail Resorts,2023-09-18,
+MTSI,MACOM Technology Solutions,2022-08-17,
+MTX,Minerals Technologies,,2022-09-19
+MTZ,MasTec,2018-11-12,
+MUR,Murphy Oil,,
+MUSA,Murphy USA,,
+MZTI,The Marzetti Company,,
+NARI,Inari Medical,2022-05-03,2024-04-01
+NATI,National Instruments,,2023-10-12
+NAVI,Navient,2018-06-05,2023-06-19
+NBIX,Neurocrine Biosciences,2021-03-30,
+NBR,Nabors Industries,,2018-12-10
+NDSN,Nordson,,2022-02-15
+NEOG,Neogen,2020-10-07,2025-03-24
+NEU,NewMarket Corporation,,
+NFG,National Fuel Gas,,
+NGVT,Ingevity Corp.,2019-03-18,2023-06-19
+NJR,New Jersey Resources,,
+NKTR,Nektar Therapeutics,2019-10-03,2021-12-20
+NLY,Annaly Capital Management,2022-09-19,
+NNN,NNN Reit,,
+NOV,NOV Inc.,2021-09-20,
+NOVT,Novanta,2022-07-26,
+NSA,National Storage Affiliates Trust,2021-05-14,2026-07-22
+NSP,Insperity,2018-11-06,2025-12-22
+NTCT,NetScout Systems,,2021-11-05
+NTNX,Nutanix,2025-09-22,
+NUS,Nu Skin Enterprises,,2022-12-01
+NUVA,NuVasive,,2022-12-19
+NVR,NVR,,2019-09-26
+NVST,Envista Holdings,2021-04-12,
+NVT,nVent Electric plc,2018-05-02,
+NWE,NorthWestern Energy,,
+NXST,Nexstar Media Group,2022-12-01,
+NXT,Nextpower,2024-06-24,
+NYT,New York Times Company,,
+OAS,Oasis Petroleum,2018-05-01,2019-12-13
+OC,Owens Corning,2019-09-23,
+ODFL,Old Dominion Freight Line,,2019-12-02
+OGE,OGE Energy,,
+OGS,One Gas,,
+OHI,Omega Healthcare Investors,,
+OI,O-I Glass,,2021-03-30
+OII,Oceaneering International,,2019-10-30
+OKTA,"Okta, Inc.",2025-05-01,
+OLED,Universal Display,2018-12-10,
+OLLI,Ollie's Bargain Outlet,2018-06-11,
+OLN,Olin Corporation,,
+OMCL,Omnicell,2022-07-05,2023-09-18
+ONB,Old National Bank,2022-02-18,
+ONTO,Onto Innovation,2023-10-18,
+OPCH,Option Care Health,2021-08-30,
+ORA,Ormat Technologies,2022-07-07,
+ORI,Old Republic International,,
+OSK,Oshkosh,,
+OVV,Ovintiv,2023-06-19,
+OZK,Bank OZK,,
+P,Everpure,2024-01-05,2026-09-21
+PACW,PacWest Bancorp,,2023-04-05
+PAG,Penske Automotive Group,2023-08-04,
+PATH,UiPath,2026-01-02,
+PAY,VeriFone,,2018-08-20
+PB,Prosperity Bancshares,,
+PBF,PBF Energy,2022-12-01,
+PBF,PBF Energy,,2020-09-21
+PBH,Prestige Brands,,2021-01-29
+PBI,Pitney Bowes,,2019-04-03
+PCH,PotlatchDeltic,,2026-02-02
+PCTY,Paylocity,2020-04-27,
+PDCE,PDC Energy,2022-02-15,2023-08-08
+PDCO,Patterson Companies,2018-03-19,2024-01-05
+PEB,Pebblebrook Hotel Trust,2018-12-03,2023-03-20
+PEGA,Pegasystems,2025-05-22,
+PEN,"Penumbra, Inc.",2019-09-23,
+PENN,Penn Entertainment,2018-10-10,2021-03-22
+PENN,Penn Entertainment,2022-09-19,2024-06-24
+PFGC,Performance Food Group,2021-09-03,
+PGNY,Progyny,2021-04-20,2024-09-23
+PII,Polaris,,
+PINS,Pinterest,2025-12-22,
+PK,Park Hotels & Resorts,2019-09-18,
+PLNT,Planet Fitness,2023-06-19,
+PLT,Plantronics,,2019-12-10
+PNFP,Pinnacle Financial Partners,,
+POOL,Pool Corporation,,2020-10-07
+POR,Portland General Electric,2022-06-29,
+POST,Post Holdings,,
+POWI,Power Integrations,2021-12-20,2025-12-22
+PPC,Pilgrim's Pride,2019-09-23,
+PR,Permian Resources,2023-09-18,
+PRAH,PRA Health Sciences,2018-05-31,2021-07-02
+PRG,PROG Holdings,,2022-04-06
+PRGO,Perrigo,2021-09-20,2025-12-22
+PRI,Primerica,,
+PRSP,Perspecta Inc.,,2021-05-07
+PSB,PS Business Parks,2019-04-11,2022-07-20
+PSN,Parsons Corporation,2024-09-23,
+PTC,PTC Inc.,,2021-04-20
+PTEN,Patterson-UTI Energy,,2020-05-26
+PVH,PVH Corp.,2022-09-19,
+PZZA,Papa John's,,2023-09-18
+QDEL,QuidelOrtho,2020-06-22,2024-07-26
+QEP,QEP Resources,,2019-09-23
+QLYS,Qualys,2020-06-22,
+R,Ryder,,
+RAMP,LiveRamp,,2022-06-21
+RBA,RB Global,2024-06-24,
+RBC,RBC Bearings,2023-09-18,
+RCM,R1 RCM,2021-05-07,2024-11-20
+RDC,Rowan Companies,,2019-04-11
+REXR,Rexford Industrial Realty,2020-08-03,
+REZI,Resideo Technologies,,2020-06-22
+RGA,Reinsurance Group of America,,
+RGEN,Repligen,2019-09-23,
+RGLD,Royal Gold,,
+RH,RH,2019-12-26,
+RIG,Transocean,,2020-09-21
+RLGY,Realogy,2018-09-20,2019-06-04
+RLI,RLI Corp.,2019-11-27,
+RMBS,Rambus,2023-12-18,
+RNR,RenaissanceRe,,
+ROIV,Roivant Sciences,2024-04-01,
+ROKU,"Roku, Inc.",2026-06-22,
+RPM,RPM International,,
+RRC,Range Resources,2018-06-18,2019-09-23
+RRC,Range Resources,2022-03-02,
+RRX,Regal Rexnord,,
+RS,"Reliance, Inc.",,
+RUN,Sunrun,2020-08-03,2024-04-01
+RXO,RXO,2022-11-01,2023-01-05
+RYAN,Ryan Specialty,2024-06-28,
+RYN,Rayonier,,
+SABR,Sabre,,2022-12-01
+SAFM,Sanderson Farms,2017-09-26,2022-07-27
+SAIA,Saia,2021-08-30,
+SAIC,Science Applications Intl Corp,,
+SAIL,SailPoint Technologies,2020-10-05,2022-08-17
+SAM,Boston Beer Company,,2026-09-21
+SANM,Sanmina Corporation,2026-06-22,
+SARO,StandardAero,2026-01-22,
+SATS,EchoStar,2025-03-24,2026-03-23
+SBH,Sally Beauty Holdings,,2020-10-05
+SBNY,Signature Bank,,2021-12-20
+SBRA,Sabra Health Care REIT,2017-08-17,
+SCI,Service Corp Intl,,
+SEDG,SolarEdge,2019-10-18,2021-12-20
+SEIC,SEI Investments Company,,
+SF,Stifel,,
+SFM,Sprouts Farmers Market,,
+SGI,Somnigroup International,,
+SHC,Sotera Health,2022-06-21,
+SIG,Signet Jewelers Ltd,2018-03-19,2019-09-23
+SIGI,Selective Insurance Group,2019-09-23,
+SIRI,SiriusXM,2026-06-11,
+SITM,SiTime,2021-11-30,2023-06-19
+SITM,SiTime,2026-03-23,
+SIX,Six Flags,2017-10-02,2022-07-26
+SKT,Tanger Factory Outlet Centers,,2020-01-21
+SKX,Skechers,,2025-09-12
+SLAB,Silicon Labs,,
+SLG,SL Green Realty,2021-03-22,2023-03-20
+SLGN,Silgan Holdings,,
+SLM,SLM Corp,,
+SM,SM Energy,,2019-07-09
+SMCI,Supermicro,2022-12-22,2024-03-18
+SMG,Scotts Miracle-Gro Company,,
+SMTC,Semtech,2019-04-11,2022-12-19
+SMTC,Semtech,2026-06-22,
+SN,SharkNinja,2026-05-18,
+SNV,Synovus,,2026-01-02
+SNX,TD Synnex,,
+SOLS,Solstice Advanced Materials,2026-03-23,
+SON,Sonoco,,
+SPN,Superior Energy Services,,2018-11-14
+SPWR,SunPower,2021-10-05,2023-06-19
+SPXC,SPX Technologies,2025-12-22,
+SR,Spire,,
+SRC,Spirit Realty,2019-07-09,2024-01-23
+SRCL,Stericycle,2018-12-03,2024-11-06
+SRPT,Sarepta Therapeutics,2024-06-03,2025-09-02
+SSB,South State Bank,2023-03-20,
+SSD,Simpson Manufacturing,2020-10-07,
+ST,Sensata Technologies,2023-09-18,
+STAA,STAAR Surgical,2021-01-29,2023-08-22
+STAG,STAG Industrial,2023-05-04,
+STE,STERIS plc,,2019-12-13
+STL,Sterling Bancorp,2017-10-02,2022-02-01
+STLD,Steel Dynamics,,2022-12-22
+STOR,Store Capital,2020-05-06,2023-02-06
+STRA,"Strategic Education, Inc.",2020-06-22,2021-08-03
+STRL,Sterling Infrastructure,2025-11-13,
+STWD,Starwood Property Trust,2023-03-20,
+SVC,Service Properties Trust,,2021-06-04
+SWAV,Shockwave Medical,2022-06-21,2024-06-03
+SWN,Southwestern Energy,2022-07-06,2024-10-01
+SWN,Southwestern Energy,,2019-12-13
+SWX,Southwest Gas Corp,,
+SXT,Sensient Technologies,,2023-09-18
+SYNA,Synaptics,,
+SYNH,Syneos Health,,2023-09-29
+TCBI,Texas Capital Bancshares,,
+TCF,TCF Financial Corporation,,2021-06-09
+TCO,Taubman Centers,,2020-12-29
+TDC,Teradata,,2025-03-24
+TDS,Telephone and Data Systems,,2021-12-20
+TDY,Teledyne Technologies,,2020-06-22
+TECD,Tech Data,,2020-06-30
+TECH,Bio-Techne,,2021-08-30
+TER,Teradyne,,2020-09-21
+TEX,Terex,,
+TFX,Teleflex,,2019-01-18
+TGNA,Tegna Inc.,,2024-09-23
+THC,Tenet Health,,
+THG,Hanover Insurance,,
+THO,Thor Industries,,
+THS,TreeHouse Foods,,2021-09-03
+TKO,TKO Group Holdings,2018-08-01,2025-03-24
+TKR,Timken,,
+TLN,Talen Energy,2025-08-28,
+TMHC,Taylor Morrison,2020-01-31,2026-07-24
+TNDM,Tandem Diabetes Care,2021-09-20,2023-03-20
+TNL,Travel + Leisure Co.,2018-05-31,
+TOL,Toll Brothers,,
+TOST,"Toast, Inc.",2026-07-01,
+TPH,Tri Pointe Homes,,2022-05-03
+TPL,Texas Pacific Land Corporation,2024-06-24,2024-11-26
+TR,Tootsie Roll,,2021-12-20
+TREE,LendingTree,2018-03-08,2021-10-22
+TREX,Trex,2019-04-01,
+TRGP,Targa Resources,2021-06-09,2022-10-12
+TRIP,Tripadvisor,2019-12-13,2023-09-18
+TRMB,Trimble Inc.,,2021-01-21
+TRMK,Trustmark Corporation,,2021-08-30
+TRN,Trinity Industries,,2022-06-21
+TRU,TransUnion,2025-09-22,
+TTC,Toro,,
+TTEK,Tetra Tech,2019-08-01,
+TTMI,TTM Technologies,2026-01-30,
+TUP,Tupperware Brands Corp,,2019-09-23
+TWLO,Twilio,2025-08-19,
+TXNM,TXNM Energy,,
+TXRH,Texas Roadhouse,,
+TYL,Tyler Technologies,,2020-06-22
+UAA,Under Armour,2022-06-21,2025-12-22
+UBSI,United Bankshares,,
+UE,Urban Edge Properties,,2022-02-18
+UFPI,UFP Industries,2023-02-23,
+UFS,Domtar,,2021-04-20
+UGI,UGI Corp,,
+ULS,UL Solutions,2025-12-22,
+ULTI,Ultimate Software Group,,2019-05-07
+UMBF,UMB Financial Corp.,,
+UMPQ,Umpqua Bank,,2023-03-01
+UNFI,United Natural Foods,,2018-11-12
+UNIT,Uniti Group,,2019-12-17
+UNM,Unum,2021-09-20,
+UNVR,Univar Solutions,2020-06-22,2023-08-04
+URBN,Urban Outfitters,,2022-06-21
+USFD,US Foods,2023-03-20,
+UTHR,United Therapeutics,,
+VAC,Marriott Vacations Worldwide,2018-09-04,2025-12-22
+VAL,Valaris,2023-03-20,
+VAL,Valaris,,2019-09-23
+VC,Visteon,2018-07-11,
+VFC,VF Corporation,2025-03-24,
+VIAV,Viavi Solutions,2026-06-22,
+VICR,Vicor Corporation,2021-12-20,2023-10-20
+VICR,Vicor Corporation,2026-03-23,
+VLY,Valley Bank,,
+VMI,Valmont Industries,,
+VNO,Vornado Realty Trust,2023-01-05,
+VNOM,Viper Energy,2024-09-23,
+VNT,Vontier,2021-03-22,
+VOYA,Voya Financial,2021-12-28,
+VSAT,Viasat,,2023-03-20
+VSCO,Victoria's Secret,2021-08-04,2023-06-19
+VSH,Vishay Intertechnology,,2024-12-23
+VSM,Versum Materials,,2019-10-08
+VST,Vistra,2023-09-18,2024-05-03
+VSTS,Vestis,2023-10-02,2023-12-18
+VVC,Vectren,,2019-02-06
+VVV,Valvoline,,
+VYX,NCR Voyix,,2024-01-02
+WAB,Wabtec,,2019-02-27
+WAFD,"WaFd, Inc.",,2023-03-20
+WAL,Western Alliance Bancorporation,2024-09-23,
+WBS,Webster Bank,,2026-08-20
+WCC,WESCO International,2023-06-19,
+WCG,WellCare,,2018-09-17
+WEN,Wendy's,,2025-09-22
+WERN,Werner Enterprises,,2024-06-24
+WEX,WEX Inc.,,
+WFRD,Weatherford International,2023-09-18,
+WH,Wyndham Hotels & Resorts,,
+WHR,Whirlpool Corporation,2024-03-18,
+WING,Wingstop,2020-09-21,
+WLK,Westlake Corporation,2022-10-18,
+WLY,John Wiley & Sons,,2023-06-19
+WMG,Warner Music Group,2024-06-24,
+WMS,Advanced Drainage Systems,2023-03-20,
+WOLF,Wolfspeed,,2024-09-23
+WOR,Worthington Industries,,2023-11-30
+WPC,W. P. Carey,2023-11-30,
+WPX,WPX Energy,,2021-01-07
+WRB,W.R. Berkley,,2019-11-27
+WRI,Weingarten Realty,,2021-08-04
+WSM,"Williams-Sonoma, Inc.",,2025-03-24
+WSO,Watsco,,
+WST,West Pharmaceutical Services,,2020-05-18
+WTFC,Wintrust Financial,,
+WTRG,Essential Utilities,,
+WTS,Watts Water Technologies,2022-02-01,
+WU,Western Union,2021-12-20,2025-10-06
+WW,WW International,2018-09-18,2021-09-20
+WWD,"Woodward, Inc.",,
+X,U.S. Steel,,2025-06-24
+XEC,Cimarex Energy,2020-02-27,2021-10-05
+XPO,"XPO, Inc.",2019-03-18,
+XRAY,Dentsply Sirona,2024-04-03,
+XRX,Xerox,2021-03-22,2023-09-18
+Y,Alleghany,,2022-10-20
+YELP,Yelp,2018-12-12,2022-06-21
+YETI,Yeti Holdings,2021-01-21,
+ZBRA,Zebra Technologies,,2019-12-13
+ZD,Ziff Davis,,2024-09-23
+ZION,Zions Bancorporation,2024-03-18,

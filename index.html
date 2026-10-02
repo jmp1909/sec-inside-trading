@@ -10,143 +10,115 @@
 <main>
 
 <h1>Does insider buying predict stock returns?</h1>
-<p class="meta">S&amp;P MidCap 400 &middot; SEC Form 4 filings, Aug 2018 &ndash; Mar 2026 &middot; first version, August 2026
+<p class="meta">S&amp;P MidCap 400 &middot; SEC Form 4 filings 2018&ndash;2026 &middot; portfolio test Feb 2019 &ndash; Jul 2026
 &middot; <a href="live-signal.html">latest insider-buying snapshot</a></p>
 
-<div class="note"><strong>Status, October 2026.</strong> The results on this page are from the first version of the
-analysis. A review found problems that probably make them look better than they are: the stock list has survivorship
-bias, there are no trading costs, the Sharpe ratio ignores the risk-free rate, there is no control for size or value
-exposure, and the statistical tests treat related trades as independent. The code has been revised to deal with each of
-these (see <a href="#changes">Changes</a>), but the revised version has not been run yet. This page will be replaced
-with the new results when it has. Until then, treat the numbers below as preliminary.</div>
-
-<nav class="toc"><a href="#summary">Summary</a> <a href="#data">Data and method</a> <a href="#events">Event study</a> <a href="#portfolio">Portfolio test</a> <a href="#limits">Limitations</a> <a href="#changes">Changes</a> <a href="#appendix">Appendix</a></nav>
+<nav class="toc"><a href="#summary">Summary</a> <a href="#data">Data and method</a> <a href="#events">Event study</a> <a href="#portfolio">Portfolio test</a> <a href="#checks">Checks</a> <a href="#limits">Limitations</a> <a href="#changes">Changes</a></nav>
 
 <h2 id="summary">Summary</h2>
+<p>With the corrected method, the insider-buying portfolio did worse than simply holding all index members in equal amounts (8.6% vs 12.2% a year after costs). Most of the first version's apparent edge came from survivorship bias: run on today's index members, as before, the same portfolio returns 24.1% a year before costs and its benchmark 19.1%; on the members at each date they return 10.9% and 12.5%.</p>
 <ul>
-<li>After insiders bought shares on the open market, the stock on average beat the benchmark (the average S&amp;P 400
-stock from an average day) at every horizon from 1 day to 2 years. One year after a purchase the average return was
-51.3% (median 21.9%), against 20.8% for the benchmark.</li>
-<li>After insiders sold, the stock did worse than the benchmark at every horizon.</li>
-<li>A portfolio of the 50 stocks with the most net insider buying over the past 3 months, rebalanced monthly, returned
-24.2% a year from February 2019 to July 2026, against 19.1% for an
-equal-weighted portfolio of all 400 stocks. Its Sharpe ratio was about the same (0.86 vs
-0.83) and its worst drawdown was deeper (&minus;43% vs &minus;37%).</li>
-<li>Smaller portfolios (10 or 20 stocks) mostly had higher returns but deeper drawdowns. The 10-stock portfolios had clearly lower Sharpe ratios than the 50-stock ones.</li>
-<li>None of this includes trading costs, and the period was mostly a rising market. See <a href="#limits">Limitations</a>.</li>
+<li>Measured against the average index member over the same days, stocks moved +0.4% in the 20
+trading days after an insider purchase (95% interval &minus;0.4% to +1.2%) and
++4.4% over a year (&minus;2.4% to +11.2%).
+Neither is statistically different from zero.
+After insider sales the figures were &minus;0.1% and +0.2%.</li>
+<li>Why the first version's numbers were so much higher, for the one-year return after a purchase: the raw average was 50.4% against 20.6% for an index stock on any day. But the market itself rose 33.7% on average over the same windows, because insiders bought heavily around market lows such as March 2020. That leaves 16.7%. Counting each company and filing day once instead of each transaction row cuts it to 8.1%, and using the index members at each date cuts it to 4.4%.</li>
+<li>The 50-stock portfolio (3-month look-back, rebalanced monthly) returned 8.6% a year after
+trading costs of 25 basis points per trade, against 12.2% for the equal-weighted benchmark and
+11.8% for the MDY index fund. Its Sharpe ratio was 0.34 (0.50 and
+0.50) and its worst drawdown &minus;44% (&minus;37% and &minus;34%).</li>
+<li>Adjusted for market, size, value, profitability, investment and momentum exposure, its alpha was
+&minus;2.9% a year (t = &minus;1.4), and &minus;2.1% relative to the
+equal-weighted benchmark (t = &minus;1.4).</li>
+<li>Its Sharpe ratio was higher than 83% of 1,000 random 50-stock portfolios from the same stocks
+(p = 0.17). It beat the equal-weighted benchmark in 2 of 8 calendar years.</li>
+<li>The first version's one-day return after a purchase (+0.6%) falls to +0.05% relative to the
+market when trades are entered at the close of the day after the filing rather than the filing day itself. Many Form 4s
+are filed after the market closes, so most of that first-day move could not have been captured.</li>
 </ul>
 
 <h2 id="data">Data and method</h2>
 <ul>
-<li><strong>Companies:</strong> the 400 members of the S&amp;P MidCap 400 in August 2026 (list from Wikipedia), matched to
-SEC company numbers (CIKs). The same list was used for the whole period.</li>
-<li><strong>Insider trades:</strong> SEC's quarterly Form 3/4/5 data sets, 2018 Q3 to 2026 Q1. Only open-market purchases
-(code P) and sales (code S); grants, option exercises and tax withholding are left out. All reporting owners are
-included: officers, directors and holders of more than 10%.</li>
-<li><strong>Prices:</strong> Yahoo Finance daily closing prices, adjusted for splits and dividends.</li>
-<li><strong>Timing:</strong> returns start from the close on the filing date, not the trade date, because the filing is when
-the trade becomes public.</li>
-<li><strong>Benchmark for the event study:</strong> the average forward return, at the same horizon, of every stock in the list
-starting from every trading day in the period.</li>
-<li><strong>Excluded:</strong> three companies that went through Chapter 11 during the period (CHRD, VAL, WFRD), because their
-price histories are not continuous across the reorganization.</li>
+<li><strong>Companies:</strong> S&amp;P MidCap 400 members on each date, rebuilt from the current list and Wikipedia's record of
+index changes. A company only counts while it is in the index. 749 companies were in the index at some point in the period, 349 of which left it before the end. Prices were found for 87% of all company-days in the index (203 of the 349 companies that left). The rest, mostly companies that were taken over and whose old tickers Yahoo no longer carries, are missing.</li>
+<li><strong>Insider trades:</strong> SEC's quarterly Form 3/4/5 data sets from 2018 Q3. Only open-market purchases (code P) and
+sales (code S). All reporting owners are included: officers, directors and holders of more than 10%.</li>
+<li><strong>Prices:</strong> Yahoo Finance daily closes, adjusted for splits and dividends. If a stock stops trading while held,
+it is treated as sold at its last price.</li>
+<li><strong>Timing:</strong> returns start at the close of the trading day after the filing date, since many Form 4s are
+filed after the market closes.</li>
+<li><strong>Market comparison:</strong> each stock's return is compared with the average return of all index members over
+exactly the same days.</li>
+<li><strong>Costs and Sharpe ratio:</strong> trading costs are charged on the value traded each month. Sharpe ratios use returns
+above the one-month Treasury bill rate.</li>
+<li><strong>Bankruptcies:</strong> 17 companies filed for Chapter 11 during the period (each filing checked by hand).
+They are kept up to the filing date, then take a &minus;30% delisting return and leave the universe. The first version
+dropped such companies entirely.</li>
 </ul>
 
 <h2 id="events">Event study</h2>
-<p>Forward returns after each purchase and sale, at seven horizons. "% up" is the share of trades followed by a positive
-return. The p-value is from a t-test of purchase returns against the benchmark.</p>
-<div class="table-wrap"><table><thead><tr><th>Horizon</th><th>Buys: mean</th><th>median</th><th>% up</th><th>Sells: mean</th><th>median</th><th>% up</th><th>Benchmark</th><th>p-value</th></tr></thead><tbody><tr><td>1 day</td><td>+0.63%</td><td>+0.65%</td><td>60%</td><td class="neg">&minus;0.09%</td><td class="neg">&minus;0.01%</td><td>50%</td><td>+0.08%</td><td>&lt;0.0001</td></tr><tr><td>5 days</td><td>+0.70%</td><td>+1.03%</td><td>58%</td><td>+0.09%</td><td>+0.21%</td><td>52%</td><td>+0.38%</td><td>0.0155</td></tr><tr><td>10 days</td><td>+1.38%</td><td>+1.54%</td><td>59%</td><td>+0.28%</td><td>+0.26%</td><td>52%</td><td>+0.74%</td><td>&lt;0.0001</td></tr><tr><td>20 days</td><td>+3.12%</td><td>+2.24%</td><td>61%</td><td>+0.72%</td><td>+0.40%</td><td>52%</td><td>+1.48%</td><td>&lt;0.0001</td></tr><tr><td>6 months</td><td>+19.4%</td><td>+10.5%</td><td>66%</td><td>+7.5%</td><td>+3.1%</td><td>55%</td><td>+9.6%</td><td>&lt;0.0001</td></tr><tr><td>1 year</td><td>+51.3%</td><td>+21.9%</td><td>70%</td><td>+13.7%</td><td>+5.8%</td><td>56%</td><td>+20.8%</td><td>&lt;0.0001</td></tr><tr><td>2 years</td><td>+105.5%</td><td>+40.5%</td><td>79%</td><td>+26.5%</td><td>+14.8%</td><td>61%</td><td>+44.1%</td><td>&lt;0.0001</td></tr></tbody></table></div>
-<p class="small">Sample: 6,443 purchase rows and 81,085 sale rows at the short horizons, falling to
-5,338 and 63,650 at two years (later trades don't have two years of prices yet).
-The counts are individual transaction rows. One filing often reports several lots, and several insiders
-at the same company often buy on the same day, so the number of independent events is smaller than shown and these
-p-values are too optimistic. Means at the longer horizons are pulled up by a few very large winners; the medians are a
-better guide to a typical outcome (for example, 41% rather than
-105% over two years).</p>
+<p>All trades by insiders of the same company filed on the same day count as one event. Returns are measured against the
+market over the same days. The 95% intervals and p-values allow for events at the same company, and events in the same
+month, being related.</p>
+<div class="table-wrap"><table><thead><tr><th>Horizon</th><th>Buy events</th><th>Buys vs market</th><th>95% interval</th><th>p</th><th>Sell events</th><th>Sells vs market</th><th>p</th><th>Buys minus sells</th></tr></thead><tbody><tr><td>1 day</td><td>3,455</td><td>+0.05%</td><td class="neg">&minus;0.04% to +0.14%</td><td>0.2803</td><td>22,120</td><td class="neg">&minus;0.01%</td><td>0.7472</td><td>+0.05%</td></tr><tr><td>5 days</td><td>3,455</td><td>+0.09%</td><td class="neg">&minus;0.13% to +0.32%</td><td>0.4175</td><td>22,120</td><td class="neg">&minus;0.00%</td><td>0.9753</td><td>+0.10%</td></tr><tr><td>10 days</td><td>3,455</td><td>+0.15%</td><td class="neg">&minus;0.30% to +0.60%</td><td>0.5118</td><td>22,120</td><td class="neg">&minus;0.01%</td><td>0.9141</td><td>+0.16%</td></tr><tr><td>20 days</td><td>3,455</td><td>+0.42%</td><td class="neg">&minus;0.40% to +1.24%</td><td>0.3178</td><td>22,120</td><td class="neg">&minus;0.09%</td><td>0.5917</td><td>+0.51%</td></tr><tr><td>6 months</td><td>3,455</td><td>+0.9%</td><td class="neg">&minus;2.0% to +3.8%</td><td>0.5384</td><td>22,120</td><td>+0.2%</td><td>0.8305</td><td>+0.7%</td></tr><tr><td>1 year</td><td>3,238</td><td>+4.4%</td><td class="neg">&minus;2.4% to +11.2%</td><td>0.2028</td><td>20,419</td><td>+0.2%</td><td>0.9194</td><td>+4.3%</td></tr><tr><td>2 years</td><td>2,792</td><td>+13.1%</td><td class="neg">&minus;3.7% to +30.0%</td><td>0.1266</td><td>17,328</td><td class="neg">&minus;1.0%</td><td>0.7078</td><td>+14.1%</td></tr></tbody></table></div>
+<h3>Purchases by year</h3>
+<div class="table-wrap"><table><thead><tr><th>Filing year</th><th>Buy events</th><th>Firms</th><th>20 days</th><th>6 months</th><th>1 year</th></tr></thead><tbody><tr><td>2018</td><td>231</td><td>100</td><td class="neg">&minus;0.5%</td><td class="neg">&minus;1.0%</td><td class="neg">&minus;2.7%</td></tr><tr><td>2019</td><td>441</td><td>126</td><td>+1.3%</td><td class="neg">&minus;4.3%</td><td class="neg">&minus;8.5%</td></tr><tr><td>2020</td><td>688</td><td>186</td><td class="neg">&minus;0.4%</td><td>+3.4%</td><td>+27.6%</td></tr><tr><td>2021</td><td>291</td><td>121</td><td>+1.1%</td><td>+1.3%</td><td>+1.1%</td></tr><tr><td>2022</td><td>412</td><td>146</td><td>+0.4%</td><td class="neg">&minus;0.8%</td><td class="neg">&minus;1.2%</td></tr><tr><td>2023</td><td>410</td><td>131</td><td>+0.1%</td><td>+1.0%</td><td>+3.5%</td></tr><tr><td>2024</td><td>452</td><td>123</td><td>+2.3%</td><td>+7.9%</td><td class="neg">&minus;1.3%</td></tr><tr><td>2025</td><td>418</td><td>150</td><td class="neg">&minus;0.1%</td><td class="neg">&minus;3.0%</td><td class="neg">&minus;3.3%</td></tr><tr><td>2026</td><td>112</td><td>66</td><td class="neg">&minus;1.9%</td><td>+0.9%</td><td>n/a</td></tr></tbody></table></div>
+<h3>Raw returns, for comparison with the first version</h3>
+<p class="small">Not market-adjusted. "Any day" is the average return of an index member from any day in the period.</p>
+<div class="table-wrap"><table><thead><tr><th>Horizon</th><th>Buys: mean</th><th>median</th><th>Sells: mean</th><th>median</th><th>Any day: mean</th></tr></thead><tbody><tr><td>1 day</td><td>+0.05%</td><td>+0.10%</td><td>+0.04%</td><td>+0.05%</td><td>+0.06%</td></tr><tr><td>5 days</td><td>+0.24%</td><td>+0.17%</td><td>+0.12%</td><td>+0.28%</td><td>+0.28%</td></tr><tr><td>10 days</td><td>+0.77%</td><td>+0.85%</td><td>+0.27%</td><td>+0.32%</td><td>+0.53%</td></tr><tr><td>20 days</td><td>+2.05%</td><td>+0.98%</td><td>+0.70%</td><td>+0.57%</td><td>+1.04%</td></tr><tr><td>6 months</td><td>+13.3%</td><td>+7.2%</td><td>+5.3%</td><td>+1.4%</td><td>+6.4%</td></tr><tr><td>1 year</td><td>+32.5%</td><td>+13.3%</td><td>+10.4%</td><td>+4.0%</td><td>+13.3%</td></tr><tr><td>2 years</td><td>+68.5%</td><td>+33.3%</td><td>+23.6%</td><td>+15.3%</td><td>+27.2%</td></tr></tbody></table></div>
 
 <h2 id="portfolio">Portfolio test</h2>
-<p>Each month, rank all stocks by net insider dollar buying (purchases minus sales) over a look-back window, buy the top N
-in equal amounts, and hold them for a month. The benchmark holds all stocks in equal amounts and is also rebalanced
-monthly.</p>
-<figure><svg viewBox="0 0 760 320" role="img" font-family="Helvetica, Arial, sans-serif" font-size="11"><line x1="44" x2="642" y1="292.0" y2="292.0" stroke="#e5e5e5"/><text x="38" y="296.0" text-anchor="end" fill="#666">$0</text><line x1="44" x2="642" y1="236.0" y2="236.0" stroke="#e5e5e5"/><text x="38" y="240.0" text-anchor="end" fill="#666">$1</text><line x1="44" x2="642" y1="180.0" y2="180.0" stroke="#e5e5e5"/><text x="38" y="184.0" text-anchor="end" fill="#666">$2</text><line x1="44" x2="642" y1="124.0" y2="124.0" stroke="#e5e5e5"/><text x="38" y="128.0" text-anchor="end" fill="#666">$3</text><line x1="44" x2="642" y1="68.0" y2="68.0" stroke="#e5e5e5"/><text x="38" y="72.0" text-anchor="end" fill="#666">$4</text><line x1="44" x2="642" y1="12.0" y2="12.0" stroke="#e5e5e5"/><text x="38" y="16.0" text-anchor="end" fill="#666">$5</text><line x1="117.8" x2="117.8" y1="12" y2="292" stroke="#f0f0f0"/><text x="117.8" y="312" text-anchor="middle" fill="#666">2020</text><line x1="198.6" x2="198.6" y1="12" y2="292" stroke="#f0f0f0"/><text x="198.6" y="312" text-anchor="middle" fill="#666">2021</text><line x1="279.3" x2="279.3" y1="12" y2="292" stroke="#f0f0f0"/><text x="279.3" y="312" text-anchor="middle" fill="#666">2022</text><line x1="359.9" x2="359.9" y1="12" y2="292" stroke="#f0f0f0"/><text x="359.9" y="312" text-anchor="middle" fill="#666">2023</text><line x1="440.5" x2="440.5" y1="12" y2="292" stroke="#f0f0f0"/><text x="440.5" y="312" text-anchor="middle" fill="#666">2024</text><line x1="521.4" x2="521.4" y1="12" y2="292" stroke="#f0f0f0"/><text x="521.4" y="312" text-anchor="middle" fill="#666">2025</text><line x1="602.0" x2="602.0" y1="12" y2="292" stroke="#f0f0f0"/><text x="602.0" y="312" text-anchor="middle" fill="#666">2026</text><polyline points="44.0,236.0 50.2,233.1 57.0,233.2 63.7,232.2 71.0,236.0 77.1,231.7 84.0,231.7 91.3,236.0 97.5,232.6 104.3,227.9 111.2,226.5 118.0,222.1 125.1,224.3 131.3,230.3 137.9,252.3 144.5,241.4 151.4,233.7 158.0,234.9 165.3,232.7 171.7,228.3 178.3,232.1 185.4,227.2 191.8,215.4 199.3,210.5 205.5,186.3 211.7,172.5 218.5,165.4 225.6,158.8 232.0,155.4 238.6,154.7 245.7,156.6 252.3,152.6 258.9,149.7 265.8,142.3 272.4,152.9 279.7,140.8 286.1,144.4 292.3,146.1 299.1,138.6 306.0,149.6 312.6,145.7 319.3,153.7 326.1,140.1 332.9,145.1 340.0,154.9 346.4,142.0 353.1,130.6 360.3,136.0 366.7,114.9 372.9,120.1 380.2,128.5 386.4,130.1 393.3,133.0 400.3,120.6 406.7,107.0 413.6,112.2 420.4,128.5 427.1,132.1 433.7,112.2 440.8,100.1 447.4,105.9 453.8,100.2 460.6,92.7 467.3,101.7 474.6,93.9 480.7,98.6 487.6,88.7 494.9,85.3 501.1,76.1 507.9,76.5 514.8,60.0 521.6,77.7 528.7,71.5 534.9,82.1 541.3,85.5 547.9,92.6 555.0,81.4 561.4,62.9 568.2,68.1 575.3,49.3 581.7,50.0 589.0,58.2 595.2,48.4 602.2,43.6 609.1,33.2 615.3,26.7 621.9,41.2 628.5,25.0 635.4,22.4 642.0,15.3" fill="none" stroke="#1a4e8a" stroke-width="1.8"/><text x="647.0" y="19.3" fill="#1a4e8a">Insiders $4.94</text><polyline points="44.0,236.0 50.2,233.0 57.0,233.0 63.7,231.8 71.0,235.5 77.1,230.9 84.0,230.9 91.3,233.0 97.5,231.3 104.3,227.6 111.2,226.9 118.0,223.9 125.1,225.3 131.3,230.6 137.9,248.9 144.5,239.1 151.4,231.7 158.0,231.9 165.3,227.6 171.7,224.3 178.3,226.9 185.4,224.0 191.8,212.6 199.3,208.8 205.5,201.4 211.7,193.1 218.5,189.3 225.6,185.6 232.0,183.8 238.6,184.0 245.7,185.4 252.3,181.9 258.9,183.3 265.8,177.2 272.4,184.7 279.7,176.8 286.1,183.6 292.3,185.5 299.1,180.9 306.0,188.6 312.6,188.7 319.3,195.9 326.1,186.7 332.9,190.9 340.0,196.6 346.4,188.3 353.1,181.5 360.3,187.4 366.7,173.6 372.9,176.9 380.2,180.6 386.4,182.0 393.3,182.5 400.3,173.2 406.7,167.6 413.6,169.0 420.4,177.8 427.1,181.9 433.7,168.4 440.8,160.0 447.4,160.9 453.8,154.8 460.6,149.8 467.3,156.4 474.6,150.2 480.7,152.3 487.6,144.9 494.9,144.2 501.1,138.6 507.9,137.6 514.8,124.2 521.6,136.6 528.7,131.4 534.9,138.7 541.3,142.9 547.9,146.2 555.0,138.0 561.4,128.4 568.2,130.1 575.3,120.2 581.7,117.9 589.0,119.9 595.2,115.3 602.2,112.0 609.1,105.3 615.3,100.7 621.9,111.3 628.5,98.4 635.4,94.7 642.0,87.0" fill="none" stroke="#888" stroke-width="1.8" stroke-dasharray="5,3"/><text x="647.0" y="91.0" fill="#888">Benchmark $3.66</text></svg>
-<figcaption>Growth of $1, 3-month look-back, top 50 stocks, before trading costs. Feb 2019 &ndash; Jul 2026.</figcaption></figure>
+<p>Each month, rank index members by net insider dollar buying (purchases minus sales) over a look-back window, buy the top N
+in equal amounts, and hold for a month.</p>
+<figure><svg viewBox="0 0 760 320" role="img" font-family="Helvetica, Arial, sans-serif" font-size="11"><line x1="44" x2="642" y1="292.0" y2="292.0" stroke="#e5e5e5"/><text x="38" y="296.0" text-anchor="end" fill="#666">$0.50</text><line x1="44" x2="642" y1="222.0" y2="222.0" stroke="#e5e5e5"/><text x="38" y="226.0" text-anchor="end" fill="#666">$1</text><line x1="44" x2="642" y1="152.0" y2="152.0" stroke="#e5e5e5"/><text x="38" y="156.0" text-anchor="end" fill="#666">$1.50</text><line x1="44" x2="642" y1="82.0" y2="82.0" stroke="#e5e5e5"/><text x="38" y="86.0" text-anchor="end" fill="#666">$2</text><line x1="44" x2="642" y1="12.0" y2="12.0" stroke="#e5e5e5"/><text x="38" y="16.0" text-anchor="end" fill="#666">$2.50</text><line x1="117.8" x2="117.8" y1="12" y2="292" stroke="#f0f0f0"/><text x="117.8" y="312" text-anchor="middle" fill="#666">2020</text><line x1="198.6" x2="198.6" y1="12" y2="292" stroke="#f0f0f0"/><text x="198.6" y="312" text-anchor="middle" fill="#666">2021</text><line x1="279.3" x2="279.3" y1="12" y2="292" stroke="#f0f0f0"/><text x="279.3" y="312" text-anchor="middle" fill="#666">2022</text><line x1="359.9" x2="359.9" y1="12" y2="292" stroke="#f0f0f0"/><text x="359.9" y="312" text-anchor="middle" fill="#666">2023</text><line x1="440.5" x2="440.5" y1="12" y2="292" stroke="#f0f0f0"/><text x="440.5" y="312" text-anchor="middle" fill="#666">2024</text><line x1="521.4" x2="521.4" y1="12" y2="292" stroke="#f0f0f0"/><text x="521.4" y="312" text-anchor="middle" fill="#666">2025</text><line x1="602.0" x2="602.0" y1="12" y2="292" stroke="#f0f0f0"/><text x="602.0" y="312" text-anchor="middle" fill="#666">2026</text><polyline points="44.0,222.0 50.2,216.3 57.0,217.9 63.7,213.7 71.0,223.0 77.1,216.1 84.0,221.2 91.3,234.7 97.5,226.2 104.3,217.0 111.2,214.0 118.0,206.4 125.1,214.3 131.3,228.4 137.9,275.2 144.5,253.5 151.4,238.8 158.0,244.2 165.3,239.4 171.7,234.0 178.3,240.5 185.4,234.3 191.8,209.9 199.3,206.4 205.5,195.5 211.7,179.0 218.5,168.1 225.6,157.9 232.0,154.3 238.6,160.2 245.7,164.8 252.3,158.5 258.9,159.0 265.8,153.0 272.4,167.0 279.7,147.1 286.1,156.7 292.3,161.7 299.1,155.6 306.0,174.3 312.6,168.6 319.3,182.9 326.1,164.6 332.9,173.0 340.0,188.7 346.4,171.1 353.1,156.0 360.3,164.4 366.7,135.3 372.9,146.0 380.2,158.9 386.4,160.7 393.3,167.8 400.3,151.1 406.7,135.8 413.6,141.9 420.4,163.7 427.1,169.0 433.7,147.6 440.8,133.8 447.4,141.2 453.8,139.3 460.6,130.0 467.3,139.1 474.6,136.2 480.7,139.0 487.6,127.9 494.9,128.5 501.1,120.9 507.9,121.7 514.8,102.5 521.6,122.1 528.7,117.7 534.9,129.9 541.3,132.9 547.9,144.0 555.0,134.6 561.4,115.2 568.2,123.3 575.3,108.6 581.7,116.6 589.0,127.7 595.2,122.9 602.2,118.6 609.1,108.7 615.3,107.1 621.9,121.3 628.5,107.5 635.4,109.5 642.0,104.1" fill="none" stroke="#1a4e8a" stroke-width="1.8"/><polyline points="44.0,222.0 50.2,215.7 57.0,216.5 63.7,214.2 71.0,224.7 77.1,214.6 84.0,216.8 91.3,224.4 97.5,218.7 104.3,211.1 111.2,210.3 118.0,204.2 125.1,208.8 131.3,221.5 137.9,262.4 144.5,241.4 151.4,225.4 158.0,227.0 165.3,218.9 171.7,212.9 178.3,218.2 185.4,212.9 191.8,188.8 199.3,183.4 205.5,172.4 211.7,155.9 218.5,147.1 225.6,139.4 232.0,137.5 238.6,140.2 245.7,144.2 252.3,138.2 258.9,143.1 265.8,132.1 272.4,147.4 279.7,130.0 286.1,143.3 292.3,147.6 299.1,139.5 306.0,154.8 312.6,154.9 319.3,170.4 326.1,152.2 332.9,161.8 340.0,174.7 346.4,157.4 353.1,144.3 360.3,156.4 366.7,130.4 372.9,137.8 380.2,146.0 386.4,147.9 393.3,152.4 400.3,134.0 406.7,124.9 413.6,129.1 420.4,146.4 427.1,154.7 433.7,131.5 440.8,117.0 447.4,118.6 453.8,109.9 460.6,101.4 467.3,114.6 474.6,105.6 480.7,110.4 487.6,97.6 494.9,98.4 501.1,90.9 507.9,91.3 514.8,68.9 521.6,90.6 528.7,84.4 534.9,96.9 541.3,103.8 547.9,111.5 555.0,99.9 561.4,84.7 568.2,89.8 575.3,75.3 581.7,74.1 589.0,79.2 595.2,72.8 602.2,68.2 609.1,58.8 615.3,52.5 621.9,70.1 628.5,51.1 635.4,45.9 642.0,33.6" fill="none" stroke="#888" stroke-width="1.8" stroke-dasharray="5,3"/><polyline points="44.0,222.0 50.2,215.3 57.0,215.3 63.7,213.2 71.0,222.6 77.1,212.5 84.0,213.7 91.3,219.4 97.5,216.0 104.3,209.4 111.2,208.2 118.0,202.6 125.1,205.3 131.3,216.9 137.9,256.8 144.5,238.7 151.4,223.3 158.0,224.2 165.3,215.1 171.7,210.6 178.3,214.7 185.4,210.6 191.8,190.2 199.3,184.2 205.5,174.9 211.7,160.8 218.5,154.1 225.6,146.7 232.0,146.3 238.6,148.5 245.7,150.5 252.3,144.9 258.9,150.8 265.8,137.4 272.4,152.0 279.7,137.0 286.1,151.8 292.3,155.6 299.1,147.5 306.0,162.7 312.6,164.1 319.3,179.4 326.1,162.2 332.9,169.9 340.0,181.1 346.4,166.9 353.1,156.4 360.3,168.3 366.7,146.0 372.9,152.9 380.2,160.2 386.4,161.8 393.3,166.4 400.3,150.0 406.7,142.3 413.6,146.1 420.4,162.2 427.1,169.1 433.7,149.0 440.8,136.9 447.4,137.0 453.8,125.4 460.6,115.6 467.3,128.6 474.6,120.5 480.7,124.9 487.6,114.2 494.9,115.5 501.1,108.3 507.9,107.5 514.8,86.4 521.6,105.9 528.7,98.8 534.9,112.9 541.3,119.7 547.9,125.5 555.0,114.4 561.4,102.0 568.2,105.0 575.3,93.5 581.7,90.3 589.0,92.7 595.2,88.4 602.2,83.2 609.1,73.5 615.3,61.8 621.9,77.7 628.5,58.3 635.4,51.1 642.0,42.5" fill="none" stroke="#b07a2a" stroke-width="1.8" stroke-dasharray="2,3"/><text x="647.0" y="37.6" fill="#888">EW bench. $2.35</text><text x="647.0" y="50.6" fill="#b07a2a">MDY $2.28</text><text x="647.0" y="108.1" fill="#1a4e8a">Insiders $1.84</text></svg>
+<figcaption>Growth of $1 after 25 bps trading costs: 3-month look-back, top 50 (Insiders), equal-weighted index members
+(EW bench.), and the MDY index fund.</figcaption></figure>
+<h3>All combinations, after 25 bps costs</h3>
+<div class="table-wrap"><table><thead><tr><th>Look-back</th><th>Holdings</th><th>Turnover / month</th><th>Annual return</th><th>Sharpe</th><th>Max drawdown</th><th>Break-even cost (bps)</th></tr></thead><tbody><tr><td>1 months</td><td>top 10</td><td>83%</td><td>2.2%</td><td>0.14</td><td class="neg">&minus;53%</td><td>0</td></tr><tr><td>1 months</td><td>top 20</td><td>81%</td><td>4.5%</td><td>0.20</td><td class="neg">&minus;45%</td><td>0</td></tr><tr><td>1 months</td><td>top 50</td><td>77%</td><td>3.8%</td><td>0.17</td><td class="neg">&minus;44%</td><td>0</td></tr><tr><td>3 months</td><td>top 10</td><td>39%</td><td>6.4%</td><td>0.28</td><td class="neg">&minus;57%</td><td>0</td></tr><tr><td>3 months</td><td>top 20</td><td>36%</td><td>11.5%</td><td>0.42</td><td class="neg">&minus;47%</td><td>17</td></tr><tr class="hl"><td>3 months</td><td>top 50</td><td>35%</td><td>8.6%</td><td>0.34</td><td>&minus;44%</td><td>0</td></tr><tr><td>6 months</td><td>top 10</td><td>25%</td><td>2.7%</td><td>0.17</td><td class="neg">&minus;57%</td><td>0</td></tr><tr><td>6 months</td><td>top 20</td><td>25%</td><td>5.2%</td><td>0.24</td><td class="neg">&minus;51%</td><td>0</td></tr><tr><td>6 months</td><td>top 50</td><td>23%</td><td>9.4%</td><td>0.37</td><td class="neg">&minus;43%</td><td>0</td></tr><tr><td>Equal-weight benchmark</td><td>all</td><td></td><td>12.2%</td><td>0.50</td><td class="neg">&minus;37%</td><td></td></tr><tr><td>MDY index fund</td><td></td><td></td><td>11.8%</td><td>0.50</td><td class="neg">&minus;34%</td><td></td></tr></tbody></table></div>
+<p class="small">Turnover is the share of the portfolio sold (and bought) each month. Break-even cost is the cost per trade at
+which the portfolio's annual return falls to the equal-weighted benchmark's.</p>
+<h3>Effect of trading costs (3-month look-back, top 50)</h3>
+<div class="table-wrap"><table><thead><tr><th>Cost per trade</th><th>Annual return</th><th>Sharpe</th><th>Max drawdown</th><th>EW benchmark return</th><th>EW benchmark Sharpe</th></tr></thead><tbody><tr><td>0 bps</td><td>10.9%</td><td>0.42</td><td class="neg">&minus;44%</td><td>12.5%</td><td>0.51</td></tr><tr><td>10 bps</td><td>10.0%</td><td>0.39</td><td class="neg">&minus;44%</td><td>12.4%</td><td>0.51</td></tr><tr><td>25 bps</td><td>8.6%</td><td>0.34</td><td class="neg">&minus;44%</td><td>12.2%</td><td>0.50</td></tr><tr><td>50 bps</td><td>6.3%</td><td>0.26</td><td class="neg">&minus;45%</td><td>11.9%</td><td>0.49</td></tr></tbody></table></div>
+<h3>Other ways of ranking (25 bps costs)</h3>
+<div class="table-wrap"><table><thead><tr><th>Ranking</th><th>Target</th><th>Avg. stocks held</th><th>Annual return</th><th>Sharpe</th><th>Max drawdown</th></tr></thead><tbody><tr><td>Net dollar value</td><td>top 20</td><td>20</td><td>11.5%</td><td>0.42</td><td class="neg">&minus;47%</td></tr><tr><td>Net dollar value</td><td>top 50</td><td>50</td><td>8.6%</td><td>0.34</td><td class="neg">&minus;44%</td></tr><tr><td>Number of buyers</td><td>top 20</td><td>20</td><td>8.6%</td><td>0.34</td><td class="neg">&minus;47%</td></tr><tr><td>Number of buyers</td><td>top 50</td><td>47</td><td>9.8%</td><td>0.39</td><td class="neg">&minus;43%</td></tr><tr><td>Dollars per buyer</td><td>top 20</td><td>17</td><td>6.5%</td><td>0.27</td><td class="neg">&minus;49%</td></tr><tr><td>Dollars per buyer</td><td>top 50</td><td>20</td><td>6.5%</td><td>0.28</td><td class="neg">&minus;49%</td></tr></tbody></table></div>
 
-<h3>All combinations tested</h3>
-<div class="table-wrap"><table><thead><tr><th>Look-back</th><th>Holdings</th><th>Annual return</th><th>Sharpe</th><th>Max drawdown</th></tr></thead><tbody><tr><td>1 months</td><td>top 10</td><td>30.8%</td><td>0.55</td><td class="neg">&minus;51%</td></tr><tr><td>1 months</td><td>top 20</td><td>30.3%</td><td>0.80</td><td class="neg">&minus;42%</td></tr><tr><td>1 months</td><td>top 50</td><td>21.7%</td><td>0.80</td><td class="neg">&minus;39%</td></tr><tr><td>3 months</td><td>top 10</td><td>29.8%</td><td>0.53</td><td class="neg">&minus;47%</td></tr><tr><td>3 months</td><td>top 20</td><td>30.5%</td><td>0.80</td><td class="neg">&minus;44%</td></tr><tr class="hl"><td>3 months</td><td>top 50</td><td>24.2%</td><td>0.86</td><td>&minus;43%</td></tr><tr><td>6 months</td><td>top 10</td><td>30.7%</td><td>0.55</td><td class="neg">&minus;49%</td></tr><tr><td>6 months</td><td>top 20</td><td>24.3%</td><td>0.62</td><td class="neg">&minus;52%</td></tr><tr><td>6 months</td><td>top 50</td><td>24.0%</td><td>0.81</td><td class="neg">&minus;44%</td></tr><tr><td>Benchmark (all stocks, equal weight)</td><td></td><td>19.1%</td><td>0.83</td><td class="neg">&minus;37%</td></tr></tbody></table></div>
-<p class="small">Sharpe ratio here is annual return divided by annual volatility, with no risk-free rate. Every portfolio had
-a deeper maximum drawdown than the benchmark.</p>
-
-<h3>Other ways of ranking (3-month look-back)</h3>
-<div class="table-wrap"><table><thead><tr><th>Ranking</th><th>Target</th><th>Avg. stocks held</th><th>Annual return</th><th>Sharpe</th><th>Max drawdown</th></tr></thead><tbody><tr><td>Net dollar value</td><td>top 20</td><td>20</td><td>30.5%</td><td>0.79</td><td class="neg">&minus;44%</td></tr><tr><td>Net dollar value</td><td>top 50</td><td>50</td><td>24.0%</td><td>0.86</td><td class="neg">&minus;43%</td></tr><tr><td>Number of buyers</td><td>top 20</td><td>20</td><td>19.3%</td><td>0.68</td><td class="neg">&minus;42%</td></tr><tr><td>Number of buyers</td><td>top 50</td><td>48</td><td>21.8%</td><td>0.77</td><td class="neg">&minus;43%</td></tr><tr><td>Dollars per buyer</td><td>top 20</td><td>17</td><td>18.1%</td><td>0.65</td><td class="neg">&minus;42%</td></tr><tr><td>Dollars per buyer</td><td>top 50</td><td>20</td><td>18.1%</td><td>0.65</td><td class="neg">&minus;42%</td></tr></tbody></table></div>
-<p class="small">Ranking by the number of insiders buying, or by dollars per buyer, gave lower returns and Sharpe ratios than
-plain net dollar value, but slightly smaller drawdowns. "Dollars per buyer" needs at least two buyers, so it rarely
-filled the portfolio (about 17 and 20 stocks on average). The net-dollar-value rows in this table come from a separate
-run and differ slightly from the grid above (see <a href="#changes">Changes</a>).</p>
+<h2 id="checks">Checks</h2>
+<h3>Survivorship bias</h3>
+<p>The same test run on today's index members (as in the first version) and on the members at each date.</p>
+<div class="table-wrap"><table><thead><tr><th>Stock list</th><th>Cost</th><th>Annual return</th><th>Sharpe</th><th>Max drawdown</th><th>EW benchmark return</th><th>EW benchmark Sharpe</th></tr></thead><tbody><tr><td>Today's members (first version)</td><td>0 bps</td><td>24.1%</td><td>0.81</td><td class="neg">&minus;43%</td><td>19.1%</td><td>0.75</td></tr><tr><td>Today's members (first version)</td><td>25 bps</td><td>21.5%</td><td>0.74</td><td class="neg">&minus;43%</td><td>18.8%</td><td>0.74</td></tr><tr><td>Point-in-time members</td><td>0 bps</td><td>10.9%</td><td>0.42</td><td class="neg">&minus;44%</td><td>12.5%</td><td>0.51</td></tr><tr><td>Point-in-time members</td><td>25 bps</td><td>8.6%</td><td>0.34</td><td class="neg">&minus;44%</td><td>12.2%</td><td>0.50</td></tr></tbody></table></div>
+<h3>Factor exposure</h3>
+<p>Monthly returns above the T-bill rate regressed on the Fama-French factors, with Newey-West t-statistics in brackets.
+Betas are from the five-factor plus momentum model. "All recent buyers" holds every index member with at least one insider
+purchase in the look-back window, which tests the purchases on their own with one observation per month.</p>
+<div class="table-wrap"><table><thead><tr><th>Portfolio</th><th>CAPM alpha (t)</th><th>FF5+Mom alpha (t)</th><th>Market</th><th>Size</th><th>Value</th><th>Momentum</th></tr></thead><tbody><tr><td>Strategy</td><td class="neg">&minus;8.4% (&minus;1.5)</td><td class="neg">&minus;2.9% (&minus;1.4)</td><td>1.02</td><td>0.64</td><td>0.31</td><td class="neg">&minus;0.30</td></tr><tr><td>Strategy minus EW benchmark</td><td class="neg">&minus;3.8% (&minus;1.7)</td><td class="neg">&minus;2.1% (&minus;1.4)</td><td>0.04</td><td>0.06</td><td>0.12</td><td class="neg">&minus;0.17</td></tr><tr><td>Strategy minus MDY</td><td class="neg">&minus;4.0% (&minus;1.4)</td><td class="neg">&minus;1.3% (&minus;0.8)</td><td>0.07</td><td>0.11</td><td>0.14</td><td class="neg">&minus;0.27</td></tr><tr><td>All recent buyers (1 month)</td><td class="neg">&minus;12.4% (&minus;2.3)</td><td class="neg">&minus;8.0% (&minus;2.8)</td><td>1.03</td><td>0.76</td><td>0.32</td><td class="neg">&minus;0.11</td></tr><tr><td>All recent buyers (3 months)</td><td class="neg">&minus;7.2% (&minus;1.4)</td><td class="neg">&minus;2.0% (&minus;1.0)</td><td>1.00</td><td>0.68</td><td>0.36</td><td class="neg">&minus;0.22</td></tr><tr><td>Sellers only (3 months)</td><td class="neg">&minus;5.7% (&minus;1.8)</td><td class="neg">&minus;2.8% (&minus;1.8)</td><td>0.99</td><td>0.57</td><td>0.11</td><td class="neg">&minus;0.03</td></tr><tr><td>Buyers minus sellers (3 months)</td><td class="neg">&minus;1.5% (&minus;0.5)</td><td>+0.8% (0.5)</td><td>0.01</td><td>0.11</td><td>0.25</td><td class="neg">&minus;0.18</td></tr></tbody></table></div>
+<h3>Drawdowns</h3>
+<div class="table-wrap"><table><thead><tr><th>Benchmark fall (month ends)</th><th>EW benchmark</th><th>MDY</th><th>Strategy</th></tr></thead><tbody><tr><td>2020-01-02 to 2020-04-01</td><td class="neg">&minus;36.9%</td><td class="neg">&minus;34.0%</td><td class="neg">&minus;44.2%</td></tr><tr><td>2022-01-03 to 2022-10-03</td><td class="neg">&minus;19.3%</td><td class="neg">&minus;19.6%</td><td class="neg">&minus;19.3%</td></tr><tr><td>2023-08-01 to 2023-11-01</td><td class="neg">&minus;12.6%</td><td class="neg">&minus;12.2%</td><td class="neg">&minus;14.7%</td></tr><tr><td>2024-12-02 to 2025-05-01</td><td class="neg">&minus;14.6%</td><td class="neg">&minus;14.2%</td><td class="neg">&minus;16.0%</td></tr></tbody></table></div>
+<h3>Rising and falling markets</h3>
+<div class="table-wrap"><table><thead><tr><th>Year</th><th>Months</th><th>Strategy</th><th>EW benchmark</th><th>MDY</th><th>Strategy minus EW</th></tr></thead><tbody><tr><td>2019</td><td>11</td><td>+11.1%</td><td>+12.7%</td><td>+13.9%</td><td class="neg">&minus;1.6%</td></tr><tr><td>2020</td><td>12</td><td>+0.0%</td><td>+13.2%</td><td>+11.6%</td><td class="neg">&minus;13.2%</td></tr><tr><td>2021</td><td>12</td><td>+38.1%</td><td>+29.9%</td><td>+26.5%</td><td>+8.2%</td></tr><tr><td>2022</td><td>12</td><td class="neg">&minus;8.0%</td><td class="neg">&minus;11.4%</td><td class="neg">&minus;13.9%</td><td>+3.4%</td></tr><tr><td>2023</td><td>12</td><td>+15.5%</td><td>+19.2%</td><td>+16.2%</td><td class="neg">&minus;3.7%</td></tr><tr><td>2024</td><td>12</td><td>+5.1%</td><td>+10.8%</td><td>+13.7%</td><td class="neg">&minus;5.6%</td></tr><tr><td>2025</td><td>12</td><td>+1.5%</td><td>+8.3%</td><td>+8.9%</td><td class="neg">&minus;6.8%</td></tr><tr><td>2026</td><td>6</td><td>+6.0%</td><td>+11.8%</td><td>+14.6%</td><td class="neg">&minus;5.8%</td></tr></tbody></table></div>
+<p class="small">Average monthly return:</p>
+<div class="table-wrap"><table><thead><tr><th>Months when MDY was</th><th>Months</th><th>Strategy</th><th>EW benchmark</th><th>MDY</th><th>Strategy minus EW</th></tr></thead><tbody><tr><td>up</td><td>51</td><td>+5.61%</td><td>+5.33%</td><td>+5.02%</td><td>+0.28%</td></tr><tr><td>down</td><td>38</td><td class="neg">&minus;5.22%</td><td class="neg">&minus;4.39%</td><td class="neg">&minus;4.12%</td><td class="neg">&minus;0.83%</td></tr></tbody></table></div>
 
 <h2 id="limits">Limitations</h2>
-<p>These are the main reasons to doubt the numbers above, and what the revised code does about each.</p>
 <ul>
-<li><strong>Survivorship bias.</strong> The stock list is today's index members applied to all eight years. It leaves out
-companies that were in the index but were later acquired, delisted or dropped, and it includes companies that only
-joined after strong gains. <em>Revision:</em> index membership is rebuilt for each date from the history of index changes,
-and removed companies are kept.</li>
-<li><strong>No trading costs; Sharpe without a risk-free rate.</strong> The top-50 portfolio replaces a large part of its
-holdings every month. <em>Revision:</em> turnover is measured and costs of 0, 10, 25 and 50 basis points per trade are
-applied; the Sharpe ratio uses returns above the Treasury bill rate.</li>
-<li><strong>Deeper drawdowns than the benchmark.</strong> Even the best combination fell 43% at its worst,
-against 37% for the benchmark. <em>Revision:</em> the strategy is also compared with the MDY index fund,
-at the benchmark's level of volatility, and hedged against the market.</li>
-<li><strong>No adjustment for factor exposure.</strong> The extra return could come from holding smaller or cheaper stocks
-rather than from insider information. <em>Revision:</em> returns are regressed on the Fama-French five factors plus momentum.</li>
-<li><strong>Few purchases.</strong> There are about 6,443 purchase rows against 81,085 sale rows,
-and many of the purchase rows belong to the same event. <em>Revision:</em> trades are grouped into one event per company
-and filing day, standard errors allow for events clustering by company and by month, and portfolios that hold every
-recent buyer are tested month by month.</li>
-<li><strong>Mostly a rising market.</strong> The period had two sharp falls (2020 and 2022) but no long bear market.
-<em>Revision:</em> each event is compared with the market over the same dates, and results are shown by year and for
-rising and falling months separately. The period cannot easily be extended to cover 2008, because the index-change
-history used for the stock list only goes back to 2012.</li>
-<li><strong>Same-day entry.</strong> Many Form 4s are filed after the market closes, so buying at that day's close is not
-always possible. <em>Revision:</em> the event study enters at the next day's close.</li>
+<li>Prices are missing for some companies that left the index, mostly takeovers. The &minus;30% bankruptcy delisting return
+is an average from the literature, not the actual loss for each company. A full fix would need a survivorship-free price
+database such as CRSP.</li>
+<li>Wikipedia lists "selected" index changes. The rebuilt membership is checked by requiring about 400 members on every
+date, but a missed change would not show up.</li>
+<li>The period (2018&ndash;2026) includes the 2020 and 2022 falls but no long bear market. Wikipedia's change history only goes
+back to 2012, so 2008 can't be added this way.</li>
+<li>Trading costs are a flat charge per dollar traded, not a market-impact model.</li>
+<li>The look-back and portfolio size shown in the summary were picked after seeing the first version's results. The full
+grid and the random-portfolio check are shown for that reason.</li>
+<li>Yahoo Finance's price API is unofficial.</li>
 </ul>
 
 <h2 id="changes">Changes</h2>
-<h3>October 2026</h3>
-<p><strong>Method (code changed, not yet run):</strong> point-in-time index membership; trading costs and turnover; Sharpe
-ratio above the T-bill rate; MDY index fund as a second benchmark; factor regressions; event-level statistics with
-clustered standard errors and market-adjusted returns; next-day entry; random-portfolio and calendar-time checks; results
-by year and market direction. Details are in the <a href="https://github.com/jmp1909/sec-inside-trading/blob/main/CHANGELOG.md">changelog</a>.</p>
-<p><strong>Corrections to this page:</strong></p>
-<ul>
-<li>The benchmark was described as "buy-and-hold". It is an equal-weighted portfolio of all stocks, rebalanced monthly.</li>
-<li>The page said the purchases were made by "officers and directors". The data also include holders of more than 10%.</li>
-<li>The page said the alternative rankings did worse "on every metric". They had lower returns and Sharpe ratios but
-slightly smaller drawdowns.</li>
-<li>The grid of all combinations showed numbers from a different run than the saved results file
-(<code>data/portfolio_backtest_grid.csv</code>), differing by up to 0.9 percentage points a year. The grid and summary now
-use the saved file. The chart and the alternative-ranking table come from the other run (24.0% a year instead of 24.2%
-for the main combination). Which run is correct can't be checked without re-running; the revised code produces all of
-these from a single run.</li>
-<li>Points on the chart were labelled with the first day of each month although they show the value at the end of the
-month. They are now plotted at month end.</li>
-<li>Simpler wording and design.</li>
-</ul>
-<h3>August 2026</h3>
-<p>First version.</p>
-
-<h2 id="appendix">Appendix</h2>
-<h3>Companies by sector</h3>
-<div class="table-wrap"><table><thead><tr><th>GICS sector</th><th>Companies</th></tr></thead><tbody><tr><td>Industrials</td><td>87</td></tr><tr><td>Financials</td><td>65</td></tr><tr><td>Consumer Discretionary</td><td>57</td></tr><tr><td>Information Technology</td><td>49</td></tr><tr><td>Health Care</td><td>35</td></tr><tr><td>Real Estate</td><td>28</td></tr><tr><td>Materials</td><td>26</td></tr><tr><td>Energy</td><td>17</td></tr><tr><td>Consumer Staples</td><td>15</td></tr><tr><td>Utilities</td><td>15</td></tr><tr><td>Communication Services</td><td>6</td></tr></tbody></table></div>
-<h3>Chapter 11 exclusions</h3>
-<div class="table-wrap"><table><thead><tr><th>Ticker</th><th>Company</th><th>Chapter 11 filings (8-K item 1.03)</th></tr></thead><tbody><tr><td>CHRD</td><td>Oasis Petroleum (now Chord Energy)</td><td>2020-09-30, 2020-11-13</td></tr><tr><td>VAL</td><td>Valaris</td><td>2020-08-19, 2021-03-05</td></tr><tr><td>WFRD</td><td>Weatherford International</td><td>2019-07-02, 2019-09-13</td></tr></tbody></table></div>
-<h3>Sources</h3>
-<ul class="small">
-<li>Index members and changes: <a href="https://en.wikipedia.org/wiki/List_of_S%26P_400_companies">Wikipedia, List of S&amp;P 400 companies</a></li>
-<li>Ticker to CIK: <a href="https://www.sec.gov/files/company_tickers.json">SEC company_tickers.json</a></li>
-<li>Insider trades: <a href="https://www.sec.gov/data-research/sec-markets-data/insider-transactions-data-sets">SEC insider transactions data sets</a></li>
-<li>Bankruptcy filings: SEC EDGAR submissions API (8-K item 1.03)</li>
-<li>Prices: Yahoo Finance chart API (unofficial)</li>
-</ul>
+<p>The first version (August 2026) used today's index members for the whole period, no trading costs, a Sharpe ratio
+without a risk-free rate, no factor adjustment, trade-level statistics and same-day entry. All of these were changed in
+October 2026. The full list, including corrections to the first version's report, is in the
+<a href="https://github.com/jmp1909/sec-inside-trading/blob/main/CHANGELOG.md">changelog</a>.</p>
 
 <footer>Code and data: <a href="https://github.com/jmp1909/sec-inside-trading">github.com/jmp1909/sec-inside-trading</a>.
 Not investment advice.</footer>
