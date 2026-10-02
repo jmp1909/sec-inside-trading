@@ -1,0 +1,25 @@
+ticker,canonical,date,side,note
+PSTG,P,,,Pure Storage renamed Everpure (ticker P)
+CHK,EXE,,,Chesapeake Energy merged with Southwestern -> Expand Energy (EXE)
+ZI,GTM,,,ZoomInfo ticker change to GTM
+GPS,GAP,,,Gap Inc. ticker change to GAP
+ELY,MODG,,,Callaway Golf -> Topgolf Callaway Brands (MODG)
+HFC,DINO,,,HollyFrontier -> HF Sinclair (DINO)
+BRKS,AZTA,,,Brooks Automation -> Azenta (AZTA)
+ADS,BFH,,,Alliance Data Systems -> Bread Financial (BFH)
+AAXN,AXON,,,Axon Enterprise ticker change to AXON
+CFX,ENOV,,,Colfax -> Enovis (ENOV)
+WTW,WW,,,Weight Watchers -> WW International (WW)
+WWE,TKO,,,WWE merged into TKO Group (TKO)
+WYND,TNL,,,Wyndham Destinations -> Travel + Leisure (TNL)
+APY,CHX,,,Apergy -> ChampionX (CHX)
+SGMS,LNW,,,Scientific Games -> Light & Wonder (LNW)
+UA/UAA,UAA,,,Under Armour dual class; Class A used for prices
+UAA/UA,UAA,,,Under Armour dual class; Class A used for prices
+IIVI,COHR,,,II-VI acquired Coherent and took the COHR ticker
+ERI,CZR,,,Eldorado Resorts acquired Caesars and took the CZR ticker
+HTA,HR,,,Healthcare Trust of America acquired Healthcare Realty and took the HR ticker
+COHR,COHR~2022,2022-07-05,removed,"old Coherent, Inc. (acquired by II-VI); ticker reused"
+CZR,CZR~2020,2019-02-04,added,old Caesars Entertainment (acquired by Eldorado); ticker reused
+CZR,CZR~2020,2020-07-24,removed,old Caesars Entertainment (acquired by Eldorado); ticker reused
+HR,HR~2022,2022-07-21,removed,old Healthcare Realty Trust (acquired by HTA); ticker reused

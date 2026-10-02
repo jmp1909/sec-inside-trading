@@ -1,0 +1,750 @@
+ticker,name,member_at_study_end,status,member_days,member_days_priced
+AA,Alcoa,True,ok,1212,1212
+AAL,American Airlines Group,True,ok,492,492
+AAON,AAON,True,ok,593,593
+ACC,American Campus Communities,False,http_404,1042,0
+ACHC,Acadia Healthcare,False,ok,1855,1855
+ACI,Albertsons,True,ok,371,371
+ACIW,ACI Worldwide,False,ok,1370,1370
+ACM,AECOM,True,ok,2087,2087
+ADC,Agree Realty,True,ok,917,917
+ADNT,Adient,False,ok,1588,1588
+AEIS,Advanced Energy,True,ok,137,137
+AEO,American Eagle Outfitters,False,ok,1070,1070
+AFG,American Financial Group,True,ok,2087,2087
+AGCO,AGCO,True,ok,2087,2087
+AHL,Aspen Insurance Holdings,False,http_404,138,0
+AHR,American Healthcare REIT,True,ok,137,137
+AIRC,Apartment Income REIT,False,http_404,919,0
+AIT,Applied Industrial Technologies,True,ok,627,627
+ALE,"Allete, Inc.",False,http_404,1917,0
+ALEX,Alexander & Baldwin,False,http_404,389,0
+ALGM,Allegro MicroSystems,True,ok,952,952
+ALK,Alaska Air Group,True,ok,362,362
+ALLY,Ally Financial,True,ok,757,757
+ALSN,Allison Transmission,True,ok,27,27
+ALTM,Arcadium Lithium,False,http_404,307,0
+ALTR,Altair Engineering,False,http_404,200,0
+ALV,Autoliv,True,ok,887,887
+AM,Antero Midstream,True,ok,1797,1797
+AMCX,AMC Networks,False,ok,602,602
+AMED,Amedisys,False,http_404,1693,0
+AMG,Affiliated Managers Group,True,ok,1738,1738
+AMH,American Homes 4 Rent,True,ok,638,638
+AMKR,Amkor Technology,True,ok,1431,1431
+AN,AutoNation,True,ok,2087,2087
+ANF,Abercrombie & Fitch,True,ok,537,537
+APG,APi Group,True,ok,296,296
+APPF,AppFolio,True,ok,617,617
+APPS,Digital Turbine,False,ok,211,211
+AR,Antero Resources,True,ok,994,994
+ARMK,Aramark,True,ok,887,887
+ARRS,Arris International,False,http_404,173,0
+ARW,Arrow Electronics,True,ok,2087,2087
+ARWR,Arrowhead Pharmaceuticals,True,ok,1468,1468
+ASB,Associated Bank,True,ok,2087,2087
+ASGN,ASGN Inc.,False,http_404,1942,0
+ASH,Ashland Global,True,ok,2087,2087
+ATGE,Adtalem Global Education,False,http_404,757,0
+ATI,ATI Inc.,True,ok,912,912
+ATR,AptarGroup,True,ok,2087,2087
+AVAV,AeroVironment,True,ok,278,278
+AVNS,Avanos Medical,False,http_404,720,0
+AVNT,Avient,True,ok,2087,2087
+AVT,Avnet,True,ok,2087,2087
+AVTR,Avantor,True,ok,533,533
+AXON,Axon Enterprise,False,ok,1003,1003
+AXTA,Axalta,True,ok,887,887
+AYI,Acuity Brands,True,ok,2087,2087
+AZPN,Aspen Technology,False,http_404,996,0
+AZTA,Azenta,False,ok,1012,1012
+BAH,Booz Allen Hamilton,True,ok,167,167
+BBBY,Bed Bath & Beyond,False,ok,485,0
+BBWI,"Bath & Body Works, Inc.",True,ok,362,362
+BC,Brunswick,True,ok,2087,2087
+BCO,Brink's,True,ok,2087,2087
+BDC,Belden Inc.,True,ok,2087,2087
+BERY,Berry Global,False,http_404,488,0
+BFH,Bread Financial,False,ok,617,617
+BHF,Brighthouse Financial,True,ok,1920,1920
+BID,Sotheby's,False,name_mismatch:Tribeca Strategic Acquisition Corp.,298,0
+BIG,Big Lots,False,http_404,155,0
+BILL,Bill Holdings,True,ok,427,427
+BIO,Bio-Rad Laboratories,True,ok,977,977
+BJ,BJ's Wholesale Club,True,ok,1770,1770
+BKH,Black Hills Corporation,True,ok,2087,2087
+BLD,TopBuild Corp.,False,http_404,1566,0
+BLDR,Builders FirstSource,False,ok,870,870
+BLKB,Blackbaud,False,ok,2050,2050
+BMRN,BioMarin Pharmaceutical,True,ok,557,557
+BMS,Bemis Company,False,http_404,214,0
+BOH,Bank of Hawaii,False,ok,1253,1253
+BRBR,BellRing Brands,False,ok,1115,1115
+BRKR,Bruker,True,ok,1224,1224
+BRO,Brown & Brown,False,ok,810,810
+BROS,Dutch Bros Inc.,True,ok,137,137
+BRX,Brixmor Property Group,True,ok,1960,1960
+BSY,Bentley Systems,True,ok,222,222
+BTSG,BrightSpring Health Services,True,ok,18,18
+BURL,Burlington Stores,True,ok,721,721
+BWA,BorgWarner,True,ok,167,167
+BWXT,BWX Technologies,True,ok,822,822
+BYD,Boyd Gaming,True,ok,2087,2087
+CABO,Cable One,False,ok,1485,1485
+CACI,CACI International,True,ok,2007,2007
+CADE,Cadence Bank,False,http_404,1950,0
+CAKE,Cheesecake Factory,False,ok,485,485
+CALX,Calix,False,ok,574,574
+CAR,Avis Budget Group,True,ok,2087,2087
+CARS,Cars.com,False,ok,290,290
+CART,Maplebear Inc.,True,ok,411,411
+CASY,Casey's,False,ok,1998,1998
+CATY,Cathay Bank,False,ok,1330,1330
+CAVA,Cava Group,True,ok,357,357
+CBRL,Cracker Barrel,False,ok,1200,1200
+CBSH,Commerce Bancshares,True,ok,2087,2087
+CBT,Cabot Corp,True,ok,2087,2087
+CC,Chemours,False,ok,1725,1725
+CCK,Crown Holdings,True,ok,822,822
+CCMP,CMC Materials,False,http_404,678,0
+CDAY,Ceridian,False,http_404,493,0
+CDE,Coeur Mining,True,ok,37,37
+CDK,CDK Global,False,http_404,1017,0
+CDP,COPT Defense Properties,True,ok,2087,2087
+CELH,Celsius Holdings,True,ok,1045,1045
+CFR,Frost Bank,True,ok,2087,2087
+CG,Carlyle Group (The),True,ok,704,704
+CGNX,Cognex,True,ok,2087,2087
+CHDN,Churchill Downs Inc.,True,ok,2087,2087
+CHE,Chemed Corp.,True,ok,2087,2087
+CHFC,Chemical Financial,False,http_404,253,0
+CHH,Choice Hotels,True,ok,1741,1741
+CHRD,Chord Energy,True,ok,887,887
+CHWY,Chewy,True,ok,460,460
+CHX,ChampionX,False,http_404,1809,0
+CIEN,Ciena,False,ok,1955,1955
+CIT,CIT Group,False,http_404,510,0
+CIVI,Civitas Resources,False,http_404,610,0
+CLB,Core Laboratories,False,ok,445,445
+CLF,Cleveland-Cliffs,True,ok,1422,1422
+CLGX,CoreLogic,False,http_404,737,0
+CLH,Clean Harbors,True,ok,2087,2087
+CLI,Mack-Cali Realty,False,http_404,550,0
+CMA,Comerica,False,http_404,290,0
+CMC,Commercial Metals,True,ok,2087,2087
+CMD,Cantel Medical Corporation,False,http_404,732,0
+CMP,Compass Minerals,False,ok,906,906
+CNH,CNH Industrial,True,ok,492,492
+CNK,Cinemark Holdings,False,ok,795,795
+CNM,Core & Main,True,ok,717,717
+CNO,CNO Financial Group,True,ok,2087,2087
+CNX,CNX Resources,True,ok,2087,2087
+CNXC,Concentrix,False,ok,1449,1449
+COHR,Coherent Corp.,False,ok,1692,1692
+COHR~2022,Coherent,False,no_symbol,1016,0
+COKE,Coca-Cola Consolidated,True,ok,1060,1060
+COLB,Columbia Banking System,True,ok,900,900
+COLM,Columbia Sportswear,True,ok,1736,1736
+CONE,CyrusOne,False,http_404,947,0
+COR,CoreSite,False,"name_mismatch:Cencora, Inc.",881,0
+COTY,Coty,False,ok,1500,1500
+CPE,Callon Petroleum,False,http_404,293,0
+CPRI,Capri Holdings,True,ok,1459,1459
+CPT,Camden,False,ok,950,950
+CR,Crane,True,ok,876,876
+CRBG,Corebridge Financial,True,ok,170,170
+CRI,Carter's,False,ok,1660,1660
+CRL,Charles River Laboratories,False,ok,719,719
+CRNC,Cerence,False,ok,178,178
+CROX,Crocs,True,ok,1355,1355
+CRS,Carpenter Technology,True,ok,942,942
+CRUS,Cirrus Logic,True,ok,2087,2087
+CSL,Carlisle Companies,True,ok,2087,2087
+CTLT,Catalent,False,http_404,550,0
+CTRE,CareTrust REIT,True,ok,102,102
+CUBE,CubeSmart,True,ok,952,952
+CUZ,Cousins Properties,True,ok,2087,2087
+CVET,Covetrus,False,http_404,187,0
+CVG,Convergys,False,http_404,42,0
+CVLT,CommVault Systems,True,ok,2087,2087
+CW,Curtiss-Wright,True,ok,2087,2087
+CXT,Crane NXT,True,ok,2087,2087
+CXW,CoreCivic,False,ok,525,525
+CY,Cypress Semiconductor,False,http_404,435,0
+CYTK,Cytokinetics,True,ok,627,627
+CZR,Caesars Entertainment,False,ok,675,675
+CZR~2020,Caesars Entertainment,False,no_symbol,384,0
+DAN,Dana Incorporated,False,ok,1265,1265
+DAR,Darling Ingredients,True,ok,1705,1705
+DBX,Dropbox,True,ok,822,822
+DCI,Donaldson Company,True,ok,2087,2087
+DCT,DCT Industrial Trust,False,http_404,7,0
+DDS,Dillard's,False,ok,485,485
+DECK,Deckers Brands,False,ok,1460,1460
+DEI,Douglas Emmett,False,ok,1265,1265
+DHC,Diversified Healthcare Trust,False,ok,467,467
+DINO,HF Sinclair,True,ok,1353,1353
+DKS,Dick's Sporting Goods,True,ok,2087,2087
+DLB,Dolby,True,ok,776,776
+DLPH,Delphi Technologies,False,http_404,562,0
+DLX,Deluxe Corporation,False,ok,515,515
+DNB,Dun & Bradstreet Corp,False,http_404,130,0
+DNKN,Dunkin' Brands,False,http_404,615,0
+DNOW,DNOW Inc.,False,ok,485,485
+DO,Diamond Offshore Drilling,False,http_404,155,0
+DOC,Physicians Realty Trust,False,"name_mismatch:Healthpeak Properties, Inc.",989,0
+DOCN,DigitalOcean,True,ok,89,89
+DOCS,Doximity,True,ok,822,822
+DOCU,Docusign,True,ok,478,478
+DPZ,Domino's Pizza,False,ok,452,452
+DRQ,Dril-Quip,False,http_404,125,0
+DT,Dynatrace,True,ok,1017,1017
+DTM,DT Midstream,True,ok,1333,1333
+DUOL,Duolingo,True,ok,602,602
+DY,Dycom Industries,True,ok,1367,1367
+EAT,Brinker International,False,ok,488,488
+EBS,Emergent BioSolutions,False,ok,352,352
+EDR,Education Realty Trust,False,http_404,28,0
+EEFT,Euronet Worldwide,True,ok,1181,1181
+EGN,Energen,False,http_404,80,0
+EGP,EastGroup Properties,True,ok,1896,1896
+EHC,Encompass Health,True,ok,2087,2087
+ELAN,Elanco,True,ok,246,246
+ELF,e.l.f. Beauty,True,ok,666,666
+ELS,Equity Lifestyle Properties,True,ok,797,797
+EME,Emcor,False,ok,1855,1855
+ENOV,Enovis,False,ok,1521,1521
+ENPH,Enphase Energy,False,ok,183,183
+ENR,Energizer,False,ok,1330,1330
+ENS,EnerSys,True,ok,2087,2087
+ENSG,Ensign Group,True,ok,486,486
+ENTG,Entegris,True,ok,374,374
+ENV,Envestnet,False,http_404,629,0
+EPC,Edgewell Personal Care,False,ok,680,680
+EPR,EPR Properties,True,ok,2087,2087
+EQH,Equitable Holdings,True,ok,692,692
+EQT,EQT Corporation,False,ok,1014,1014
+ERIE,Erie Indemnity,False,ok,294,294
+ESAB,ESAB,True,ok,1136,1136
+ESL,Esterline Technologies,False,http_404,155,0
+ESNT,Essent Group Ltd.,True,ok,1621,1621
+ETRN,Equitrans Midstream,False,http_404,1484,0
+ETSY,Etsy,False,ok,260,260
+EV,Eaton Vance,False,http_404,665,0
+EVR,Evercore,True,ok,2087,2087
+EWBC,East West Bancorp,True,ok,2087,2087
+EXE,Expand Energy,False,ok,818,415
+EXEL,Exelixis,True,ok,2087,2087
+EXLS,EXL Service,True,ok,1007,1007
+EXP,Eagle Materials,True,ok,2087,2087
+EXPO,"Exponent, Inc.",True,ok,885,885
+FAF,First American Financial Corporation,True,ok,2087,2087
+FBIN,Fortune Brands Innovations,True,ok,952,952
+FCFS,FirstCash,True,ok,1797,1797
+FCN,FTI Consulting,True,ok,1774,1774
+FDS,FactSet,False,ok,875,875
+FFIN,First Financial Bankshares,True,ok,1928,1928
+FHI,Federated Hermes,True,ok,2087,2087
+FHN,First Horizon,True,ok,2087,2087
+FICO,Fair Isaac,False,ok,1200,1200
+FIVE,Five Below,True,ok,2087,2087
+FIX,Comfort Systems USA,False,ok,525,525
+FL,Foot Locker,False,http_404,1071,0
+FLEX,Flex Ltd.,False,ok,410,410
+FLG,Flagstar Bank,True,ok,2087,2087
+FLO,Flowers Foods,False,ok,2025,2025
+FLR,Fluor,True,ok,1876,1876
+FLS,Flowserve,True,ok,1407,1407
+FN,Fabrinet,True,ok,492,492
+FNB,FNB Corporation,True,ok,2087,2087
+FND,Floor & Decor,True,ok,733,733
+FNF,Fidelity National Financial,True,ok,757,757
+FOUR,Shift4,True,ok,450,450
+FOXF,Fox Factory,False,ok,922,922
+FR,First Industrial Realty Trust,True,ok,2087,2087
+FSLR,First Solar,False,ok,1135,1135
+FTI,TechnipFMC,True,ok,238,238
+FTNT,Fortinet,False,ok,43,43
+FULT,Fulton Financial Corporation,False,ok,1265,1265
+FYBR,Frontier Communications,False,http_404,863,0
+G,Genpact,True,ok,1377,1377
+GAP,Gap Inc.,True,ok,1179,1179
+GATX,GATX,True,ok,2087,2087
+GBCI,Glacier Bancorp,True,ok,1602,1602
+GDDY,GoDaddy,False,ok,200,200
+GDOT,Green Dot Corp,False,ok,270,270
+GEF,"Greif, Inc.",True,ok,2087,2087
+GEO,GEO Group,False,ok,589,589
+GGG,Graco Inc.,True,ok,2087,2087
+GHC,Graham Holdings,True,ok,2087,2087
+GLPI,Gaming and Leisure Properties,True,ok,757,757
+GME,GameStop,True,ok,1310,1310
+GMED,Globus Medical,True,ok,2087,2087
+GNRC,Generac Holdings,False,ok,291,291
+GNTX,Gentex,True,ok,2087,2087
+GNW,Genworth Financial,False,ok,710,710
+GO,Grocery Outlet,False,ok,1042,1042
+GPK,Graphic Packaging,True,ok,822,822
+GPOR,Gulfport Energy Corp,False,ok,87,0
+GRUB,Grubhub,False,http_404,482,0
+GT,Goodyear Tire & Rubber,False,ok,1918,1918
+GTLS,Chart Industries,False,http_404,1122,0
+GTM,ZoomInfo,False,ok,720,720
+GVA,Granite Construction,False,ok,349,349
+GWR,Genesee & Wyoming,False,http_404,358,0
+GWRE,Guidewire Software,True,ok,402,402
+GXO,GXO Logistics,True,ok,1312,1312
+H,Hyatt,True,ok,739,739
+HAE,Haemonetics,True,ok,2087,2087
+HAIN,Hain Celestial Group,False,ok,1080,1080
+HALO,Halozyme,True,ok,1498,1498
+HBI,Hanesbrands,False,http_404,325,0
+HCSG,Healthcare Services Group,False,ok,810,810
+HE,Hawaiian Electric Industries,False,ok,1330,1330
+HELE,Helen of Troy Limited,False,ok,1595,1595
+HGV,Hilton Grand Vacations,True,ok,887,887
+HIMS,Hims & Hers Health,True,ok,362,362
+HIW,Highwoods Properties,False,ok,1330,1330
+HL,Hecla Mining,True,ok,167,167
+HLI,Houlihan Lokey,True,ok,692,692
+HLNE,Hamilton Lane,True,ok,492,492
+HNI,HNI Corporation,False,ok,656,656
+HOG,Harley-Davidson,True,ok,1602,1602
+HOMB,Home BancShares,True,ok,2087,2087
+HPP,Hudson Pacific Properties,False,ok,603,603
+HQY,HealthEquity,True,ok,2062,2062
+HR,Healthcare Realty Trust,True,ok,1059,1059
+HRB,H&R Block,True,ok,1537,1537
+HRC,Hillrom,False,http_404,875,0
+HR~2022,Healthcare Realty Trust,False,no_symbol,1028,0
+HTZ,Hertz,False,ok,330,330
+HUBB,Hubbell Incorporated,False,ok,1352,1352
+HWC,Hancock Whitney,True,ok,2087,2087
+HXL,Hexcel,True,ok,1602,1602
+IAA,"IAA, Inc.",False,http_404,687,0
+IART,Integra LifeSciences,False,ok,1530,1530
+IBKR,Interactive Brokers,False,ok,1838,1838
+IBOC,Intl Bancshares Corp,True,ok,2087,2087
+ICUI,ICU Medical,False,ok,1383,1383
+IDA,Idacorp,True,ok,2087,2087
+IDCC,InterDigital,True,ok,797,797
+IDTI,Integrated Device Technology,False,http_404,165,0
+IESC,IES Holdings,True,ok,30,30
+IEX,IDEX Corp.,False,ok,259,259
+ILG,"ILG, Inc.",False,http_404,16,0
+ILMN,"Illumina, Inc.",True,ok,557,557
+INGN,Inogen,False,ok,287,287
+INGR,Ingredion,True,ok,2087,2087
+INT,World Fuel Services,False,name_mismatch:Corgi Intc 2x Daily ETF,777,0
+IPGP,IPG Photonics,True,ok,1081,1081
+IRDM,Iridium Communications,False,ok,1266,1266
+IRT,Independence Realty Trust,True,ok,1104,1104
+ISCA,International Speedway,False,http_404,309,0
+ITT,ITT Inc.,True,ok,2087,2087
+JACK,Jack in the Box,False,ok,908,908
+JAZZ,Jazz Pharmaceuticals,True,ok,1537,1537
+JBGS,JBG Smith,False,ok,1200,1200
+JBL,Jabil,False,ok,1395,1395
+JBLU,JetBlue,False,ok,1330,1330
+JEF,Jefferies,True,ok,1794,1794
+JHG,Janus Henderson,False,http_404,2057,0
+JKHY,Jack Henry & Associates,False,ok,66,66
+JLL,Jones Lang LaSalle,True,ok,2087,2087
+JWN,Nordstrom,False,http_404,1283,0
+KAR,KAR Auction Services,False,http_404,573,0
+KBH,KB Home,True,ok,2087,2087
+KBR,"KBR, Inc.",True,ok,2087,2087
+KD,Kyndryl,True,ok,1243,1243
+KEX,Kirby Corporation,True,ok,2087,2087
+KEYS,Keysight Technologies,False,ok,66,66
+KLXI,KLX Inc.,False,http_404,26,0
+KMPR,Kemper Corporation,False,ok,1985,1985
+KMT,Kennametal,False,ok,1200,1200
+KNF,Knife River Corporation,True,ok,834,831
+KNSL,Kinsale Capital Group,True,ok,1466,1466
+KNX,Knight-Swift,True,ok,2087,2087
+KRC,Kilroy Realty Corp,True,ok,2087,2087
+KRG,Kite Realty Group Trust,True,ok,1253,1253
+KRYS,Krystal Biotech,True,ok,13,13
+KSS,Kohl's,False,ok,791,791
+KTOS,Kratos Defense & Security Solutions,True,ok,232,232
+LAD,Lithia Motors,True,ok,1551,1551
+LAMR,Lamar Advertising Company,True,ok,2087,2087
+LDOS,Leidos Holdings,False,ok,259,259
+LEA,Lear,True,ok,1738,1738
+LECO,Lincoln Electric,True,ok,2087,2087
+LEG,Leggett & Platt,False,ok,655,0
+LFUS,Littelfuse,True,ok,2087,2087
+LGND,Ligand Pharmaceuticals,False,ok,735,735
+LHCG,LHC Group,False,http_404,748,0
+LHO,LaSalle Hotel Properties,False,http_404,80,0
+LII,Lennox International,False,ok,1660,1660
+LITE,Lumentum,False,ok,1985,1985
+LIVN,LivaNova,True,ok,2087,2087
+LM,Legg Mason,False,http_404,515,0
+LNTH,Lantheus Holdings,True,ok,1000,1000
+LNW,Light & Wonder,False,http_404,1893,0
+LOGM,LogMeIn,False,http_404,536,0
+LOPE,Grand Canyon Education,True,ok,1738,1738
+LPNT,LifePoint Health Inc.,False,http_404,61,0
+LPT,Liberty Property Trust,False,http_404,382,0
+LPX,Louisiana-Pacific,True,ok,2087,2087
+LSCC,Lattice Semiconductor,True,ok,1386,1386
+LSI,Life Storage,False,http_404,1290,0
+LSTR,Landstar System,True,ok,2087,2087
+LW,Lamb Weston Holdings,False,ok,80,80
+LYV,Live Nation Entertainment,False,ok,349,349
+M,Macy's,True,ok,1212,1212
+MAC,Macerich,False,ok,916,916
+MAN,ManpowerGroup,False,ok,1855,1855
+MANH,Manhattan Associates,True,ok,2087,2087
+MASI,Masimo,False,http_404,2043,0
+MAT,Mattel,True,ok,1873,1873
+MBFI,MB Financial,False,http_404,159,0
+MCY,Mercury General,False,ok,1070,1070
+MD,Mednax,False,ok,589,589
+MDP,Meredith Corp,False,http_404,445,0
+MDR,McDermott International,False,http_404,290,0
+MDRX,Allscripts Healthcare Solutions,False,ok,485,485
+MDSO,Medidata Solutions,False,http_404,313,0
+MDU,MDU Resources,False,ok,1609,1609
+MEDP,Medpace,True,ok,1537,1537
+MIDD,Middleby,True,ok,1602,1602
+MIK,The Michaels Companies,False,http_404,290,0
+MIME,Mimecast,False,http_404,188,0
+MKSI,MKS Instruments,True,ok,2087,2087
+MKTX,MarketAxess,False,ok,230,230
+MLI,Mueller Industries,True,ok,446,446
+MLKN,MillerKnoll,False,ok,1091,1091
+MMS,Maximus Inc.,True,ok,2087,2087
+MNK,Mallinckrodt,False,http_404,290,0
+MODG,Topgolf Callaway Brands,False,http_404,654,0
+MOG.A,Moog Inc.,True,ok,102,102
+MOH,Molina Healthcare,True,ok,942,942
+MORN,"Morningstar, Inc.",True,ok,757,757
+MP,MP Materials,True,ok,795,795
+MPW,Medical Properties Trust,False,http_404,1460,0
+MPWR,Monolithic Power Systems,False,ok,654,654
+MRCY,Mercury Systems,False,ok,1009,1009
+MSA,MSA Safety,True,ok,2087,2087
+MSM,MSC Industrial Direct,True,ok,2087,2087
+MTDR,Matador Resources,True,ok,1622,1622
+MTG,MGIC Investment Corporation,True,ok,1498,1498
+MTN,Vail Resorts,True,ok,757,757
+MTSI,MACOM Technology Solutions,True,ok,1040,1040
+MTX,Minerals Technologies,False,ok,1070,1070
+MTZ,MasTec,True,ok,2022,2022
+MUR,Murphy Oil,True,ok,2087,2087
+MUSA,Murphy USA,True,ok,2087,2087
+MZTI,The Marzetti Company,True,ok,2087,2087
+NARI,Inari Medical,False,http_404,499,0
+NATI,National Instruments,False,http_404,1348,0
+NAVI,Navient,False,ok,1265,1265
+NBIX,Neurocrine Biosciences,True,ok,1401,1401
+NBR,Nabors Industries,False,ok,85,85
+NDSN,Nordson,False,ok,916,916
+NEOG,Neogen,False,ok,1163,1163
+NEU,NewMarket Corporation,True,ok,2087,2087
+NFG,National Fuel Gas,True,ok,2087,2087
+NGVT,Ingevity Corp.,False,ok,1110,1110
+NJR,New Jersey Resources,True,ok,2087,2087
+NKTR,Nektar Therapeutics,False,ok,577,577
+NLY,Annaly Capital Management,True,ok,1017,1017
+NNN,NNN Reit,True,ok,2087,2087
+NOV,NOV Inc.,True,ok,1277,1277
+NOVT,Novanta,True,ok,1056,1056
+NSA,National Storage Affiliates Trust,False,http_404,1353,0
+NSP,Insperity,False,ok,1859,1859
+NTCT,NetScout Systems,False,ok,844,844
+NTNX,Nutanix,True,ok,232,232
+NUS,Nu Skin Enterprises,False,ok,1123,1123
+NUVA,NuVasive,False,http_404,1135,0
+NVR,NVR,False,ok,293,293
+NVST,Envista Holdings,True,ok,1392,1392
+NVT,nVent Electric plc,True,ok,2087,2087
+NWE,NorthWestern Energy,True,ok,2087,2087
+NXST,Nexstar Media Group,True,ok,964,964
+NXT,Nextpower,True,ok,557,557
+NYT,New York Times Company,True,ok,2087,2087
+OAS,Oasis Petroleum,False,http_404,349,0
+OC,Owens Corning,True,ok,1797,1797
+ODFL,Old Dominion Freight Line,False,ok,340,340
+OGE,OGE Energy,True,ok,2087,2087
+OGS,One Gas,True,ok,2087,2087
+OHI,Omega Healthcare Investors,True,ok,2087,2087
+OI,O-I Glass,False,ok,686,686
+OII,Oceaneering International,False,ok,317,317
+OKTA,"Okta, Inc.",True,ok,334,334
+OLED,Universal Display,True,ok,2002,2002
+OLLI,Ollie's Bargain Outlet,True,ok,2087,2087
+OLN,Olin Corporation,True,ok,2087,2087
+OMCL,Omnicell,False,ok,314,314
+ONB,Old National Bank,True,ok,1168,1168
+ONTO,Onto Innovation,True,ok,735,735
+OPCH,Option Care Health,True,ok,1292,1292
+ORA,Ormat Technologies,True,ok,1069,1069
+ORI,Old Republic International,True,ok,2087,2087
+OSK,Oshkosh,True,ok,2087,2087
+OVV,Ovintiv,True,ok,822,822
+OZK,Bank OZK,True,ok,2087,2087
+P,Everpure,True,ok,678,678
+PACW,PacWest Bancorp,False,http_404,1212,0
+PAG,Penske Automotive Group,True,ok,788,788
+PATH,UiPath,True,ok,158,158
+PAY,VeriFone,False,"name_mismatch:Paymentus Holdings, Inc.",5,0
+PB,Prosperity Bancshares,True,ok,2087,2087
+PBF,PBF Energy,True,ok,1514,1514
+PBH,Prestige Brands,False,ok,644,644
+PBI,Pitney Bowes,False,ok,167,167
+PCH,PotlatchDeltic,False,http_404,1950,0
+PCTY,Paylocity,True,ok,1642,1642
+PDCE,PDC Energy,False,http_404,385,0
+PDCO,Patterson Companies,False,http_404,1409,0
+PEB,Pebblebrook Hotel Trust,False,ok,1120,1120
+PEGA,Pegasystems,True,ok,319,319
+PEN,"Penumbra, Inc.",True,ok,1797,1797
+PENN,Penn Entertainment,False,ok,1098,1098
+PFGC,Performance Food Group,True,ok,1288,1288
+PGNY,Progyny,False,ok,894,894
+PII,Polaris,True,ok,2087,2087
+PINS,Pinterest,True,ok,167,167
+PK,Park Hotels & Resorts,True,ok,1800,1800
+PLNT,Planet Fitness,True,ok,822,822
+PLT,Plantronics,False,http_404,346,0
+PNFP,Pinnacle Financial Partners,True,ok,2087,2087
+POOL,Pool Corporation,False,ok,562,562
+POR,Portland General Electric,True,ok,1075,1075
+POST,Post Holdings,True,ok,2087,2087
+POWI,Power Integrations,False,ok,1045,1045
+PPC,Pilgrim's Pride,True,ok,1797,1797
+PR,Permian Resources,True,ok,757,757
+PRAH,PRA Health Sciences,False,http_404,754,0
+PRG,PROG Holdings,False,ok,952,952
+PRGO,Perrigo,False,ok,1110,1110
+PRI,Primerica,True,ok,2087,2087
+PRSP,Perspecta Inc.,False,http_404,714,0
+PSB,PS Business Parks,False,http_404,854,0
+PSN,Parsons Corporation,True,ok,492,492
+PTC,PTC Inc.,False,ok,701,701
+PTEN,Patterson-UTI Energy,False,ok,466,466
+PVH,PVH Corp.,True,ok,1017,1017
+PZZA,Papa John's,False,ok,1330,1330
+QDEL,QuidelOrtho,False,ok,1069,1069
+QEP,QEP Resources,False,http_404,290,0
+QLYS,Qualys,True,ok,1602,1602
+R,Ryder,True,ok,2087,2087
+RAMP,LiveRamp,False,ok,1006,1006
+RBA,RB Global,True,ok,557,557
+RBC,RBC Bearings,True,ok,757,757
+RCM,R1 RCM,False,http_404,923,0
+RDC,Rowan Companies,False,http_404,173,0
+REXR,Rexford Industrial Realty,True,ok,1572,1572
+REZI,Resideo Technologies,False,ok,485,430
+RGA,Reinsurance Group of America,True,ok,2087,2087
+RGEN,Repligen,True,ok,1797,1797
+RGLD,Royal Gold,True,ok,2087,2087
+RH,RH,True,ok,1729,1729
+RIG,Transocean,False,ok,550,550
+RLGY,Realogy,False,http_404,183,0
+RLI,RLI Corp.,True,ok,1750,1750
+RMBS,Rambus,True,ok,692,692
+RNR,RenaissanceRe,True,ok,2087,2087
+ROIV,Roivant Sciences,True,ok,617,617
+ROKU,"Roku, Inc.",True,ok,37,37
+RPM,RPM International,True,ok,2087,2087
+RRC,Range Resources,True,ok,1450,1450
+RRX,Regal Rexnord,True,ok,2087,2087
+RS,"Reliance, Inc.",True,ok,2087,2087
+RUN,Sunrun,False,ok,955,955
+RXO,RXO,False,ok,47,47
+RYAN,Ryan Specialty,True,ok,553,553
+RYN,Rayonier,True,ok,2087,2087
+SABR,Sabre,False,ok,1123,1123
+SAFM,Sanderson Farms,False,http_404,1032,0
+SAIA,Saia,True,ok,1292,1292
+SAIC,Science Applications Intl Corp,True,ok,2087,2087
+SAIL,SailPoint Technologies,False,ok,487,0
+SAM,Boston Beer Company,True,ok,2087,2087
+SANM,Sanmina Corporation,True,ok,37,37
+SARO,StandardAero,True,ok,144,144
+SATS,EchoStar,False,http_404,260,0
+SBH,Sally Beauty Holdings,False,ok,560,560
+SBNY,Signature Bank,False,ok,875,0
+SBRA,Sabra Health Care REIT,True,ok,2087,2087
+SCI,Service Corp Intl,True,ok,2087,2087
+SEDG,SolarEdge,False,ok,566,566
+SEIC,SEI Investments Company,True,ok,2087,2087
+SF,Stifel,True,ok,2087,2087
+SFM,Sprouts Farmers Market,True,ok,2087,2087
+SGI,Somnigroup International,True,ok,2087,2087
+SHC,Sotera Health,True,ok,1081,1081
+SIG,Signet Jewelers Ltd,False,ok,290,290
+SIGI,Selective Insurance Group,True,ok,1797,1797
+SIRI,SiriusXM,True,ok,44,44
+SITM,SiTime,True,ok,506,506
+SIX,Six Flags,False,http_404,1031,0
+SKT,Tanger Factory Outlet Centers,False,ok,376,376
+SKX,Skechers,False,http_404,1849,0
+SLAB,Silicon Labs,True,ok,2087,2087
+SLG,SL Green Realty,False,ok,520,520
+SLGN,Silgan Holdings,True,ok,2087,2087
+SLM,SLM Corp,True,ok,2087,2087
+SM,SM Energy,False,ok,236,236
+SMCI,Supermicro,False,ok,322,322
+SMG,Scotts Miracle-Gro Company,True,ok,2087,2087
+SMTC,Semtech,True,ok,999,999
+SN,SharkNinja,True,ok,62,62
+SNV,Synovus,False,http_404,1929,0
+SNX,TD Synnex,True,ok,2087,2087
+SOLS,Solstice Advanced Materials,True,ok,102,102
+SON,Sonoco,True,ok,2087,2087
+SPN,Superior Energy Services,False,http_404,67,0
+SPWR,SunPower,False,ok,444,119
+SPXC,SPX Technologies,True,ok,167,167
+SR,Spire,True,ok,2087,2087
+SRC,Spirit Realty,False,http_404,1185,0
+SRCL,Stericycle,False,http_404,1547,0
+SRPT,Sarepta Therapeutics,False,ok,326,326
+SSB,South State Bank,True,ok,887,887
+SSD,Simpson Manufacturing,True,ok,1525,1525
+ST,Sensata Technologies,True,ok,757,757
+STAA,STAAR Surgical,False,ok,667,667
+STAG,STAG Industrial,True,ok,854,854
+STE,STERIS plc,False,ok,349,349
+STL,Sterling Bancorp,False,http_404,906,0
+STLD,Steel Dynamics,False,ok,1138,1138
+STOR,Store Capital,False,http_404,718,0
+STRA,"Strategic Education, Inc.",False,ok,291,291
+STRL,Sterling Infrastructure,True,ok,194,194
+STWD,Starwood Property Trust,True,ok,887,887
+SVC,Service Properties Trust,False,ok,734,734
+SWAV,Shockwave Medical,False,http_404,509,0
+SWN,Southwestern Energy,False,http_404,933,0
+SWX,Southwest Gas Corp,True,ok,2087,2087
+SXT,Sensient Technologies,False,ok,1330,1330
+SYNA,Synaptics,True,ok,2087,2087
+SYNH,Syneos Health,False,http_404,1339,0
+TCBI,Texas Capital Bancshares,True,ok,2087,2087
+TCF,TCF Financial Corporation,False,http_404,737,0
+TCO,Taubman Centers,False,http_404,621,0
+TDC,Teradata,False,ok,1725,1725
+TDS,Telephone and Data Systems,False,ok,875,875
+TDY,Teledyne Technologies,False,ok,485,485
+TECD,Tech Data,False,http_404,491,0
+TECH,Bio-Techne,False,ok,795,795
+TER,Teradyne,False,ok,550,550
+TEX,Terex,True,ok,2087,2087
+TFX,Teleflex,False,ok,114,114
+TGNA,Tegna Inc.,False,http_404,1595,0
+THC,Tenet Health,True,ok,2087,2087
+THG,Hanover Insurance,True,ok,2087,2087
+THO,Thor Industries,True,ok,2087,2087
+THS,TreeHouse Foods,False,http_404,799,0
+TKO,TKO Group Holdings,False,ok,1725,1725
+TKR,Timken,True,ok,2087,2087
+TLN,Talen Energy,True,ok,249,249
+TMHC,Taylor Morrison,False,http_404,1690,0
+TNDM,Tandem Diabetes Care,False,ok,390,390
+TNL,Travel + Leisure Co.,True,ok,2087,2087
+TOL,Toll Brothers,True,ok,2087,2087
+TOST,"Toast, Inc.",True,ok,30,30
+TPH,Tri Pointe Homes,False,http_404,971,0
+TPL,Texas Pacific Land Corporation,False,ok,111,111
+TR,Tootsie Roll,False,ok,875,875
+TREE,LendingTree,False,ok,834,834
+TREX,Trex,True,ok,1922,1922
+TRGP,Targa Resources,False,ok,350,350
+TRIP,Tripadvisor,False,ok,981,981
+TRMB,Trimble Inc.,False,ok,638,638
+TRMK,Trustmark Corporation,False,ok,795,795
+TRN,Trinity Industries,False,ok,1006,1006
+TRU,TransUnion,True,ok,232,232
+TTC,Toro,True,ok,2087,2087
+TTEK,Tetra Tech,True,ok,1834,1834
+TTMI,TTM Technologies,True,ok,138,138
+TUP,Tupperware Brands Corp,False,http_404,290,0
+TWLO,Twilio,True,ok,256,256
+TXNM,TXNM Energy,True,ok,2087,2087
+TXRH,Texas Roadhouse,True,ok,2087,2087
+TYL,Tyler Technologies,False,ok,485,485
+UAA,Under Armour,False,ok,914,914
+UBSI,United Bankshares,True,ok,2087,2087
+UE,Urban Edge Properties,False,ok,919,919
+UFPI,UFP Industries,True,ok,904,904
+UFS,Domtar,False,http_404,701,0
+UGI,UGI Corp,True,ok,2087,2087
+ULS,UL Solutions,True,ok,167,167
+ULTI,Ultimate Software Group,False,name_mismatch:REX IncomeMax Option Strategy ETF,191,0
+UMBF,UMB Financial Corp.,True,ok,2087,2087
+UMPQ,Umpqua Bank,False,http_404,1187,0
+UNFI,United Natural Foods,False,ok,65,65
+UNIT,Uniti Group,False,ok,351,351
+UNM,Unum,True,ok,1277,1277
+UNVR,Univar Solutions,False,http_404,814,0
+URBN,Urban Outfitters,False,ok,1006,1006
+USFD,US Foods,True,ok,887,887
+UTHR,United Therapeutics,True,ok,2087,2087
+VAC,Marriott Vacations Worldwide,False,ok,1904,1904
+VAL,Valaris,True,ok,1177,887
+VC,Visteon,True,ok,2087,2087
+VFC,VF Corporation,True,ok,362,362
+VIAV,Viavi Solutions,True,ok,37,37
+VICR,Vicor Corporation,True,ok,581,581
+VLY,Valley Bank,True,ok,2087,2087
+VMI,Valmont Industries,True,ok,2087,2087
+VNO,Vornado Realty Trust,True,ok,939,939
+VNOM,Viper Energy,True,ok,492,492
+VNT,Vontier,True,ok,1407,1407
+VOYA,Voya Financial,True,ok,1206,1206
+VSAT,Viasat,False,ok,1200,1200
+VSCO,Victoria's Secret,False,http_404,488,0
+VSH,Vishay Intertechnology,False,ok,1660,1660
+VSM,Versum Materials,False,http_404,301,0
+VST,Vistra,False,ok,164,164
+VSTS,Vestis,False,ok,55,55
+VVC,Vectren,False,http_404,127,0
+VVV,Valvoline,True,ok,2087,2087
+VYX,NCR Voyix,False,ok,1406,1406
+WAB,Wabtec,False,ok,142,142
+WAFD,"WaFd, Inc.",False,ok,1200,1200
+WAL,Western Alliance Bancorporation,True,ok,492,492
+WBS,Webster Bank,True,ok,2087,0
+WCC,WESCO International,True,ok,822,822
+WCG,WellCare,False,http_404,25,0
+WEN,Wendy's,False,ok,1855,1855
+WERN,Werner Enterprises,False,ok,1530,1530
+WEX,WEX Inc.,True,ok,2087,2087
+WFRD,Weatherford International,True,ok,757,757
+WH,Wyndham Hotels & Resorts,True,ok,2087,2087
+WHR,Whirlpool Corporation,True,ok,627,627
+WING,Wingstop,True,ok,1537,1537
+WLK,Westlake Corporation,True,ok,996,996
+WLY,John Wiley & Sons,False,ok,1265,1265
+WMG,Warner Music Group,True,ok,557,557
+WMS,Advanced Drainage Systems,True,ok,887,887
+WOLF,Wolfspeed,False,ok,1595,0
+WOR,Worthington Industries,False,ok,1383,1383
+WPC,W. P. Carey,True,ok,704,704
+WPX,WPX Energy,False,http_404,628,0
+WRB,W.R. Berkley,False,ok,337,337
+WRI,Weingarten Realty,False,http_404,777,0
+WSM,"Williams-Sonoma, Inc.",False,ok,1725,1725
+WSO,Watsco,True,ok,2087,2087
+WST,West Pharmaceutical Services,False,ok,460,460
+WTFC,Wintrust Financial,True,ok,2087,2087
+WTRG,Essential Utilities,True,ok,2087,2087
+WTS,Watts Water Technologies,True,ok,1181,1181
+WU,Western Union,False,ok,990,990
+WW,WW International,False,ok,784,0
+WWD,"Woodward, Inc.",True,ok,2087,2087
+X,U.S. Steel,False,http_404,1791,0
+XEC,Cimarex Energy,False,http_404,418,0
+XPO,"XPO, Inc.",True,ok,1932,1932
+XRAY,Dentsply Sirona,True,ok,615,615
+XRX,Xerox,False,ok,650,650
+Y,Alleghany,False,http_404,1093,0
+YELP,Yelp,False,ok,919,919
+YETI,Yeti Holdings,True,ok,1449,1449
+ZBRA,Zebra Technologies,False,ok,349,349
+ZD,Ziff Davis,False,ok,1595,1595
+ZION,Zions Bancorporation,True,ok,627,627

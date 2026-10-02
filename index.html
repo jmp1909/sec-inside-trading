@@ -1,623 +1,127 @@
-<title>Does Insider Buying Predict Returns?</title>
-<style>
-  :root {
-    /* headline face: bold typewriter, straight out of a case-file title page */
-    --serif: "Courier New", "Cascadia Mono", Consolas, "Liberation Mono", monospace;
-    /* body face: a warm reading serif, for the actual prose */
-    --sans: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif;
-    /* data face: same typewriter family as headlines -- tables read like typed evidence logs */
-    --mono: "SF Mono", "Cascadia Mono", "Cascadia Code", Consolas, "Roboto Mono", "Liberation Mono", monospace;
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Does insider buying predict stock returns?</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
 
-    --bg: #F3F3F2;
-    --surface: #FFFFFF;
-    --surface-2: #EAEAE8;
-    --ink: #141414;
-    --ink-2: #454542;
-    --ink-3: #78776F;
-    --border: #DCDBD6;
-    --accent: #29354F;
-    --accent-ink: #FFFFFF;
-    --pos: #29604A;
-    --pos-soft: #E1EBE4;
-    --neg: #93372B;
-    --neg-soft: #F1E1DC;
-    --shadow: 0 1px 2px rgba(0,0,0,0.06), 0 4px 14px rgba(0,0,0,0.05);
-  }
+<h1>Does insider buying predict stock returns?</h1>
+<p class="meta">S&amp;P MidCap 400 &middot; SEC Form 4 filings 2018&ndash;2026 &middot; portfolio test Feb 2019 &ndash; Jul 2026
+&middot; <a href="live-signal.html">latest insider-buying snapshot</a></p>
 
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-  ::selection { background: var(--accent); color: var(--accent-ink); }
+<nav class="toc"><a href="#summary">Summary</a> <a href="#data">Data and method</a> <a href="#events">Event study</a> <a href="#portfolio">Portfolio test</a> <a href="#checks">Checks</a> <a href="#limits">Limitations</a> <a href="#changes">Changes</a></nav>
 
-  a { color: var(--accent); }
+<h2 id="summary">Summary</h2>
+<p>With the corrected method, the insider-buying portfolio did worse than simply holding all index members in equal amounts (8.6% vs 12.2% a year after costs). Most of the first version's apparent edge came from survivorship bias: run on today's index members, as before, the same portfolio returns 24.1% a year before costs and its benchmark 19.1%; on the members at each date they return 10.9% and 12.5%.</p>
+<ul>
+<li>Measured against the average index member over the same days, stocks moved +0.4% in the 20
+trading days after an insider purchase (95% interval &minus;0.4% to +1.2%) and
++4.4% over a year (&minus;2.4% to +11.2%).
+Neither is statistically different from zero.
+After insider sales the figures were &minus;0.1% and +0.2%.</li>
+<li>Why the first version's numbers were so much higher, for the one-year return after a purchase: the raw average was 50.4% against 20.6% for an index stock on any day. But the market itself rose 33.7% on average over the same windows, because insiders bought heavily around market lows such as March 2020. That leaves 16.7%. Counting each company and filing day once instead of each transaction row cuts it to 8.1%, and using the index members at each date cuts it to 4.4%.</li>
+<li>The 50-stock portfolio (3-month look-back, rebalanced monthly) returned 8.6% a year after
+trading costs of 25 basis points per trade, against 12.2% for the equal-weighted benchmark and
+11.8% for the MDY index fund. Its Sharpe ratio was 0.34 (0.50 and
+0.50) and its worst drawdown &minus;44% (&minus;37% and &minus;34%).</li>
+<li>Adjusted for market, size, value, profitability, investment and momentum exposure, its alpha was
+&minus;2.9% a year (t = &minus;1.4), and &minus;2.1% relative to the
+equal-weighted benchmark (t = &minus;1.4).</li>
+<li>Its Sharpe ratio was higher than 83% of 1,000 random 50-stock portfolios from the same stocks
+(p = 0.17). It beat the equal-weighted benchmark in 2 of 8 calendar years.</li>
+<li>The first version's one-day return after a purchase (+0.6%) falls to +0.05% relative to the
+market when trades are entered at the close of the day after the filing rather than the filing day itself. Many Form 4s
+are filed after the market closes, so most of that first-day move could not have been captured.</li>
+</ul>
 
-  .page {
-    display: grid;
-    grid-template-columns: 220px minmax(0, 1fr);
-    gap: 48px;
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 40px 24px 100px;
-  }
-  @media (max-width: 900px) {
-    .page { grid-template-columns: 1fr; gap: 20px; padding: 20px 16px 70px; }
-  }
+<h2 id="data">Data and method</h2>
+<ul>
+<li><strong>Companies:</strong> S&amp;P MidCap 400 members on each date, rebuilt from the current list and Wikipedia's record of
+index changes. A company only counts while it is in the index. 749 companies were in the index at some point in the period, 349 of which left it before the end. Prices were found for 87% of all company-days in the index (203 of the 349 companies that left). The rest, mostly companies that were taken over and whose old tickers Yahoo no longer carries, are missing.</li>
+<li><strong>Insider trades:</strong> SEC's quarterly Form 3/4/5 data sets from 2018 Q3. Only open-market purchases (code P) and
+sales (code S). All reporting owners are included: officers, directors and holders of more than 10%.</li>
+<li><strong>Prices:</strong> Yahoo Finance daily closes, adjusted for splits and dividends. If a stock stops trading while held,
+it is treated as sold at its last price.</li>
+<li><strong>Timing:</strong> returns start at the close of the trading day after the filing date, since many Form 4s are
+filed after the market closes.</li>
+<li><strong>Market comparison:</strong> each stock's return is compared with the average return of all index members over
+exactly the same days.</li>
+<li><strong>Costs and Sharpe ratio:</strong> trading costs are charged on the value traded each month. Sharpe ratios use returns
+above the one-month Treasury bill rate.</li>
+<li><strong>Bankruptcies:</strong> 17 companies filed for Chapter 11 during the period (each filing checked by hand).
+They are kept up to the filing date, then take a &minus;30% delisting return and leave the universe. The first version
+dropped such companies entirely.</li>
+</ul>
 
-  /* ---------- TOC rail: folder tabs ---------- */
-  .rail { position: sticky; top: 28px; align-self: start; }
-  @media (max-width: 900px) {
-    .rail {
-      position: static;
-      overflow-x: auto;
-      white-space: nowrap;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 8px;
-    }
-  }
-  .rail-title {
-    font-family: var(--serif); font-size: 11px; letter-spacing: 0.14em; color: var(--ink-3);
-    text-transform: uppercase; margin-bottom: 12px; font-weight: 700;
-  }
-  @media (max-width: 900px) { .rail-title { display: none; } }
-  .rail nav { display: flex; flex-direction: column; gap: 5px; }
-  @media (max-width: 900px) { .rail nav { flex-direction: row; gap: 6px; display: inline-flex; } }
-  .rail a {
-    text-decoration: none;
-    color: var(--ink-2);
-    font-family: var(--mono);
-    font-size: 12.5px;
-    padding: 7px 12px 7px 12px;
-    border-radius: 3px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--ink-3);
-    display: block;
-  }
-  @media (max-width: 900px) {
-    .rail a { border-left: 1px solid var(--border); border-top: 3px solid var(--ink-3); flex: 0 0 auto; }
-  }
-  .rail a:hover { color: var(--ink); background: var(--surface); border-left-color: var(--accent); }
+<h2 id="events">Event study</h2>
+<p>All trades by insiders of the same company filed on the same day count as one event. Returns are measured against the
+market over the same days. The 95% intervals and p-values allow for events at the same company, and events in the same
+month, being related.</p>
+<div class="table-wrap"><table><thead><tr><th>Horizon</th><th>Buy events</th><th>Buys vs market</th><th>95% interval</th><th>p</th><th>Sell events</th><th>Sells vs market</th><th>p</th><th>Buys minus sells</th></tr></thead><tbody><tr><td>1 day</td><td>3,455</td><td>+0.05%</td><td class="neg">&minus;0.04% to +0.14%</td><td>0.2803</td><td>22,120</td><td class="neg">&minus;0.01%</td><td>0.7472</td><td>+0.05%</td></tr><tr><td>5 days</td><td>3,455</td><td>+0.09%</td><td class="neg">&minus;0.13% to +0.32%</td><td>0.4175</td><td>22,120</td><td class="neg">&minus;0.00%</td><td>0.9753</td><td>+0.10%</td></tr><tr><td>10 days</td><td>3,455</td><td>+0.15%</td><td class="neg">&minus;0.30% to +0.60%</td><td>0.5118</td><td>22,120</td><td class="neg">&minus;0.01%</td><td>0.9141</td><td>+0.16%</td></tr><tr><td>20 days</td><td>3,455</td><td>+0.42%</td><td class="neg">&minus;0.40% to +1.24%</td><td>0.3178</td><td>22,120</td><td class="neg">&minus;0.09%</td><td>0.5917</td><td>+0.51%</td></tr><tr><td>6 months</td><td>3,455</td><td>+0.9%</td><td class="neg">&minus;2.0% to +3.8%</td><td>0.5384</td><td>22,120</td><td>+0.2%</td><td>0.8305</td><td>+0.7%</td></tr><tr><td>1 year</td><td>3,238</td><td>+4.4%</td><td class="neg">&minus;2.4% to +11.2%</td><td>0.2028</td><td>20,419</td><td>+0.2%</td><td>0.9194</td><td>+4.3%</td></tr><tr><td>2 years</td><td>2,792</td><td>+13.1%</td><td class="neg">&minus;3.7% to +30.0%</td><td>0.1266</td><td>17,328</td><td class="neg">&minus;1.0%</td><td>0.7078</td><td>+14.1%</td></tr></tbody></table></div>
+<h3>Purchases by year</h3>
+<div class="table-wrap"><table><thead><tr><th>Filing year</th><th>Buy events</th><th>Firms</th><th>20 days</th><th>6 months</th><th>1 year</th></tr></thead><tbody><tr><td>2018</td><td>231</td><td>100</td><td class="neg">&minus;0.5%</td><td class="neg">&minus;1.0%</td><td class="neg">&minus;2.7%</td></tr><tr><td>2019</td><td>441</td><td>126</td><td>+1.3%</td><td class="neg">&minus;4.3%</td><td class="neg">&minus;8.5%</td></tr><tr><td>2020</td><td>688</td><td>186</td><td class="neg">&minus;0.4%</td><td>+3.4%</td><td>+27.6%</td></tr><tr><td>2021</td><td>291</td><td>121</td><td>+1.1%</td><td>+1.3%</td><td>+1.1%</td></tr><tr><td>2022</td><td>412</td><td>146</td><td>+0.4%</td><td class="neg">&minus;0.8%</td><td class="neg">&minus;1.2%</td></tr><tr><td>2023</td><td>410</td><td>131</td><td>+0.1%</td><td>+1.0%</td><td>+3.5%</td></tr><tr><td>2024</td><td>452</td><td>123</td><td>+2.3%</td><td>+7.9%</td><td class="neg">&minus;1.3%</td></tr><tr><td>2025</td><td>418</td><td>150</td><td class="neg">&minus;0.1%</td><td class="neg">&minus;3.0%</td><td class="neg">&minus;3.3%</td></tr><tr><td>2026</td><td>112</td><td>66</td><td class="neg">&minus;1.9%</td><td>+0.9%</td><td>n/a</td></tr></tbody></table></div>
+<h3>Raw returns, for comparison with the first version</h3>
+<p class="small">Not market-adjusted. "Any day" is the average return of an index member from any day in the period.</p>
+<div class="table-wrap"><table><thead><tr><th>Horizon</th><th>Buys: mean</th><th>median</th><th>Sells: mean</th><th>median</th><th>Any day: mean</th></tr></thead><tbody><tr><td>1 day</td><td>+0.05%</td><td>+0.10%</td><td>+0.04%</td><td>+0.05%</td><td>+0.06%</td></tr><tr><td>5 days</td><td>+0.24%</td><td>+0.17%</td><td>+0.12%</td><td>+0.28%</td><td>+0.28%</td></tr><tr><td>10 days</td><td>+0.77%</td><td>+0.85%</td><td>+0.27%</td><td>+0.32%</td><td>+0.53%</td></tr><tr><td>20 days</td><td>+2.05%</td><td>+0.98%</td><td>+0.70%</td><td>+0.57%</td><td>+1.04%</td></tr><tr><td>6 months</td><td>+13.3%</td><td>+7.2%</td><td>+5.3%</td><td>+1.4%</td><td>+6.4%</td></tr><tr><td>1 year</td><td>+32.5%</td><td>+13.3%</td><td>+10.4%</td><td>+4.0%</td><td>+13.3%</td></tr><tr><td>2 years</td><td>+68.5%</td><td>+33.3%</td><td>+23.6%</td><td>+15.3%</td><td>+27.2%</td></tr></tbody></table></div>
 
-  main { min-width: 0; }
+<h2 id="portfolio">Portfolio test</h2>
+<p>Each month, rank index members by net insider dollar buying (purchases minus sales) over a look-back window, buy the top N
+in equal amounts, and hold for a month.</p>
+<figure><svg viewBox="0 0 760 320" role="img" font-family="Helvetica, Arial, sans-serif" font-size="11"><line x1="44" x2="642" y1="292.0" y2="292.0" stroke="#e5e5e5"/><text x="38" y="296.0" text-anchor="end" fill="#666">$0.50</text><line x1="44" x2="642" y1="222.0" y2="222.0" stroke="#e5e5e5"/><text x="38" y="226.0" text-anchor="end" fill="#666">$1</text><line x1="44" x2="642" y1="152.0" y2="152.0" stroke="#e5e5e5"/><text x="38" y="156.0" text-anchor="end" fill="#666">$1.50</text><line x1="44" x2="642" y1="82.0" y2="82.0" stroke="#e5e5e5"/><text x="38" y="86.0" text-anchor="end" fill="#666">$2</text><line x1="44" x2="642" y1="12.0" y2="12.0" stroke="#e5e5e5"/><text x="38" y="16.0" text-anchor="end" fill="#666">$2.50</text><line x1="117.8" x2="117.8" y1="12" y2="292" stroke="#f0f0f0"/><text x="117.8" y="312" text-anchor="middle" fill="#666">2020</text><line x1="198.6" x2="198.6" y1="12" y2="292" stroke="#f0f0f0"/><text x="198.6" y="312" text-anchor="middle" fill="#666">2021</text><line x1="279.3" x2="279.3" y1="12" y2="292" stroke="#f0f0f0"/><text x="279.3" y="312" text-anchor="middle" fill="#666">2022</text><line x1="359.9" x2="359.9" y1="12" y2="292" stroke="#f0f0f0"/><text x="359.9" y="312" text-anchor="middle" fill="#666">2023</text><line x1="440.5" x2="440.5" y1="12" y2="292" stroke="#f0f0f0"/><text x="440.5" y="312" text-anchor="middle" fill="#666">2024</text><line x1="521.4" x2="521.4" y1="12" y2="292" stroke="#f0f0f0"/><text x="521.4" y="312" text-anchor="middle" fill="#666">2025</text><line x1="602.0" x2="602.0" y1="12" y2="292" stroke="#f0f0f0"/><text x="602.0" y="312" text-anchor="middle" fill="#666">2026</text><polyline points="44.0,222.0 50.2,216.3 57.0,217.9 63.7,213.7 71.0,223.0 77.1,216.1 84.0,221.2 91.3,234.7 97.5,226.2 104.3,217.0 111.2,214.0 118.0,206.4 125.1,214.3 131.3,228.4 137.9,275.2 144.5,253.5 151.4,238.8 158.0,244.2 165.3,239.4 171.7,234.0 178.3,240.5 185.4,234.3 191.8,209.9 199.3,206.4 205.5,195.5 211.7,179.0 218.5,168.1 225.6,157.9 232.0,154.3 238.6,160.2 245.7,164.8 252.3,158.5 258.9,159.0 265.8,153.0 272.4,167.0 279.7,147.1 286.1,156.7 292.3,161.7 299.1,155.6 306.0,174.3 312.6,168.6 319.3,182.9 326.1,164.6 332.9,173.0 340.0,188.7 346.4,171.1 353.1,156.0 360.3,164.4 366.7,135.3 372.9,146.0 380.2,158.9 386.4,160.7 393.3,167.8 400.3,151.1 406.7,135.8 413.6,141.9 420.4,163.7 427.1,169.0 433.7,147.6 440.8,133.8 447.4,141.2 453.8,139.3 460.6,130.0 467.3,139.1 474.6,136.2 480.7,139.0 487.6,127.9 494.9,128.5 501.1,120.9 507.9,121.7 514.8,102.5 521.6,122.1 528.7,117.7 534.9,129.9 541.3,132.9 547.9,144.0 555.0,134.6 561.4,115.2 568.2,123.3 575.3,108.6 581.7,116.6 589.0,127.7 595.2,122.9 602.2,118.6 609.1,108.7 615.3,107.1 621.9,121.3 628.5,107.5 635.4,109.5 642.0,104.1" fill="none" stroke="#1a4e8a" stroke-width="1.8"/><polyline points="44.0,222.0 50.2,215.7 57.0,216.5 63.7,214.2 71.0,224.7 77.1,214.6 84.0,216.8 91.3,224.4 97.5,218.7 104.3,211.1 111.2,210.3 118.0,204.2 125.1,208.8 131.3,221.5 137.9,262.4 144.5,241.4 151.4,225.4 158.0,227.0 165.3,218.9 171.7,212.9 178.3,218.2 185.4,212.9 191.8,188.8 199.3,183.4 205.5,172.4 211.7,155.9 218.5,147.1 225.6,139.4 232.0,137.5 238.6,140.2 245.7,144.2 252.3,138.2 258.9,143.1 265.8,132.1 272.4,147.4 279.7,130.0 286.1,143.3 292.3,147.6 299.1,139.5 306.0,154.8 312.6,154.9 319.3,170.4 326.1,152.2 332.9,161.8 340.0,174.7 346.4,157.4 353.1,144.3 360.3,156.4 366.7,130.4 372.9,137.8 380.2,146.0 386.4,147.9 393.3,152.4 400.3,134.0 406.7,124.9 413.6,129.1 420.4,146.4 427.1,154.7 433.7,131.5 440.8,117.0 447.4,118.6 453.8,109.9 460.6,101.4 467.3,114.6 474.6,105.6 480.7,110.4 487.6,97.6 494.9,98.4 501.1,90.9 507.9,91.3 514.8,68.9 521.6,90.6 528.7,84.4 534.9,96.9 541.3,103.8 547.9,111.5 555.0,99.9 561.4,84.7 568.2,89.8 575.3,75.3 581.7,74.1 589.0,79.2 595.2,72.8 602.2,68.2 609.1,58.8 615.3,52.5 621.9,70.1 628.5,51.1 635.4,45.9 642.0,33.6" fill="none" stroke="#888" stroke-width="1.8" stroke-dasharray="5,3"/><polyline points="44.0,222.0 50.2,215.3 57.0,215.3 63.7,213.2 71.0,222.6 77.1,212.5 84.0,213.7 91.3,219.4 97.5,216.0 104.3,209.4 111.2,208.2 118.0,202.6 125.1,205.3 131.3,216.9 137.9,256.8 144.5,238.7 151.4,223.3 158.0,224.2 165.3,215.1 171.7,210.6 178.3,214.7 185.4,210.6 191.8,190.2 199.3,184.2 205.5,174.9 211.7,160.8 218.5,154.1 225.6,146.7 232.0,146.3 238.6,148.5 245.7,150.5 252.3,144.9 258.9,150.8 265.8,137.4 272.4,152.0 279.7,137.0 286.1,151.8 292.3,155.6 299.1,147.5 306.0,162.7 312.6,164.1 319.3,179.4 326.1,162.2 332.9,169.9 340.0,181.1 346.4,166.9 353.1,156.4 360.3,168.3 366.7,146.0 372.9,152.9 380.2,160.2 386.4,161.8 393.3,166.4 400.3,150.0 406.7,142.3 413.6,146.1 420.4,162.2 427.1,169.1 433.7,149.0 440.8,136.9 447.4,137.0 453.8,125.4 460.6,115.6 467.3,128.6 474.6,120.5 480.7,124.9 487.6,114.2 494.9,115.5 501.1,108.3 507.9,107.5 514.8,86.4 521.6,105.9 528.7,98.8 534.9,112.9 541.3,119.7 547.9,125.5 555.0,114.4 561.4,102.0 568.2,105.0 575.3,93.5 581.7,90.3 589.0,92.7 595.2,88.4 602.2,83.2 609.1,73.5 615.3,61.8 621.9,77.7 628.5,58.3 635.4,51.1 642.0,42.5" fill="none" stroke="#b07a2a" stroke-width="1.8" stroke-dasharray="2,3"/><text x="647.0" y="37.6" fill="#888">EW bench. $2.35</text><text x="647.0" y="50.6" fill="#b07a2a">MDY $2.28</text><text x="647.0" y="108.1" fill="#1a4e8a">Insiders $1.84</text></svg>
+<figcaption>Growth of $1 after 25 bps trading costs: 3-month look-back, top 50 (Insiders), equal-weighted index members
+(EW bench.), and the MDY index fund.</figcaption></figure>
+<h3>All combinations, after 25 bps costs</h3>
+<div class="table-wrap"><table><thead><tr><th>Look-back</th><th>Holdings</th><th>Turnover / month</th><th>Annual return</th><th>Sharpe</th><th>Max drawdown</th><th>Break-even cost (bps)</th></tr></thead><tbody><tr><td>1 months</td><td>top 10</td><td>83%</td><td>2.2%</td><td>0.14</td><td class="neg">&minus;53%</td><td>0</td></tr><tr><td>1 months</td><td>top 20</td><td>81%</td><td>4.5%</td><td>0.20</td><td class="neg">&minus;45%</td><td>0</td></tr><tr><td>1 months</td><td>top 50</td><td>77%</td><td>3.8%</td><td>0.17</td><td class="neg">&minus;44%</td><td>0</td></tr><tr><td>3 months</td><td>top 10</td><td>39%</td><td>6.4%</td><td>0.28</td><td class="neg">&minus;57%</td><td>0</td></tr><tr><td>3 months</td><td>top 20</td><td>36%</td><td>11.5%</td><td>0.42</td><td class="neg">&minus;47%</td><td>17</td></tr><tr class="hl"><td>3 months</td><td>top 50</td><td>35%</td><td>8.6%</td><td>0.34</td><td>&minus;44%</td><td>0</td></tr><tr><td>6 months</td><td>top 10</td><td>25%</td><td>2.7%</td><td>0.17</td><td class="neg">&minus;57%</td><td>0</td></tr><tr><td>6 months</td><td>top 20</td><td>25%</td><td>5.2%</td><td>0.24</td><td class="neg">&minus;51%</td><td>0</td></tr><tr><td>6 months</td><td>top 50</td><td>23%</td><td>9.4%</td><td>0.37</td><td class="neg">&minus;43%</td><td>0</td></tr><tr><td>Equal-weight benchmark</td><td>all</td><td></td><td>12.2%</td><td>0.50</td><td class="neg">&minus;37%</td><td></td></tr><tr><td>MDY index fund</td><td></td><td></td><td>11.8%</td><td>0.50</td><td class="neg">&minus;34%</td><td></td></tr></tbody></table></div>
+<p class="small">Turnover is the share of the portfolio sold (and bought) each month. Break-even cost is the cost per trade at
+which the portfolio's annual return falls to the equal-weighted benchmark's.</p>
+<h3>Effect of trading costs (3-month look-back, top 50)</h3>
+<div class="table-wrap"><table><thead><tr><th>Cost per trade</th><th>Annual return</th><th>Sharpe</th><th>Max drawdown</th><th>EW benchmark return</th><th>EW benchmark Sharpe</th></tr></thead><tbody><tr><td>0 bps</td><td>10.9%</td><td>0.42</td><td class="neg">&minus;44%</td><td>12.5%</td><td>0.51</td></tr><tr><td>10 bps</td><td>10.0%</td><td>0.39</td><td class="neg">&minus;44%</td><td>12.4%</td><td>0.51</td></tr><tr><td>25 bps</td><td>8.6%</td><td>0.34</td><td class="neg">&minus;44%</td><td>12.2%</td><td>0.50</td></tr><tr><td>50 bps</td><td>6.3%</td><td>0.26</td><td class="neg">&minus;45%</td><td>11.9%</td><td>0.49</td></tr></tbody></table></div>
+<h3>Other ways of ranking (25 bps costs)</h3>
+<div class="table-wrap"><table><thead><tr><th>Ranking</th><th>Target</th><th>Avg. stocks held</th><th>Annual return</th><th>Sharpe</th><th>Max drawdown</th></tr></thead><tbody><tr><td>Net dollar value</td><td>top 20</td><td>20</td><td>11.5%</td><td>0.42</td><td class="neg">&minus;47%</td></tr><tr><td>Net dollar value</td><td>top 50</td><td>50</td><td>8.6%</td><td>0.34</td><td class="neg">&minus;44%</td></tr><tr><td>Number of buyers</td><td>top 20</td><td>20</td><td>8.6%</td><td>0.34</td><td class="neg">&minus;47%</td></tr><tr><td>Number of buyers</td><td>top 50</td><td>47</td><td>9.8%</td><td>0.39</td><td class="neg">&minus;43%</td></tr><tr><td>Dollars per buyer</td><td>top 20</td><td>17</td><td>6.5%</td><td>0.27</td><td class="neg">&minus;49%</td></tr><tr><td>Dollars per buyer</td><td>top 50</td><td>20</td><td>6.5%</td><td>0.28</td><td class="neg">&minus;49%</td></tr></tbody></table></div>
 
-  /* ---------- Masthead ---------- */
-  .masthead { padding-bottom: 28px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
-  .eyebrow {
-    font-family: var(--serif); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--accent); font-weight: 700; margin-bottom: 18px; display: inline-block;
-    border: 1px solid var(--accent); border-radius: 2px; padding: 5px 12px;
-  }
-  h1.title {
-    font-family: var(--serif); font-weight: 700; font-size: clamp(24px, 4vw, 38px);
-    line-height: 1.18; margin: 0 0 14px; text-wrap: balance; letter-spacing: -0.01em;
-  }
-  .subtitle { font-size: 16.5px; color: var(--ink-2); max-width: 62ch; margin: 0 0 22px; }
-  .byline { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); }
+<h2 id="checks">Checks</h2>
+<h3>Survivorship bias</h3>
+<p>The same test run on today's index members (as in the first version) and on the members at each date.</p>
+<div class="table-wrap"><table><thead><tr><th>Stock list</th><th>Cost</th><th>Annual return</th><th>Sharpe</th><th>Max drawdown</th><th>EW benchmark return</th><th>EW benchmark Sharpe</th></tr></thead><tbody><tr><td>Today's members (first version)</td><td>0 bps</td><td>24.1%</td><td>0.81</td><td class="neg">&minus;43%</td><td>19.1%</td><td>0.75</td></tr><tr><td>Today's members (first version)</td><td>25 bps</td><td>21.5%</td><td>0.74</td><td class="neg">&minus;43%</td><td>18.8%</td><td>0.74</td></tr><tr><td>Point-in-time members</td><td>0 bps</td><td>10.9%</td><td>0.42</td><td class="neg">&minus;44%</td><td>12.5%</td><td>0.51</td></tr><tr><td>Point-in-time members</td><td>25 bps</td><td>8.6%</td><td>0.34</td><td class="neg">&minus;44%</td><td>12.2%</td><td>0.50</td></tr></tbody></table></div>
+<h3>Factor exposure</h3>
+<p>Monthly returns above the T-bill rate regressed on the Fama-French factors, with Newey-West t-statistics in brackets.
+Betas are from the five-factor plus momentum model. "All recent buyers" holds every index member with at least one insider
+purchase in the look-back window, which tests the purchases on their own with one observation per month.</p>
+<div class="table-wrap"><table><thead><tr><th>Portfolio</th><th>CAPM alpha (t)</th><th>FF5+Mom alpha (t)</th><th>Market</th><th>Size</th><th>Value</th><th>Momentum</th></tr></thead><tbody><tr><td>Strategy</td><td class="neg">&minus;8.4% (&minus;1.5)</td><td class="neg">&minus;2.9% (&minus;1.4)</td><td>1.02</td><td>0.64</td><td>0.31</td><td class="neg">&minus;0.30</td></tr><tr><td>Strategy minus EW benchmark</td><td class="neg">&minus;3.8% (&minus;1.7)</td><td class="neg">&minus;2.1% (&minus;1.4)</td><td>0.04</td><td>0.06</td><td>0.12</td><td class="neg">&minus;0.17</td></tr><tr><td>Strategy minus MDY</td><td class="neg">&minus;4.0% (&minus;1.4)</td><td class="neg">&minus;1.3% (&minus;0.8)</td><td>0.07</td><td>0.11</td><td>0.14</td><td class="neg">&minus;0.27</td></tr><tr><td>All recent buyers (1 month)</td><td class="neg">&minus;12.4% (&minus;2.3)</td><td class="neg">&minus;8.0% (&minus;2.8)</td><td>1.03</td><td>0.76</td><td>0.32</td><td class="neg">&minus;0.11</td></tr><tr><td>All recent buyers (3 months)</td><td class="neg">&minus;7.2% (&minus;1.4)</td><td class="neg">&minus;2.0% (&minus;1.0)</td><td>1.00</td><td>0.68</td><td>0.36</td><td class="neg">&minus;0.22</td></tr><tr><td>Sellers only (3 months)</td><td class="neg">&minus;5.7% (&minus;1.8)</td><td class="neg">&minus;2.8% (&minus;1.8)</td><td>0.99</td><td>0.57</td><td>0.11</td><td class="neg">&minus;0.03</td></tr><tr><td>Buyers minus sellers (3 months)</td><td class="neg">&minus;1.5% (&minus;0.5)</td><td>+0.8% (0.5)</td><td>0.01</td><td>0.11</td><td>0.25</td><td class="neg">&minus;0.18</td></tr></tbody></table></div>
+<h3>Drawdowns</h3>
+<div class="table-wrap"><table><thead><tr><th>Benchmark fall (month ends)</th><th>EW benchmark</th><th>MDY</th><th>Strategy</th></tr></thead><tbody><tr><td>2020-01-02 to 2020-04-01</td><td class="neg">&minus;36.9%</td><td class="neg">&minus;34.0%</td><td class="neg">&minus;44.2%</td></tr><tr><td>2022-01-03 to 2022-10-03</td><td class="neg">&minus;19.3%</td><td class="neg">&minus;19.6%</td><td class="neg">&minus;19.3%</td></tr><tr><td>2023-08-01 to 2023-11-01</td><td class="neg">&minus;12.6%</td><td class="neg">&minus;12.2%</td><td class="neg">&minus;14.7%</td></tr><tr><td>2024-12-02 to 2025-05-01</td><td class="neg">&minus;14.6%</td><td class="neg">&minus;14.2%</td><td class="neg">&minus;16.0%</td></tr></tbody></table></div>
+<h3>Rising and falling markets</h3>
+<div class="table-wrap"><table><thead><tr><th>Year</th><th>Months</th><th>Strategy</th><th>EW benchmark</th><th>MDY</th><th>Strategy minus EW</th></tr></thead><tbody><tr><td>2019</td><td>11</td><td>+11.1%</td><td>+12.7%</td><td>+13.9%</td><td class="neg">&minus;1.6%</td></tr><tr><td>2020</td><td>12</td><td>+0.0%</td><td>+13.2%</td><td>+11.6%</td><td class="neg">&minus;13.2%</td></tr><tr><td>2021</td><td>12</td><td>+38.1%</td><td>+29.9%</td><td>+26.5%</td><td>+8.2%</td></tr><tr><td>2022</td><td>12</td><td class="neg">&minus;8.0%</td><td class="neg">&minus;11.4%</td><td class="neg">&minus;13.9%</td><td>+3.4%</td></tr><tr><td>2023</td><td>12</td><td>+15.5%</td><td>+19.2%</td><td>+16.2%</td><td class="neg">&minus;3.7%</td></tr><tr><td>2024</td><td>12</td><td>+5.1%</td><td>+10.8%</td><td>+13.7%</td><td class="neg">&minus;5.6%</td></tr><tr><td>2025</td><td>12</td><td>+1.5%</td><td>+8.3%</td><td>+8.9%</td><td class="neg">&minus;6.8%</td></tr><tr><td>2026</td><td>6</td><td>+6.0%</td><td>+11.8%</td><td>+14.6%</td><td class="neg">&minus;5.8%</td></tr></tbody></table></div>
+<p class="small">Average monthly return:</p>
+<div class="table-wrap"><table><thead><tr><th>Months when MDY was</th><th>Months</th><th>Strategy</th><th>EW benchmark</th><th>MDY</th><th>Strategy minus EW</th></tr></thead><tbody><tr><td>up</td><td>51</td><td>+5.61%</td><td>+5.33%</td><td>+5.02%</td><td>+0.28%</td></tr><tr><td>down</td><td>38</td><td class="neg">&minus;5.22%</td><td class="neg">&minus;4.39%</td><td class="neg">&minus;4.12%</td><td class="neg">&minus;0.83%</td></tr></tbody></table></div>
 
-  .chips { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
-  .chip {
-    background: var(--surface); border: 1px solid var(--border); border-left: 2px solid var(--accent);
-    border-radius: 3px; padding: 12px 18px 10px; box-shadow: var(--shadow); min-width: 128px;
-  }
-  .chip .num { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
-  .chip .num.pos { color: var(--pos); }
-  .chip .label { font-size: 10.5px; color: var(--ink-3); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.04em; }
+<h2 id="limits">Limitations</h2>
+<ul>
+<li>Prices are missing for some companies that left the index, mostly takeovers. The &minus;30% bankruptcy delisting return
+is an average from the literature, not the actual loss for each company. A full fix would need a survivorship-free price
+database such as CRSP.</li>
+<li>Wikipedia lists "selected" index changes. The rebuilt membership is checked by requiring about 400 members on every
+date, but a missed change would not show up.</li>
+<li>The period (2018&ndash;2026) includes the 2020 and 2022 falls but no long bear market. Wikipedia's change history only goes
+back to 2012, so 2008 can't be added this way.</li>
+<li>Trading costs are a flat charge per dollar traded, not a market-impact model.</li>
+<li>The look-back and portfolio size shown in the summary were picked after seeing the first version's results. The full
+grid and the random-portfolio check are shown for that reason.</li>
+<li>Yahoo Finance's price API is unofficial.</li>
+</ul>
 
-  /* ---------- Sections ---------- */
-  section { margin-bottom: 56px; scroll-margin-top: 24px; }
-  .section-head {
-    display: flex; align-items: center; gap: 14px; margin-bottom: 22px;
-    background: var(--ink); border-radius: 3px; padding: 10px 16px;
-  }
-  .section-num {
-    font-family: var(--mono); font-size: 12px; color: var(--bg); background: var(--accent);
-    border-radius: 2px; padding: 3px 7px; font-weight: 700;
-  }
-  .section-head h2 {
-    color: var(--surface); text-transform: uppercase; letter-spacing: 0.04em;
-  }
-  h2 {
-    font-family: var(--serif); font-weight: 700; font-size: 21px; margin: 0; letter-spacing: -0.005em;
-  }
-  h3 { font-family: var(--serif); font-weight: 700; font-size: 15.5px; margin: 28px 0 10px; letter-spacing: -0.005em; }
-  p { max-width: 72ch; color: var(--ink); }
-  p.lede { font-size: 17px; color: var(--ink-2); max-width: 68ch; }
-  .prose-note { color: var(--ink-2); font-size: 14.5px; }
+<h2 id="changes">Changes</h2>
+<p>The first version (August 2026) used today's index members for the whole period, no trading costs, a Sharpe ratio
+without a risk-free rate, no factor adjustment, trade-level statistics and same-day entry. All of these were changed in
+October 2026. The full list, including corrections to the first version's report, is in the
+<a href="https://github.com/jmp1909/sec-inside-trading/blob/main/CHANGELOG.md">changelog</a>.</p>
 
-  .card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
-    padding: 24px; box-shadow: var(--shadow); margin: 18px 0;
-  }
-  .scrollx { overflow-x: auto; }
-
-  /* ---------- Tables ---------- */
-  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
-  table.data { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-  th, td { padding: 9px 12px; text-align: right; white-space: nowrap; }
-  th:first-child, td:first-child { text-align: left; font-family: var(--sans); }
-  thead th {
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--surface); background: var(--ink-2); border-bottom: 1px solid var(--border); font-weight: 700;
-  }
-  tbody tr { border-bottom: 1px solid var(--border); }
-  tbody tr:nth-child(even) { background: var(--surface-2); }
-  tbody tr:last-child { border-bottom: none; }
-  td.pos { color: var(--pos); font-weight: 600; }
-  td.neg { color: var(--neg); font-weight: 600; }
-  tr.highlight td { background: var(--surface-2); font-weight: 700; }
-
-  .ticker {
-    font-family: var(--mono); background: var(--surface-2); color: var(--ink);
-    border-radius: 2px; padding: 1px 6px; font-size: 12px; font-weight: 700;
-  }
-
-  /* ---------- Bar charts (CSS-driven) ---------- */
-  .barlist { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
-  .barrow { display: grid; grid-template-columns: 130px 1fr 64px; align-items: center; gap: 10px; font-size: 13px; }
-  .barrow .rowlabel { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); }
-  .bartrack { position: relative; height: 16px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
-  .barfill { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 4px; background: var(--accent); }
-  .barfill.pos { background: var(--pos); }
-  .barval { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; font-size: 12.5px; color: var(--ink-2); }
-
-  .divtrack { position: relative; height: 18px; background: var(--surface-2); border-radius: 4px; }
-  .divzero { position: absolute; top: -3px; bottom: -3px; left: 50%; width: 1px; background: var(--border); }
-  .divbar { position: absolute; top: 0; bottom: 0; border-radius: 3px; }
-  .divbar.p { background: var(--pos); }
-  .divbar.s { background: var(--neg); }
-
-  /* ---------- heatmap table ---------- */
-  table.heat td { text-align: center; font-family: var(--mono); font-variant-numeric: tabular-nums; border-radius: 6px; }
-  table.heat .cell { padding: 12px 10px; border-radius: 8px; }
-  .cell .sharpe { font-size: 15px; font-weight: 700; }
-  .cell .sub { font-size: 10.5px; color: var(--ink-3); margin-top: 3px; }
-
-  /* ---------- equity chart ---------- */
-  .chart-wrap { position: relative; }
-  #equitychart { width: 100%; height: auto; display: block; }
-  .legend { display: flex; gap: 20px; font-size: 12.5px; margin-bottom: 10px; }
-  .legend .item { display: flex; align-items: center; gap: 7px; }
-  .legend .swatch { width: 12px; height: 3px; border-radius: 2px; }
-  .tooltip {
-    position: absolute; pointer-events: none; background: var(--ink); color: var(--bg);
-    font-family: var(--mono); font-size: 11.5px; padding: 8px 10px; border-radius: 6px;
-    opacity: 0; transition: opacity 0.08s; white-space: nowrap; z-index: 5; transform: translate(-50%, -110%);
-  }
-  .callout {
-    border: 1px solid var(--border); border-left: 3px solid var(--accent); background: var(--surface);
-    border-radius: 2px; padding: 18px 20px 16px; margin: 20px 0; box-shadow: var(--shadow);
-  }
-  .callout.warn { border-left-color: var(--neg); }
-  .callout h4 {
-    margin: 0 0 6px; font-size: 12.5px; font-family: var(--serif); font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-2);
-  }
-  .callout p { margin: 0; font-size: 14px; color: var(--ink-2); }
-
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  @media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } }
-
-  .foot {
-    margin-top: 70px; padding-top: 18px; border-top: 1px solid var(--border);
-    font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); letter-spacing: 0.02em;
-  }
-
-  .kv { display: grid; grid-template-columns: max-content 1fr; gap: 9px 18px; font-size: 13.5px; }
-  .kv dt {
-    color: var(--accent); font-family: var(--serif); font-size: 11px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.04em; padding-top: 1px;
-  }
-  .kv dd { margin: 0; color: var(--ink); }
-</style>
-
-<div class="page">
-  <aside class="rail">
-    <div class="rail-title">Contents</div>
-    <nav>
-      <a href="#summary">Executive Summary</a>
-      <a href="#methodology">Methodology</a>
-      <a href="#event-study">Event Study</a>
-      <a href="#portfolio">Portfolio Backtest</a>
-      <a href="#findings">Key Findings</a>
-      <a href="#limitations">Limitations</a>
-      <a href="#appendix">Appendix</a>
-    </nav>
-  </aside>
-
-  <main>
-    <div class="masthead">
-      <div class="eyebrow">Research Note &middot; Insider Transactions</div>
-      <h1 class="title">Does Insider Buying Predict Returns?</h1>
-      <p class="subtitle">An event study and monthly-rebalanced portfolio backtest of open-market insider purchases and sales across the S&amp;P MidCap 400, built entirely on SEC EDGAR Form&nbsp;4 structured data and Yahoo Finance daily prices.</p>
-      <div class="byline">Aug 2018 &ndash; Mar 2026 filing window &middot; S&amp;P MidCap 400 universe &middot; compiled 2026-08-11 &middot; <a href="live-signal.html">see today's live signal &rarr;</a></div>
-      <div class="chips">
-        <div class="chip"><div class="num">400</div><div class="label">companies in universe</div></div>
-        <div class="chip"><div class="num">87,528</div><div class="label">insider transactions</div></div>
-        <div class="chip"><div class="num pos">+30.5pp</div><div class="label">1yr purchase spread vs. benchmark</div></div>
-        <div class="chip"><div class="num">0.86</div><div class="label">best portfolio Sharpe (vs 0.83 bench)</div></div>
-      </div>
-    </div>
-
-    <section id="summary">
-      <div class="section-head"><span class="section-num">01</span><h2>Executive Summary</h2></div>
-      <p class="lede">Insider buying predicts returns. That's a real finding, not a fluke, but it's a modest tilt rather than a golden signal. Open-market purchases by officers and directors beat an unconditional benchmark at every horizon we tested, from one trading day out to two years, and the effect holds up even after turning it into an actual monthly-rebalanced trading strategy. Here's the catch: the edge only survives risk-adjustment once the portfolio is spread across enough names. Concentrate on the "highest-conviction" bets and the raw returns look spectacular. Once you account for the drawdowns, though, they're worse than just holding the market.</p>
-      <div class="callout">
-        <h4>The one-paragraph version</h4>
-        <p>Buy right after an insider purchase and hold for a year, and you'd average +51.3% (median +21.9%) against a +20.8% benchmark. That gap is statistically significant, p &lt; 0.0001. Turn it into an actual strategy, ranking the universe by trailing 3-month net insider dollar buying, holding the top 50, rebalancing monthly, and it beats a diversified buy-and-hold on both return (24.0% vs 19.1% annualized) and risk-adjusted return (Sharpe 0.86 vs 0.83). Go more concentrated, top 10 instead of top 50, and raw returns climb even higher, but the Sharpe ratio drops below the market's. Concentration adds drawdown faster than it adds return.</p>
-      </div>
-    </section>
-
-    <section id="methodology">
-      <div class="section-head"><span class="section-num">02</span><h2>Methodology</h2></div>
-      <p>Every data source below got a live test pull before we relied on it. A few candidates didn't survive that check: CoinGecko, Stooq, and OpenSky's historical endpoint were all tried and dropped, and none of them made it into this pipeline.</p>
-      <div class="card">
-        <dl class="kv">
-          <dt>Universe</dt><dd>S&amp;P MidCap 400, current constituents applied retroactively. That introduces survivorship bias (see Limitations). Pulled from Wikipedia's constituent list and cross-matched to SEC CIKs via <span class="ticker">company_tickers.json</span>; all 400 tickers resolved.</dd>
-          <dt>Insider data</dt><dd>SEC's official quarterly bulk structured datasets (<span class="ticker">NONDERIV_TRANS.tsv</span> / <span class="ticker">SUBMISSION.tsv</span> / <span class="ticker">REPORTINGOWNER.tsv</span>), 33 quarterly files covering 2018Q3 through 2026Q1. Filtered down to open-market codes <span class="ticker">P</span> (purchase) and <span class="ticker">S</span> (sale) only. Option exercises, grants, and tax-withholding transactions don't reflect an actual trading decision, so they were left out.</dd>
-          <dt>Price data</dt><dd>Yahoo Finance daily adjusted close, full history per ticker, 2,740,075 price-days across 400 tickers.</dd>
-          <dt>Event timing</dt><dd>All returns anchored on <strong>filing date</strong>, not transaction date. This avoids lookahead bias: some filers report years-old transactions late, and the market couldn't have reacted before the filing existed.</dd>
-          <dt>Benchmark</dt><dd>Mean forward return from <em>every</em> trading day for every universe ticker, not just insider-filing days (763,483 ticker-day observations at the 1-day horizon). This isolates the insider signal from ordinary mid-cap drift.</dd>
-          <dt>Exclusions</dt><dd>3 tickers (CHRD, VAL, WFRD) excluded. A scan of every company's 8-K Item 1.03 filings turned up genuine Chapter 11 reorganizations in the window, and pre/post-reorg price series don't produce continuous, meaningful returns. 181 transactions (0.21% of the dataset) affected.</dd>
-        </dl>
-      </div>
-    </section>
-
-    <section id="event-study">
-      <div class="section-head"><span class="section-num">03</span><h2>Event Study</h2></div>
-      <p>We measured forward returns at seven horizons for every open-market purchase (P) and sale (S), then compared each one against the unconditional benchmark for that horizon.</p>
-
-      <div class="card scrollx">
-        <table class="data">
-          <thead>
-            <tr><th>Horizon</th><th>P mean</th><th>P median</th><th>P win%</th><th>S mean</th><th>S median</th><th>S win%</th><th>Benchmark</th></tr>
-          </thead>
-          <tbody id="event-table"></tbody>
-        </table>
-      </div>
-
-      <h3>Spread vs. benchmark, by horizon</h3>
-      <p class="prose-note">Purchases (green, right) beat the benchmark at every horizon. Sales (rust, left) lag it at every horizon too. The pattern holds cleanly from 1 day out to 2 years.</p>
-      <div class="card">
-        <div id="divergechart"></div>
-      </div>
-
-      <div class="callout">
-        <h4>Reading the mean vs. median gap</h4>
-        <p>At the 2-year horizon, the mean purchase return is +105.5%, but the median is +40.5%. A handful of large winners are pulling the average up. Both numbers are real. The honest one-line summary is "the typical purchase returns about 40% over 2 years, with a fat right tail," not "the average purchase returns 105%."</p>
-      </div>
-    </section>
-
-    <section id="portfolio">
-      <div class="section-head"><span class="section-num">04</span><h2>Portfolio Backtest</h2></div>
-      <p>The event study shows the signal exists at the individual-transaction level. The harder question: does it survive becoming an actual, tradable, diversified strategy? Here's the setup: rank the universe monthly by trailing net insider dollar value (purchases minus sales), hold the top N equal-weight, rebalance monthly.</p>
-
-      <h3>Best configuration (net dollar value, 3-month window, top 50): cumulative growth of $1</h3>
-      <div class="card">
-        <div class="legend">
-          <div class="item"><span class="swatch" style="background:var(--accent)"></span>Insider-signal portfolio</div>
-          <div class="item"><span class="swatch" style="background:var(--ink-3)"></span>Equal-weight universe (benchmark)</div>
-        </div>
-        <div class="chart-wrap">
-          <svg id="equitychart" viewBox="0 0 960 380" preserveAspectRatio="xMidYMid meet"></svg>
-          <div class="tooltip" id="tooltip"></div>
-        </div>
-      </div>
-
-      <h3>Full grid: lookback window &times; portfolio size (Sharpe ratio)</h3>
-      <p class="prose-note">Cell shading scales with Sharpe ratio. Benchmark Sharpe is 0.83, so only cells brighter than that actually beat the market on a risk-adjusted basis.</p>
-      <div class="card scrollx">
-        <table class="heat" id="heatmap"></table>
-      </div>
-
-      <h3>Does combining signals help? (net dollar value vs. buyer count vs. concentration)</h3>
-      <p class="prose-note">We tested whether "many insiders buying" (breadth) or "large value from few buyers" (concentration) refines the base signal, using the best-performing window (3 months). Neither did. The simplest signal won.</p>
-      <div class="card">
-        <div class="barlist" id="signalbars"></div>
-      </div>
-    </section>
-
-    <section id="findings">
-      <div class="section-head"><span class="section-num">05</span><h2>Key Findings</h2></div>
-      <ol style="padding-left: 20px; max-width: 72ch;">
-        <li style="margin-bottom: 10px;"><strong>The signal is real.</strong> Insider purchases predict outperformance and sales predict underperformance at every horizon from 1 day to 2 years, against a proper unconditional benchmark, with strong statistical significance (p &lt; 0.02 everywhere, mostly p &lt; 0.0001).</li>
-        <li style="margin-bottom: 10px;"><strong>It survives becoming a real strategy.</strong> A monthly-rebalanced long portfolio built on trailing net insider dollar value beats a diversified buy-and-hold on raw return in every configuration tested (9 window &times; size combinations).</li>
-        <li style="margin-bottom: 10px;"><strong>But the edge is thin once you price in risk.</strong> Only the most diversified configuration (top 50, 3-month window) beats the benchmark's Sharpe ratio. Concentrated top-10 portfolios have eye-catching raw returns and meaningfully worse risk-adjusted performance than just holding the market.</li>
-        <li style="margin-bottom: 10px;"><strong>Simple beats clever.</strong> Refining the signal with buyer-count (breadth) or value-per-buyer (concentration) underperformed the plain net-dollar-value ranking on every metric we tested. That's a negative result, and it's worth keeping rather than burying.</li>
-      </ol>
-    </section>
-
-    <section id="limitations">
-      <div class="section-head"><span class="section-num">06</span><h2>Limitations &amp; Caveats</h2></div>
-      <div class="grid2">
-        <div class="callout warn">
-          <h4>Survivorship bias</h4>
-          <p>The universe is today's 400 MidCap constituents applied retroactively across all 8 years. Companies that were genuine mid-caps in 2018&ndash;2026 but were later acquired, went bankrupt beyond our 3 known cases, or otherwise dropped out of the index are invisible to this study. This likely inflates results somewhat.</p>
-        </div>
-        <div class="callout warn">
-          <h4>Mean vs. median</h4>
-          <p>Headline mean returns (especially at 1&ndash;2yr horizons) are pulled upward by a fat right tail of large winners. Medians, reported alongside every mean in this note, are the more representative "typical outcome" figure.</p>
-        </div>
-        <div class="callout warn">
-          <h4>Unofficial price source</h4>
-          <p>Yahoo Finance's chart API is undocumented and could change or rate-limit without notice. It's extremely widely used in practice, but isn't an SLA-backed data source the way SEC EDGAR is.</p>
-        </div>
-        <div class="callout warn">
-          <h4>Data-entry noise</h4>
-          <p>A handful of SEC filings contain evident typos (e.g., a transaction dated 2028, filed 2023). Anchoring all analysis on filing date rather than transaction date renders these harmless, but they're a reminder the underlying filings aren't perfectly clean.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="appendix">
-      <div class="section-head"><span class="section-num">07</span><h2>Appendix</h2></div>
-      <h3>Universe composition by GICS sector</h3>
-      <div class="card">
-        <div class="barlist" id="sectorbars"></div>
-      </div>
-
-      <h3>Chapter 11 exclusions</h3>
-      <div class="card scrollx">
-        <table class="data">
-          <thead><tr><th>Ticker</th><th>Issuer</th><th>Item 1.03 filing dates</th><th>Transactions excluded</th></tr></thead>
-          <tbody>
-            <tr><td><span class="ticker">CHRD</span></td><td>Oasis Petroleum &rarr; Chord Energy</td><td>2020-09-30, 2020-11-13</td><td>87</td></tr>
-            <tr><td><span class="ticker">VAL</span></td><td>Valaris</td><td>2020-08-19, 2021-03-05</td><td>43</td></tr>
-            <tr><td><span class="ticker">WFRD</span></td><td>Weatherford International</td><td>2019-07-02, 2019-09-13</td><td>51</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>Data sources</h3>
-      <div class="card">
-        <dl class="kv">
-          <dt>Universe list</dt><dd>en.wikipedia.org/wiki/List_of_S%26P_400_companies</dd>
-          <dt>Ticker&rarr;CIK map</dt><dd>sec.gov/files/company_tickers.json</dd>
-          <dt>Insider transactions</dt><dd>sec.gov/data-research/sec-markets-data/insider-transactions-data-sets</dd>
-          <dt>8-K item codes</dt><dd>data.sec.gov/submissions/CIK##########.json</dd>
-          <dt>Prices</dt><dd>query1.finance.yahoo.com/v8/finance/chart/&lbrace;ticker&rbrace;</dd>
-        </dl>
-      </div>
-    </section>
-
-    <div class="foot">
-      sec-insider-trading &middot; S&amp;P MidCap 400 insider-transaction study &middot; built on SEC EDGAR + Yahoo Finance &middot; not investment advice
-    </div>
-  </main>
-</div>
-
-<script>
-(function() {
-  var eventRows = [
-    {h:"1 day",  pm:0.0062925805, pmed:0.0064557528, pw:0.5964612758, sm:-0.0008586761, smed:-0.0000828296, sw:0.4954677191, b:0.0007778062},
-    {h:"5 days", pm:0.0070386186, pmed:0.0103305743, pw:0.5775259972, sm:0.0009176056, smed:0.0020704408, sw:0.5179379663, b:0.0038040145},
-    {h:"10 days",pm:0.013836943,  pmed:0.0154180783, pw:0.594288375,  sm:0.0027838605, smed:0.0026349511, sw:0.5159770611, b:0.0074351392},
-    {h:"20 days",pm:0.0312449684, pmed:0.0224164194, pw:0.6108955456, sm:0.0072442336, smed:0.0040347984, sw:0.5216871185, b:0.0147798932},
-    {h:"6 months",pm:0.1936548991,pmed:0.1047413408, pw:0.6639746635, sm:0.0745192148, smed:0.0306588158, sw:0.5453055104, b:0.0960180333},
-    {h:"1 year", pm:0.5125587694, pmed:0.2192095129, pw:0.7040968652, sm:0.1373168227, smed:0.0583963464, sw:0.5591157375, b:0.2077544706},
-    {h:"2 years",pm:1.054798539,  pmed:0.4053810695, pw:0.7911202698, sm:0.264714092,  smed:0.1476014602, sw:0.6084996072, b:0.4410596428}
-  ];
-
-  function pct(x, digits) { digits = digits === undefined ? 1 : digits; return (x*100).toFixed(digits) + "%"; }
-  function signedPct(x, digits) { var s = x >= 0 ? "+" : ""; return s + pct(x, digits); }
-
-  var tbody = document.getElementById("event-table");
-  eventRows.forEach(function(r) {
-    var tr = document.createElement("tr");
-    tr.innerHTML =
-      "<td>" + r.h + "</td>" +
-      "<td class='pos'>" + signedPct(r.pm) + "</td>" +
-      "<td class='pos'>" + signedPct(r.pmed) + "</td>" +
-      "<td>" + pct(r.pw, 0) + "</td>" +
-      "<td class='" + (r.sm >= 0 ? "pos" : "neg") + "'>" + signedPct(r.sm) + "</td>" +
-      "<td class='" + (r.smed >= 0 ? "pos" : "neg") + "'>" + signedPct(r.smed) + "</td>" +
-      "<td>" + pct(r.sw, 0) + "</td>" +
-      "<td>" + signedPct(r.b) + "</td>";
-    tbody.appendChild(tr);
-  });
-
-  // ---- diverging bar chart: P-bench (right, pos) vs S-bench (left, neg) ----
-  var diverge = document.getElementById("divergechart");
-  var spreads = eventRows.map(function(r) { return {h: r.h, p: r.pm - r.b, s: r.sm - r.b}; });
-  var maxAbs = Math.max.apply(null, spreads.map(function(d) { return Math.max(Math.abs(d.p), Math.abs(d.s)); }));
-  var html = "<div class='barlist'>";
-  spreads.forEach(function(d) {
-    var pPct = (Math.abs(d.p) / maxAbs) * 50;
-    var sPct = (Math.abs(d.s) / maxAbs) * 50;
-    html += "<div class='barrow' style='grid-template-columns:70px 1fr 150px;'>" +
-      "<div class='rowlabel'>" + d.h + "</div>" +
-      "<div class='divtrack'>" +
-        "<div class='divzero'></div>" +
-        "<div class='divbar s' style='right:50%; width:" + sPct + "%;'></div>" +
-        "<div class='divbar p' style='left:50%; width:" + pPct + "%;'></div>" +
-      "</div>" +
-      "<div class='barval'><span class='neg'>" + signedPct(d.s) + "</span> &nbsp;/&nbsp; <span class='pos'>" + signedPct(d.p) + "</span></div>" +
-    "</div>";
-  });
-  html += "</div>";
-  diverge.innerHTML = html;
-
-  // ---- equity curve ----
-  var equityData = [{"date": "2019-02-01", "portfolio": 1.0511305149090566, "benchmark": 1.0533642095786249}, {"date": "2019-03-01", "portfolio": 1.049792758312579, "benchmark": 1.053452482131073}, {"date": "2019-04-01", "portfolio": 1.0683495653254471, "benchmark": 1.0749258611986874}, {"date": "2019-05-01", "portfolio": 0.9992704533604544, "benchmark": 1.0090942995183447}, {"date": "2019-06-03", "portfolio": 1.0764392941836476, "benchmark": 1.0909545498662645}, {"date": "2019-07-01", "portfolio": 1.0776113975358097, "benchmark": 1.09053624416982}, {"date": "2019-08-01", "portfolio": 0.9996885280772704, "benchmark": 1.0541249839971454}, {"date": "2019-09-03", "portfolio": 1.0599691005756968, "benchmark": 1.0837542792352852}, {"date": "2019-10-01", "portfolio": 1.1437917785871472, "benchmark": 1.150595679920811}, {"date": "2019-11-01", "portfolio": 1.1695801423862195, "benchmark": 1.1633027125354107}, {"date": "2019-12-02", "portfolio": 1.2476889589507936, "benchmark": 1.2167626455028886}, {"date": "2020-01-02", "portfolio": 1.2083694958845237, "benchmark": 1.1905071007689312}, {"date": "2020-02-03", "portfolio": 1.1014070088698469, "benchmark": 1.0964664684477}, {"date": "2020-03-02", "portfolio": 0.7097087076670683, "benchmark": 0.769241110720913}, {"date": "2020-04-01", "portfolio": 0.9043194335791548, "benchmark": 0.943754929874702}, {"date": "2020-05-01", "portfolio": 1.0410597576164304, "benchmark": 1.075998068347464}, {"date": "2020-06-01", "portfolio": 1.0188865933107918, "benchmark": 1.0729107140621068}, {"date": "2020-07-01", "portfolio": 1.0581719985875178, "benchmark": 1.1501628158185733}, {"date": "2020-08-03", "portfolio": 1.1367670749513288, "benchmark": 1.2094186405754386}, {"date": "2020-09-01", "portfolio": 1.0699102471127298, "benchmark": 1.1623842886452629}, {"date": "2020-10-01", "portfolio": 1.156686895432773, "benchmark": 1.214670430334865}, {"date": "2020-11-02", "portfolio": 1.36708296209873, "benchmark": 1.4184800087316758}, {"date": "2020-12-01", "portfolio": 1.4549738839454516, "benchmark": 1.4857569856595645}, {"date": "2021-01-04", "portfolio": 1.8871178618531772, "benchmark": 1.6171106148628134}, {"date": "2021-02-01", "portfolio": 2.134069713873396, "benchmark": 1.766957300254267}, {"date": "2021-03-01", "portfolio": 2.261310660360244, "benchmark": 1.8346191430650096}, {"date": "2021-04-01", "portfolio": 2.377727271774942, "benchmark": 1.8999687513422443}, {"date": "2021-05-03", "portfolio": 2.438515953476045, "benchmark": 1.932865585564056}, {"date": "2021-06-01", "portfolio": 2.4514467194694274, "benchmark": 1.9280788101054387}, {"date": "2021-07-01", "portfolio": 2.417937233883286, "benchmark": 1.9034756510517823}, {"date": "2021-08-02", "portfolio": 2.489978687361884, "benchmark": 1.9667106773833989}, {"date": "2021-09-01", "portfolio": 2.541270251163393, "benchmark": 1.9419591999960677}, {"date": "2021-10-01", "portfolio": 2.672382353270304, "benchmark": 2.050015424838284}, {"date": "2021-11-01", "portfolio": 2.484184502108061, "benchmark": 1.9165882732353932}, {"date": "2021-12-01", "portfolio": 2.7008365537164307, "benchmark": 2.0563141820861017}, {"date": "2022-01-03", "portfolio": 2.6349928631756967, "benchmark": 1.9348590513529595}, {"date": "2022-02-01", "portfolio": 2.605972775624206, "benchmark": 1.901019546120756}, {"date": "2022-03-01", "portfolio": 2.738435870710064, "benchmark": 1.984094177222621}, {"date": "2022-04-01", "portfolio": 2.5430991678484136, "benchmark": 1.8462077749108208}, {"date": "2022-05-02", "portfolio": 2.612356293280587, "benchmark": 1.8452560133228224}, {"date": "2022-06-01", "portfolio": 2.469985678809647, "benchmark": 1.7155782630791914}, {"date": "2022-07-01", "portfolio": 2.7123147262689757, "benchmark": 1.8805355064901896}, {"date": "2022-08-01", "portfolio": 2.6232263591276306, "benchmark": 1.8050181046549827}, {"date": "2022-09-01", "portfolio": 2.4488883232048964, "benchmark": 1.7032979030376638}, {"date": "2022-10-03", "portfolio": 2.6782786793419024, "benchmark": 1.852368438247058}, {"date": "2022-11-01", "portfolio": 2.881512718634037, "benchmark": 1.973652342022106}, {"date": "2022-12-01", "portfolio": 2.7860505816392145, "benchmark": 1.8676356773021745}, {"date": "2023-01-03", "portfolio": 3.1619933738380426, "benchmark": 2.114864095815357}, {"date": "2023-02-01", "portfolio": 3.0690877276804733, "benchmark": 2.0559407711876987}, {"date": "2023-03-01", "portfolio": 2.919011855293509, "benchmark": 1.9893386540676008}, {"date": "2023-04-03", "portfolio": 2.891054067522347, "benchmark": 1.9644420535301728}, {"date": "2023-05-01", "portfolio": 2.8385003761897143, "benchmark": 1.9550569742725592}, {"date": "2023-06-01", "portfolio": 3.06096595325441, "benchmark": 2.1212846564580654}, {"date": "2023-07-03", "portfolio": 3.303129609335845, "benchmark": 2.221028617568348}, {"date": "2023-08-01", "portfolio": 3.2113965974254124, "benchmark": 2.1967663074798582}, {"date": "2023-09-01", "portfolio": 2.9204520523572404, "benchmark": 2.040082219614399}, {"date": "2023-10-02", "portfolio": 2.8559515467641496, "benchmark": 1.966020984162289}, {"date": "2023-11-01", "portfolio": 3.2115441182398583, "benchmark": 2.207987294184726}, {"date": "2023-12-01", "portfolio": 3.427157229933444, "benchmark": 2.357890869989712}, {"date": "2024-01-02", "portfolio": 3.3229070455090497, "benchmark": 2.3401850239819098}, {"date": "2024-02-01", "portfolio": 3.424781916912801, "benchmark": 2.449693287671048}, {"date": "2024-03-01", "portfolio": 3.558895468720191, "benchmark": 2.540080536859827}, {"date": "2024-04-01", "portfolio": 3.397797140361582, "benchmark": 2.420712192414169}, {"date": "2024-05-01", "portfolio": 3.5369342044005343, "benchmark": 2.5318348526045944}, {"date": "2024-06-03", "portfolio": 3.4543156612408605, "benchmark": 2.4937690312065404}, {"date": "2024-07-01", "portfolio": 3.630077754289621, "benchmark": 2.626048538700884}, {"date": "2024-08-01", "portfolio": 3.690390401466994, "benchmark": 2.640070823584643}, {"date": "2024-09-03", "portfolio": 3.8559109959598543, "benchmark": 2.7395027613474974}, {"date": "2024-10-01", "portfolio": 3.848745889564389, "benchmark": 2.757825583155475}, {"date": "2024-11-01", "portfolio": 4.142927116539422, "benchmark": 2.995875668862162}, {"date": "2024-12-02", "portfolio": 3.827148003585747, "benchmark": 2.774420031879332}, {"date": "2025-01-02", "portfolio": 3.9370315955249886, "benchmark": 2.8670227687620726}, {"date": "2025-02-03", "portfolio": 3.74735098454636, "benchmark": 2.737616252601113}, {"date": "2025-03-03", "portfolio": 3.688147105423838, "benchmark": 2.6632173430939576}, {"date": "2025-04-01", "portfolio": 3.561313929424567, "benchmark": 2.6042445251751336}, {"date": "2025-05-01", "portfolio": 3.760078403073381, "benchmark": 2.7503721544905364}, {"date": "2025-06-02", "portfolio": 4.09172018888947, "benchmark": 2.921603651903641}, {"date": "2025-07-01", "portfolio": 3.9990097818724544, "benchmark": 2.890252742516599}, {"date": "2025-08-01", "portfolio": 4.3343112186552135, "benchmark": 3.068581459725036}, {"date": "2025-09-02", "portfolio": 4.321742825176906, "benchmark": 3.1091764169581877}, {"date": "2025-10-01", "portfolio": 4.174502678807792, "benchmark": 3.0737411568622592}, {"date": "2025-11-03", "portfolio": 4.349665766535075, "benchmark": 3.155183112390397}, {"date": "2025-12-01", "portfolio": 4.436296262695664, "benchmark": 3.2139459199392406}, {"date": "2026-01-02", "portfolio": 4.621755507067877, "benchmark": 3.334565470440357}, {"date": "2026-02-02", "portfolio": 4.737385129357093, "benchmark": 3.4166522818874405}, {"date": "2026-03-02", "portfolio": 4.479022597569897, "benchmark": 3.22729543005646}, {"date": "2026-04-01", "portfolio": 4.768258510478512, "benchmark": 3.4566437136713586}, {"date": "2026-05-01", "portfolio": 4.814790495556501, "benchmark": 3.5229862960345857}, {"date": "2026-06-01", "portfolio": 4.940676286001707, "benchmark": 3.66136854197672}];
-
-  var svg = document.getElementById("equitychart");
-  var tooltip = document.getElementById("tooltip");
-  var W = 960, H = 380, ML = 42, MR = 14, MT = 16, MB = 34;
-  var plotW = W - ML - MR, plotH = H - MT - MB;
-
-  var yMax = 5.2, yMin = 0.5;
-  var n = equityData.length;
-
-  function xFor(i) { return ML + (i / (n - 1)) * plotW; }
-  function yFor(v) { return MT + plotH - ((v - yMin) / (yMax - yMin)) * plotH; }
-
-  var svgns = "http://www.w3.org/2000/svg";
-  function el(tag, attrs) {
-    var e = document.createElementNS(svgns, tag);
-    for (var k in attrs) e.setAttribute(k, attrs[k]);
-    return e;
-  }
-
-  // gridlines + y labels
-  [1, 2, 3, 4, 5].forEach(function(v) {
-    var y = yFor(v);
-    svg.appendChild(el("line", {x1: ML, x2: W - MR, y1: y, y2: y, stroke: "var(--border)", "stroke-width": 1}));
-    var t = el("text", {x: 6, y: y + 4, "font-family": "var(--mono)", "font-size": 10, fill: "var(--ink-3)"});
-    t.textContent = "$" + v;
-    svg.appendChild(t);
-  });
-
-  // x labels: Jan of each year
-  var yearSeen = {};
-  equityData.forEach(function(d, i) {
-    var year = d.date.slice(0, 4);
-    var month = d.date.slice(5, 7);
-    if (month === "01" && !yearSeen[year]) {
-      yearSeen[year] = true;
-      var x = xFor(i);
-      svg.appendChild(el("line", {x1: x, x2: x, y1: MT, y2: H - MB, stroke: "var(--border)", "stroke-width": 1}));
-      var t = el("text", {x: x, y: H - 12, "font-family": "var(--mono)", "font-size": 10, fill: "var(--ink-3)", "text-anchor": "middle"});
-      t.textContent = year;
-      svg.appendChild(t);
-    }
-  });
-
-  function pathFor(key) {
-    return equityData.map(function(d, i) {
-      return (i === 0 ? "M" : "L") + xFor(i).toFixed(1) + "," + yFor(d[key]).toFixed(1);
-    }).join(" ");
-  }
-
-  svg.appendChild(el("path", {d: pathFor("benchmark"), fill: "none", stroke: "var(--ink-3)", "stroke-width": 2, "stroke-linejoin": "round"}));
-  svg.appendChild(el("path", {d: pathFor("portfolio"), fill: "none", stroke: "var(--accent)", "stroke-width": 2.5, "stroke-linejoin": "round"}));
-
-  // end-point markers + labels
-  var lastI = n - 1;
-  [["portfolio", "var(--accent)"], ["benchmark", "var(--ink-3)"]].forEach(function(pair) {
-    var key = pair[0], color = pair[1];
-    var cx = xFor(lastI), cy = yFor(equityData[lastI][key]);
-    svg.appendChild(el("circle", {cx: cx, cy: cy, r: 3.5, fill: color}));
-    var t = el("text", {x: cx - 6, y: cy - 8, "font-family": "var(--mono)", "font-size": 11, fill: color, "text-anchor": "end", "font-weight": "700"});
-    t.textContent = "$" + equityData[lastI][key].toFixed(2);
-    svg.appendChild(t);
-  });
-
-  // hover interaction
-  var hoverLine = el("line", {y1: MT, y2: H - MB, stroke: "var(--ink-3)", "stroke-width": 1, opacity: 0});
-  svg.appendChild(hoverLine);
-  var hoverDotP = el("circle", {r: 4, fill: "var(--accent)", opacity: 0});
-  var hoverDotB = el("circle", {r: 4, fill: "var(--ink-3)", opacity: 0});
-  svg.appendChild(hoverDotP);
-  svg.appendChild(hoverDotB);
-
-  var hitArea = el("rect", {x: ML, y: MT, width: plotW, height: plotH, fill: "transparent"});
-  svg.appendChild(hitArea);
-
-  function nearestIndex(mouseX) {
-    var rel = (mouseX - ML) / plotW;
-    var idx = Math.round(rel * (n - 1));
-    return Math.max(0, Math.min(n - 1, idx));
-  }
-
-  hitArea.addEventListener("mousemove", function(evt) {
-    var rect = svg.getBoundingClientRect();
-    var scaleX = W / rect.width;
-    var mouseX = (evt.clientX - rect.left) * scaleX;
-    var i = nearestIndex(mouseX);
-    var d = equityData[i];
-    var x = xFor(i);
-    hoverLine.setAttribute("x1", x); hoverLine.setAttribute("x2", x); hoverLine.setAttribute("opacity", 1);
-    hoverDotP.setAttribute("cx", x); hoverDotP.setAttribute("cy", yFor(d.portfolio)); hoverDotP.setAttribute("opacity", 1);
-    hoverDotB.setAttribute("cx", x); hoverDotB.setAttribute("cy", yFor(d.benchmark)); hoverDotB.setAttribute("opacity", 1);
-
-    var scaleXBack = rect.width / W;
-    tooltip.style.left = (x * scaleXBack) + "px";
-    tooltip.style.top = (yFor(d.portfolio) * (rect.height / H)) + "px";
-    tooltip.style.opacity = 1;
-    tooltip.innerHTML = d.date + "<br>Portfolio: $" + d.portfolio.toFixed(2) + "<br>Benchmark: $" + d.benchmark.toFixed(2);
-  });
-  hitArea.addEventListener("mouseleave", function() {
-    hoverLine.setAttribute("opacity", 0);
-    hoverDotP.setAttribute("opacity", 0);
-    hoverDotB.setAttribute("opacity", 0);
-    tooltip.style.opacity = 0;
-  });
-
-  // ---- heatmap grid ----
-  var grid = [{"window_months": 1, "portfolio_size": 10, "port_sharpe": 0.5439606560662075, "port_ann_return": 0.3058971113136948}, {"window_months": 1, "portfolio_size": 20, "port_sharpe": 0.7973980241493176, "port_ann_return": 0.3007824027504597}, {"window_months": 1, "portfolio_size": 50, "port_sharpe": 0.7974107463250724, "port_ann_return": 0.2157801573599067}, {"window_months": 3, "portfolio_size": 10, "port_sharpe": 0.5252205979933545, "port_ann_return": 0.2961737605715764}, {"window_months": 3, "portfolio_size": 20, "port_sharpe": 0.793316670264365, "port_ann_return": 0.3046886127713499}, {"window_months": 3, "portfolio_size": 50, "port_sharpe": 0.8570345549446262, "port_ann_return": 0.2403499505663886}, {"window_months": 6, "portfolio_size": 10, "port_sharpe": 0.5324230516124183, "port_ann_return": 0.2986128364893861}, {"window_months": 6, "portfolio_size": 20, "port_sharpe": 0.607474757596876, "port_ann_return": 0.2396408950108262}, {"window_months": 6, "portfolio_size": 50, "port_sharpe": 0.8082864767584238, "port_ann_return": 0.2380450988511779}];
-  var windows = [1, 3, 6], sizes = [10, 20, 50];
-  var maxSharpe = Math.max.apply(null, grid.map(function(g) { return g.port_sharpe; }));
-  var minSharpe = Math.min.apply(null, grid.map(function(g) { return g.port_sharpe; }));
-
-  function sharpeColor(s) {
-    var t = (s - minSharpe) / (maxSharpe - minSharpe);
-    // interpolate a light->accent navy ramp using CSS var isn't directly possible in JS, use fixed hex ramp
-    var stops = [[240,240,239],[187,193,201],[112,124,144],[41,53,79]];
-    var seg = t * (stops.length - 1);
-    var i0 = Math.floor(seg), i1 = Math.min(stops.length - 1, i0 + 1);
-    var f = seg - i0;
-    var c0 = stops[i0], c1 = stops[i1];
-    var r = Math.round(c0[0] + (c1[0]-c0[0])*f);
-    var g = Math.round(c0[1] + (c1[1]-c0[1])*f);
-    var b = Math.round(c0[2] + (c1[2]-c0[2])*f);
-    return "rgb(" + r + "," + g + "," + b + ")";
-  }
-
-  var heat = document.getElementById("heatmap");
-  var thead = "<thead><tr><th></th>" + sizes.map(function(s){return "<th>Top " + s + "</th>";}).join("") + "</tr></thead>";
-  var rowsHtml = "";
-  windows.forEach(function(w) {
-    rowsHtml += "<tr><th style='text-align:left; font-family:var(--mono); color:var(--ink-3); font-size:11px;'>" + w + "mo window</th>";
-    sizes.forEach(function(sz) {
-      var rec = grid.find(function(g) { return g.window_months === w && g.portfolio_size === sz; });
-      var bg = sharpeColor(rec.port_sharpe);
-      var textColor = rec.port_sharpe > (minSharpe + (maxSharpe-minSharpe)*0.55) ? "#FAFAFA" : "var(--ink)";
-      rowsHtml += "<td class='cell' style='background:" + bg + "; color:" + textColor + ";'>" +
-        "<div class='sharpe'>" + rec.port_sharpe.toFixed(2) + "</div>" +
-        "<div class='sub' style='color:" + textColor + "; opacity:0.75;'>" + signedPct(rec.port_ann_return, 1) + " ann.</div>" +
-      "</td>";
-    });
-    rowsHtml += "</tr>";
-  });
-  heat.innerHTML = thead + "<tbody>" + rowsHtml + "</tbody>";
-
-  // ---- signal comparison bars ----
-  var signals = [{"signal": "net_dollar_value", "portfolio_size": 20, "sharpe": 0.793316670264365}, {"signal": "net_dollar_value", "portfolio_size": 50, "sharpe": 0.8570345549446262}, {"signal": "buyer_count", "portfolio_size": 20, "sharpe": 0.6820832746149321}, {"signal": "buyer_count", "portfolio_size": 50, "sharpe": 0.7651331683216234}, {"signal": "value_per_buyer", "portfolio_size": 20, "sharpe": 0.6506136732620175}, {"signal": "value_per_buyer", "portfolio_size": 50, "sharpe": 0.6520207975373621}];
-  var sbEl = document.getElementById("signalbars");
-  var maxSharpeSig = Math.max.apply(null, signals.map(function(s){return s.sharpe;}));
-  var sbHtml = "";
-  var labelMap = {net_dollar_value: "Net $ value", buyer_count: "Buyer count", value_per_buyer: "$ / buyer"};
-  signals.forEach(function(s) {
-    var w = (s.sharpe / maxSharpeSig) * 100;
-    sbHtml += "<div class='barrow'>" +
-      "<div class='rowlabel'>" + labelMap[s.signal] + " &middot; top " + s.portfolio_size + "</div>" +
-      "<div class='bartrack'><div class='barfill pos' style='width:" + w + "%;'></div></div>" +
-      "<div class='barval'>" + s.sharpe.toFixed(2) + "</div>" +
-    "</div>";
-  });
-  sbEl.innerHTML = sbHtml;
-
-  // ---- sector bars ----
-  var sectors = [{"name": "Industrials", "count": 87}, {"name": "Financials", "count": 65}, {"name": "Consumer Discretionary", "count": 57}, {"name": "Information Technology", "count": 49}, {"name": "Health Care", "count": 35}, {"name": "Real Estate", "count": 28}, {"name": "Materials", "count": 26}, {"name": "Energy", "count": 17}, {"name": "Consumer Staples", "count": 15}, {"name": "Utilities", "count": 15}, {"name": "Communication Services", "count": 6}];
-  var sectorEl = document.getElementById("sectorbars");
-  var maxCount = Math.max.apply(null, sectors.map(function(s){return s.count;}));
-  var secHtml = "";
-  sectors.forEach(function(s) {
-    var w = (s.count / maxCount) * 100;
-    secHtml += "<div class='barrow'>" +
-      "<div class='rowlabel'>" + s.name + "</div>" +
-      "<div class='bartrack'><div class='barfill' style='width:" + w + "%;'></div></div>" +
-      "<div class='barval'>" + s.count + "</div>" +
-    "</div>";
-  });
-  sectorEl.innerHTML = secHtml;
-
-})();
-</script>
+<footer>Code and data: <a href="https://github.com/jmp1909/sec-inside-trading">github.com/jmp1909/sec-inside-trading</a>.
+Not investment advice.</footer>
+</main>
+</body>
+</html>
