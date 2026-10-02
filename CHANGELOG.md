@@ -1,5 +1,14 @@
 # Changelog
 
+## 2 October 2026: snapshot refresh
+
+- New insider-activity snapshot (`data/live/live_signal_2026-10-02.csv`, 277
+  companies) and regenerated `live-signal.html`.
+- `live_signal.py` no longer calls the ranking "validated in the backtest" or
+  the 3-month window the one that "performed best"; the corrected backtest found
+  no edge.
+- README notes the new Chapter 11 treatment.
+
 ## 2 October 2026: revised results
 
 The revised pipeline was run on the real data. Main results (point-in-time
