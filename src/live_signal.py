@@ -1,7 +1,9 @@
 """
-Live insider-buying signal: today's ranked list of S&P MidCap 400 companies
-by trailing net insider dollar value, using the same methodology validated
-in the backtest (net dollar value, 3-month window, top 50).
+Current insider-activity snapshot: today's S&P MidCap 400 members ranked by
+trailing net insider dollar value, the same ranking used in the backtest
+(net dollar value, 90-day window). In the corrected backtest a portfolio built
+on this ranking did not beat the market, so this is information about insider
+activity, not a trading signal.
 
 Unlike the historical pipeline, this does NOT use SEC's bulk quarterly files
 (those lag by roughly a quarter). It scrapes individual Form 4 filings
@@ -26,7 +28,7 @@ import requests
 HEADERS = {"User-Agent": "Research Project joaomatteop@gmail.com"}
 RATE_PER_SEC = 9
 MAX_WORKERS = 20
-LOOKBACK_DAYS = 90  # matches the 3-month window that performed best in the backtest
+LOOKBACK_DAYS = 90  # same 3-month window as the backtest headline configuration
 TOP_N = 50
 
 _session = requests.Session()

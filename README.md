@@ -54,9 +54,12 @@ Each of the main objections to the first version, and what the pipeline now does
 | **Mostly a bull market** | Market-adjusted event returns remove the common market move. Results are broken out by calendar year, and by up vs down months (upside / downside capture). | `event_study.py`, `robustness.py` |
 
 Also fixed along the way: event-study entry is now the close of the trading day
-*after* the filing date (Form 4s are often filed after the close), and the step
-that builds `event_study_final.csv` is part of `event_study.py` instead of
-being missing from the pipeline.
+*after* the filing date (Form 4s are often filed after the close); companies that
+filed for Chapter 11 stay in the study up to the filing with a -30% delisting
+return, instead of being dropped (filings checked by hand, false positives in
+`data/bankruptcy_false_positives.csv`); and the step that builds
+`event_study_final.csv` is part of `event_study.py` instead of being missing
+from the pipeline.
 
 ## Data sources
 
