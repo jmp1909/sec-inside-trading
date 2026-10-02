@@ -42,7 +42,7 @@ _NAME_STOPWORDS = {
 def normalize_name(name) -> str:
     if not isinstance(name, str):
         return ""
-    s = re.sub(r"\[.*?\]", "", name.lower())
+    s = re.sub(r"\[.*?\]", "", name.lower()).replace("'", "").replace("\u2019", "")  # Casey's -> caseys
     s = re.sub(r"[^a-z0-9 ]+", " ", s.replace("&", " and "))
     return " ".join(t for t in s.split() if t not in _NAME_STOPWORDS)
 

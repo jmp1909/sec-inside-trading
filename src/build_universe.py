@@ -10,7 +10,8 @@ winners).
 
 Method: start from the current constituent list and walk Wikipedia's "Selected past
 and announced changes" table backwards in time, undoing each change. Ticker renames
-and reused tickers are canonicalized with the hand-checked data/ticker_overrides.csv.
+and reused tickers are canonicalized with the hand-checked data/ticker_overrides.csv;
+data/cik_overrides.csv covers renamed companies whose SEC name no longer matches.
 The reconstruction is sanity-checked by printing the member count over time (it should
 stay ~400; one-day 401s around spin-offs are real).
 
@@ -171,6 +172,12 @@ def main():
         return pd.Series({"cik": None, "cik_source": None})
 
     companies[["cik", "cik_source"]] = companies.apply(resolve, axis=1)
+    # hand-verified renames where the SEC legal name no longer resembles the index name
+    overrides = pd.read_csv("data/cik_overrides.csv")
+    for o in overrides.itertuples():
+        hit = companies["ticker"] == o.ticker
+        if hit.any() and companies.loc[hit, "cik"].isna().all():
+            companies.loc[hit, ["cik", "cik_source"]] = [o.cik, "cik_overrides"]
     companies["cik"] = companies["cik"].astype("Int64")
     companies["cik_padded"] = companies["cik"].map(lambda c: f"{int(c):010d}" if pd.notna(c) else None)
     companies["yahoo_ticker"] = companies["ticker"].map(lambda t: None if "~" in t else yahoo_symbol(t))
