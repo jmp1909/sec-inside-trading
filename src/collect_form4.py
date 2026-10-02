@@ -15,7 +15,6 @@ Quarterly zips are cached in data/sec_bulk/ (gitignored) so reruns don't refetch
 Source: https://www.sec.gov/data-research/sec-markets-data/insider-transactions-data-sets
 """
 import argparse
-import io
 import re
 import zipfile
 from datetime import date
@@ -58,7 +57,7 @@ def fetch_zip(quarter: str) -> zipfile.ZipFile | None:
         if r.status_code != 200:
             return None
         path.write_bytes(r.content)
-    return zipfile.ZipFile(io.BytesIO(path.read_bytes()))
+    return zipfile.ZipFile(path)  # reads lazily from the cached file
 
 
 def normalize_symbols(raw) -> list[str]:
@@ -141,27 +140,20 @@ def main():
     print(f"Fetching {len(quarters)} quarterly bulk files: {quarters[0]} .. {quarters[-1]}", flush=True)
 
     universe = pd.read_csv("data/universe.csv", dtype={"cik_padded": str})
-    known_ciks = set(universe["cik"].dropna().astype(int))
-    # symbols of the not-yet-resolved companies: keep their candidate issuers' rows too,
-    # so the whole national file never has to sit in memory
-    unresolved_symbols = set()
-    for t in universe.loc[universe["cik"].isna(), "ticker"]:
-        b = t.split("~")[0].upper()
-        unresolved_symbols |= {b, b.replace(".", "-"), b.replace(".", ""), *b.split("/")}
 
-    trans_frames, symbol_frames = [], []
+    # pass 1: issuer symbols from every quarter, so CIKs of delisted companies are resolved
+    # before any transactions are filtered (otherwise filings that spelled the symbol
+    # differently in some quarter would be lost)
+    zips, symbol_frames = {}, []
     for q in quarters:
         z = fetch_zip(q)
         if z is None:
             print(f"  {q}: not available yet, skipping", flush=True)
             continue
-        merged, subs = read_quarter(z)
-        sym = symbol_table(subs, q)
-        symbol_frames.append(sym)
-        keep = known_ciks | set(sym.loc[sym["symbol"].isin(unresolved_symbols), "cik"])
-        trans_frames.append(merged[merged["ISSUERCIK"].isin(keep)])
-        print(f"  {q}: {len(merged)} total P/S rows in bulk file, {len(trans_frames[-1])} kept", flush=True)
-
+        zips[q] = z
+        subs = pd.read_csv(z.open("SUBMISSION.tsv"), sep="\t", low_memory=False,
+                           usecols=["ACCESSION_NUMBER", "ISSUERCIK", "ISSUERNAME", "ISSUERTRADINGSYMBOL"])
+        symbol_frames.append(symbol_table(subs, q))
     symbols = pd.concat(symbol_frames, ignore_index=True)
     if universe["cik"].isna().any():
         universe = resolve_missing_ciks(universe, symbols)
@@ -169,9 +161,15 @@ def main():
         universe.to_csv("data/universe.csv", index=False)
         print("Updated data/universe.csv with the newly resolved CIKs")
 
+    # pass 2: open-market P/S transactions for every universe CIK
     universe_ciks = set(universe["cik"].dropna().astype(int))
+    trans_frames = []
+    for q, z in zips.items():
+        merged, _ = read_quarter(z)
+        trans_frames.append(merged[merged["ISSUERCIK"].isin(universe_ciks)])
+        print(f"  {q}: {len(merged)} total P/S rows in bulk file, {len(trans_frames[-1])} in our universe", flush=True)
+
     combined = pd.concat(trans_frames, ignore_index=True)
-    combined = combined[combined["ISSUERCIK"].isin(universe_ciks)]
     combined.to_csv(args.out, index=False)
     print(f"\nWrote {len(combined)} P/S transactions for our universe to {args.out}")
 
