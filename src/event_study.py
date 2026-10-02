@@ -32,13 +32,14 @@ from scipy import stats
 from common import suffix
 
 HORIZONS = ["1d", "5d", "10d", "20d", "6m", "1y", "2y"]
-BANKRUPT_TICKERS = set(pd.read_csv("data/bankruptcies.csv")["ticker"])
 
 
 def build_final(mode: str) -> pd.DataFrame:
-    """form4_with_returns -> event_study_final: bankruptcies out, universe filter, has a price."""
+    """form4_with_returns -> event_study_final: universe filter, has a price.
+
+    Chapter 11 companies are no longer dropped: their returns run to the petition date
+    plus a delisting return (see common.load_prices_long)."""
     df = pd.read_csv("data/form4_with_returns.csv", parse_dates=["filing_date", "entry_date"])
-    df = df[~df["ticker"].isin(BANKRUPT_TICKERS)]
     df = df[df[f"member_{mode}"]]
     df = df[df["entry_date"].notna()]
     for h in HORIZONS:

@@ -1,21 +1,25 @@
 """
 Scan the universe for companies that filed for Chapter 11 (or receivership) during
 our study window, via 8-K Item 1.03 ("Bankruptcy or Receivership") filings.
-These get excluded from the event study since pre/post-reorg price series are
-not a continuous, meaningful return series.
+Each hit's 8-K was read by hand: filings about a subsidiary's bankruptcy (or mis-tagged
+filings) are listed in data/bankruptcy_false_positives.csv and dropped here. For the
+remaining companies the price series stops at the petition date with a delisting
+return (see common.load_prices_long), because pre/post-reorganization prices are not
+a continuous return series.
 """
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import date, timedelta
-
 import pandas as pd
 import requests
+
+from common import STUDY_END, STUDY_START
 
 HEADERS = {"User-Agent": "Research Project joaomatteop@gmail.com"}
 RATE_PER_SEC = 9
 MAX_WORKERS = 15
-START_DATE = (date.today() - timedelta(days=8 * 365)).isoformat()
+START_DATE = STUDY_START.date().isoformat()
+END_DATE = STUDY_END.date().isoformat()
 
 _session = requests.Session()
 _session.headers.update(HEADERS)
@@ -55,7 +59,7 @@ def check_bankruptcy(cik_padded: str, ticker: str):
         items = recent["items"][i] or ""
         if "1.03" in items.split(","):
             fdate = recent["filingDate"][i]
-            if fdate >= START_DATE:
+            if START_DATE <= fdate <= END_DATE:
                 hits.append(fdate)
     if hits:
         return {"ticker": ticker, "cik": cik_padded, "bankruptcy_8k_dates": hits}
@@ -85,6 +89,11 @@ def main():
                 print(f"  scanned {done}/{len(universe)} (elapsed {time.time()-t0:.0f}s)", flush=True)
 
     out = pd.DataFrame(results)
+    fp = pd.read_csv("data/bankruptcy_false_positives.csv")
+    dropped = out[out["ticker"].isin(fp["ticker"])]
+    if len(dropped):
+        print(f"Dropping {len(dropped)} verified false positives (subsidiary filings etc.): {list(dropped['ticker'])}")
+    out = out[~out["ticker"].isin(fp["ticker"])].sort_values("ticker")
     out.to_csv("data/bankruptcies.csv", index=False)
     print(f"\nFound {len(out)} companies with Item 1.03 filings in the window")
     print(f"Wrote data/bankruptcies.csv")

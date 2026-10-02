@@ -19,9 +19,6 @@ import pandas as pd
 from common import STUDY_END, STUDY_START, build_price_panel, load_prices_long, membership_mask, suffix
 from compute_returns import HORIZONS, forward_return_panels
 
-# same Chapter 11 tickers excluded from the event study, for consistency
-BANKRUPT_TICKERS = set(pd.read_csv("data/bankruptcies.csv")["ticker"])
-
 
 def main():
     parser = argparse.ArgumentParser()
@@ -29,7 +26,6 @@ def main():
     args = parser.parse_args()
 
     prices = load_prices_long()
-    prices = prices[~prices["ticker"].isin(BANKRUPT_TICKERS)]
     panel, _ = build_price_panel(prices)
     fwd = forward_return_panels(panel)
     mask = membership_mask(panel.index, panel.columns, args.universe).to_numpy()

@@ -24,6 +24,10 @@ STUDY_END = pd.Timestamp("2026-08-11")
 BACKTEST_START = pd.Timestamp("2019-02-01")
 BACKTEST_END = pd.Timestamp("2026-07-01")
 
+# Return applied when a stock's old equity stops at a Chapter 11 filing (Shumway 1997's
+# average delisting return for performance-related delistings)
+BANKRUPTCY_DELISTING_RETURN = -0.30
+
 # investable, survivorship-free benchmark: SPDR S&P MidCap 400 ETF (cap-weighted, net of its fee)
 ETF_BENCHMARK = "MDY"
 
@@ -125,10 +129,45 @@ def suffix(mode: str) -> str:
 
 # ---------------------------------------------------------------- prices
 
+def load_bankruptcies() -> pd.DataFrame:
+    """Verified Chapter 11 filings: ticker -> petition 8-K date (first Item 1.03 in the window)."""
+    b = pd.read_csv("data/bankruptcies.csv")
+    b["petition_date"] = pd.to_datetime(b["bankruptcy_8k_dates"].map(lambda s: min(eval(s))))
+    return b[["ticker", "petition_date"]]
+
+
 def load_prices_long() -> pd.DataFrame:
+    """Daily prices, with bankruptcies handled instead of the companies being dropped.
+
+    A company that files for Chapter 11 keeps its prices up to the petition 8-K date; the
+    next trading day gets one more price at BANKRUPTCY_DELISTING_RETURN below the last
+    close, and the series ends there. Yahoo often splices post-reorganization equity onto
+    the same ticker, so later prices are not a continuous return series and are dropped
+    (the company leaves the universe at the petition).
+    """
     prices = pd.read_csv("data/prices.csv")
     prices["date"] = pd.to_datetime(prices["date"], format="mixed")
-    return prices
+    try:
+        bk = load_bankruptcies()
+    except FileNotFoundError:
+        return prices
+    calendar = pd.DatetimeIndex(sorted(prices["date"].unique()))
+    keep = np.ones(len(prices), dtype=bool)
+    extra = []
+    for r in bk.itertuples():
+        mask = (prices["ticker"] == r.ticker).to_numpy()
+        if not mask.any():
+            continue
+        before = mask & (prices["date"] <= r.petition_date).to_numpy()
+        keep &= ~(mask & ~before)
+        if before.any():
+            last = prices.loc[before].sort_values("date").iloc[-1]
+            nxt = calendar[calendar > r.petition_date]
+            if len(nxt):
+                extra.append({"date": nxt[0], "adj_close": last["adj_close"] * (1 + BANKRUPTCY_DELISTING_RETURN),
+                              "ticker": r.ticker})
+    out = pd.concat([prices[keep], pd.DataFrame(extra)], ignore_index=True)
+    return out.sort_values(["ticker", "date"]).reset_index(drop=True)
 
 
 def build_price_panel(prices: pd.DataFrame):

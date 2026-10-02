@@ -115,7 +115,10 @@ def main():
     universe = pd.read_csv("data/universe.csv")
     if args.limit:
         universe = universe.head(args.limit)
-    jobs = [(r.ticker, r.yahoo_ticker, None if r.member_at_study_end else r.name) for r in universe.itertuples()]
+    # renamed companies verified by hand (data/cik_overrides.csv) skip the name check
+    verified = set(pd.read_csv("data/cik_overrides.csv")["ticker"])
+    jobs = [(r.ticker, r.yahoo_ticker, None if (r.member_at_study_end or r.ticker in verified) else r.name)
+            for r in universe.itertuples()]
     jobs.append((ETF_BENCHMARK, ETF_BENCHMARK, None))
 
     print(f"Fetching daily prices for {len(jobs)} tickers...", flush=True)

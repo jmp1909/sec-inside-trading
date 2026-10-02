@@ -49,8 +49,8 @@ Form 4 filings, because SEC's bulk files used for the historical study are about
 
 <div class="note">This is a snapshot, not a live feed. Insiders have to file a Form 4 within two business days of a
 trade, so the underlying data are fresh when the script runs, but this page only changes when it is re-run. Each run is
-saved in <code>data/live/</code>. The report's backtest results for this ranking are preliminary and being revised (see
-the <a href="index.html">report</a>), so this is not a validated trading signal.</div>
+saved in <code>data/live/</code>. In the <a href="index.html">report's</a> corrected backtest, a portfolio built on this
+ranking did not beat the market, so treat this as information about insider activity, not as a trading signal.</div>
 
 <p>{len(df)} companies had insider purchases or sales in the window: {(df.net_dollar_value > 0).sum()} with more buying
 than selling, {(df.net_dollar_value < 0).sum()} with more selling. In total there were {df.n_purchases.sum():,}

@@ -24,7 +24,7 @@ import warnings
 import numpy as np
 import pandas as pd
 
-from common import build_price_panel, is_member_on, load_prices_long, membership_mask
+from common import build_price_panel, is_member_on, load_membership, load_prices_long, membership_mask
 
 HORIZONS = {"1d": 1, "5d": 5, "10d": 10, "20d": 20, "6m": 126, "1y": 252, "2y": 504}
 
@@ -53,9 +53,21 @@ def main():
     # "NYSE:XXX" prefixes, multi-class tickers like "GEF,GEF.B", even literal "NONE").
     # Use issuer_cik -> our verified universe.csv ticker mapping instead of trusting it.
     universe = pd.read_csv("data/universe.csv").dropna(subset=["cik"])
-    universe = universe.drop_duplicates("cik", keep="first")
-    cik_to_ticker = dict(zip(universe["cik"].astype(int), universe["ticker"]))
-    txs["ticker"] = txs["issuer_cik"].map(cik_to_ticker)
+    universe["cik"] = universe["cik"].astype(int)
+    txs["ticker"] = txs["issuer_cik"].map(universe.drop_duplicates("cik", keep="first").set_index("cik")["ticker"])
+    # a CIK can sit behind two index tickers over time (e.g. Chemical Financial CHFC was
+    # renamed TCF in 2019): use whichever ticker was the index member on the filing date
+    shared = universe[universe["cik"].duplicated(keep=False)]
+    if len(shared):
+        membership = load_membership()
+        for cik, grp in shared.groupby("cik"):
+            iv = membership[membership["ticker"].isin(grp["ticker"])]
+            rows = txs.index[txs["issuer_cik"] == cik]
+            for i in rows:
+                d = txs.at[i, "filing_date"]
+                dist = np.where(d < iv["start_date"], (iv["start_date"] - d).dt.days,
+                                np.where(d >= iv["end_date"], (d - iv["end_date"]).dt.days, 0))
+                txs.at[i, "ticker"] = iv["ticker"].iloc[int(np.argmin(dist))]
     txs = txs.dropna(subset=["ticker"]).reset_index(drop=True)
 
     prices = load_prices_long()

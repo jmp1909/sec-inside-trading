@@ -151,6 +151,52 @@ def main():
                         pct(r.ew_avg, 2, True), pct(r.mdy_avg, 2, True), pct(r.strategy_minus_ew_avg, 2, True)]
                        for r in capture.itertuples()])
     pl_beat = (placebo.sharpe < head.port_sharpe).mean()
+    pl_p = 1 - pl_beat
+    bk = read("bankruptcies.csv")
+    ev_cur = read("report_event_study_current.csv")
+
+    def effect(lo, hi):
+        if lo > 0:
+            return "statistically significant"
+        if hi < 0:
+            return "statistically significant (negative)"
+        return "not statistically different from zero"
+
+    # where the first version's large raw returns came from (1-year return after a purchase)
+    decomp = ""
+    fin_cur = read("event_study_final_current.csv", usecols=["trans_code", "ret_1y", "bench_1y"])
+    if fin_cur is not None and ev_cur is not None:
+        pc = fin_cur[(fin_cur.trans_code == "P")].dropna(subset=["ret_1y"])
+        e_cur, e_pit = ev_cur.set_index("horizon").loc["1y"], y1
+        decomp = (f"<li>Why the first version's numbers were so much higher, for the one-year return after a purchase: "
+                  f"the raw average was {pct(pc.ret_1y.mean(), 1)} against {pct(e_cur.bench, 1)} for an index stock on any "
+                  f"day. But the market itself rose {pct(pc.bench_1y.mean(), 1)} on average over the same windows, because "
+                  f"insiders bought heavily around market lows such as March 2020. That leaves "
+                  f"{pct(pc.ret_1y.mean() - pc.bench_1y.mean(), 1)}. Counting each company and filing day once instead of "
+                  f"each transaction row cuts it to {pct(e_cur.p_abn_mean, 1)}, and using the index members at each date "
+                  f"cuts it to {pct(e_pit.p_abn_mean, 1)}.</li>")
+    d1 = ev.set_index("horizon").loc["1d"]
+
+    e20, e1y = effect(m20.p_abn_ci_lo, m20.p_abn_ci_hi), effect(y1.p_abn_ci_lo, y1.p_abn_ci_hi)
+    if e20 == e1y == "not statistically different from zero":
+        significance = "Neither is statistically different from zero."
+    elif e20 == e1y:
+        significance = f"Both are {e20}."
+    else:
+        significance = f"The 20-day figure is {e20}; the one-year figure is {e1y}."
+
+    beat = head.port_ann_return > head.bench_ann_return
+    verdict = (f"With the corrected method, the insider-buying portfolio {'beat' if beat else 'did worse than'} simply "
+               f"holding all index members in equal amounts ({pct(head.port_ann_return, 1)} vs "
+               f"{pct(head.bench_ann_return, 1)} a year after costs)")
+    if grid_cur is not None:
+        gc0 = grid_cur[(grid_cur.window_months == w) & (grid_cur.portfolio_size == n) & (grid_cur.cost_bps == 0)].iloc[0]
+        g0 = grid[(grid.window_months == w) & (grid.portfolio_size == n) & (grid.cost_bps == 0)].iloc[0]
+        verdict += (f". Most of the first version's apparent edge came from survivorship bias: run on today's index "
+                    f"members, as before, the same portfolio returns {pct(gc0.port_ann_return, 1)} a year before costs "
+                    f"and its benchmark {pct(gc0.bench_ann_return, 1)}; on the members at each date they return "
+                    f"{pct(g0.port_ann_return, 1)} and {pct(g0.bench_ann_return, 1)}")
+    verdict += "."
     yrs_beat = int((regimes.strategy_minus_ew > 0).sum())
 
     page = PAGE_HEAD.format(title="Does insider buying predict stock returns?") + f"""
@@ -161,21 +207,26 @@ def main():
 <nav class="toc"><a href="#summary">Summary</a> <a href="#data">Data and method</a> <a href="#events">Event study</a> <a href="#portfolio">Portfolio test</a> <a href="#checks">Checks</a> <a href="#limits">Limitations</a> <a href="#changes">Changes</a></nav>
 
 <h2 id="summary">Summary</h2>
+<p>{verdict}</p>
 <ul>
-<li>Measured against the market over the same dates, stocks beat it by {pct(m20.p_abn_mean, 1, True)} in the 20 trading days after an
-insider purchase (95% interval {pct(m20.p_abn_ci_lo, 1, True)} to {pct(m20.p_abn_ci_hi, 1, True)}) and by
-{pct(y1.p_abn_mean, 1, True)} over a year ({pct(y1.p_abn_ci_lo, 1, True)} to {pct(y1.p_abn_ci_hi, 1, True)}). After insider
-sales the figures were {pct(m20.s_abn_mean, 1, True)} and {pct(y1.s_abn_mean, 1, True)}.</li>
-<li>A portfolio of the {n} stocks with the most net insider buying over the previous {w} months, rebalanced monthly, returned
-{pct(head.port_ann_return, 1)} a year after trading costs of {c} basis points per trade, against {pct(head.bench_ann_return, 1)}
-for an equal-weighted portfolio of all index members and {pct(head.mdy_ann_return, 1)} for the MDY index fund. Its Sharpe ratio
-was {num(head.port_sharpe)} ({num(head.bench_sharpe)} and {num(head.mdy_sharpe)}); its worst drawdown was
-{pct(head.port_max_dd, 0)} ({pct(head.bench_max_dd, 0)} and {pct(head.mdy_max_dd, 0)}).</li>
-<li>After adjusting for market, size, value, profitability, investment and momentum exposure, the strategy's alpha was
-{pct(fs.alpha_annual, 1, True)} a year (t = {num(fs.alpha_t, 1)}); its return over the equal-weighted benchmark had an alpha of
-{pct(fa.alpha_annual, 1, True)} (t = {num(fa.alpha_t, 1)}).</li>
-<li>Its Sharpe ratio was higher than {pct(pl_beat, 0)} of 1,000 random {n}-stock portfolios drawn from the same stocks.
-It beat the equal-weighted benchmark in {yrs_beat} of {len(regimes)} calendar years.</li>
+<li>Measured against the average index member over the same days, stocks moved {pct(m20.p_abn_mean, 1, True)} in the 20
+trading days after an insider purchase (95% interval {pct(m20.p_abn_ci_lo, 1, True)} to {pct(m20.p_abn_ci_hi, 1, True)}) and
+{pct(y1.p_abn_mean, 1, True)} over a year ({pct(y1.p_abn_ci_lo, 1, True)} to {pct(y1.p_abn_ci_hi, 1, True)}).
+{significance}
+After insider sales the figures were {pct(m20.s_abn_mean, 1, True)} and {pct(y1.s_abn_mean, 1, True)}.</li>
+{decomp}
+<li>The {n}-stock portfolio ({w}-month look-back, rebalanced monthly) returned {pct(head.port_ann_return, 1)} a year after
+trading costs of {c} basis points per trade, against {pct(head.bench_ann_return, 1)} for the equal-weighted benchmark and
+{pct(head.mdy_ann_return, 1)} for the MDY index fund. Its Sharpe ratio was {num(head.port_sharpe)} ({num(head.bench_sharpe)} and
+{num(head.mdy_sharpe)}) and its worst drawdown {pct(head.port_max_dd, 0)} ({pct(head.bench_max_dd, 0)} and {pct(head.mdy_max_dd, 0)}).</li>
+<li>Adjusted for market, size, value, profitability, investment and momentum exposure, its alpha was
+{pct(fs.alpha_annual, 1, True)} a year (t = {num(fs.alpha_t, 1)}), and {pct(fa.alpha_annual, 1, True)} relative to the
+equal-weighted benchmark (t = {num(fa.alpha_t, 1)}).</li>
+<li>Its Sharpe ratio was higher than {pct(pl_beat, 0)} of 1,000 random {n}-stock portfolios from the same stocks
+(p = {num(pl_p, 2)}). It beat the equal-weighted benchmark in {yrs_beat} of {len(regimes)} calendar years.</li>
+<li>The first version's one-day return after a purchase (+0.6%) falls to {pct(d1.p_abn_mean, 2, True)} relative to the
+market when trades are entered at the close of the day after the filing rather than the filing day itself. Many Form 4s
+are filed after the market closes, so most of that first-day move could not have been captured.</li>
 </ul>
 
 <h2 id="data">Data and method</h2>
@@ -192,7 +243,9 @@ filed after the market closes.</li>
 exactly the same days.</li>
 <li><strong>Costs and Sharpe ratio:</strong> trading costs are charged on the value traded each month. Sharpe ratios use returns
 above the one-month Treasury bill rate.</li>
-<li><strong>Excluded:</strong> companies that filed for Chapter 11 during the period.</li>
+<li><strong>Bankruptcies:</strong> {len(bk)} companies filed for Chapter 11 during the period (each filing checked by hand).
+They are kept up to the filing date, then take a &minus;30% delisting return and leave the universe. The first version
+dropped such companies entirely.</li>
 </ul>
 
 <h2 id="events">Event study</h2>
@@ -239,8 +292,9 @@ purchase in the look-back window, which tests the purchases on their own with on
 
 <h2 id="limits">Limitations</h2>
 <ul>
-<li>Prices are missing for some companies that left the index, mostly takeovers. Companies that went through Chapter 11
-are excluded. A full fix would need a survivorship-free price database.</li>
+<li>Prices are missing for some companies that left the index, mostly takeovers. The &minus;30% bankruptcy delisting return
+is an average from the literature, not the actual loss for each company. A full fix would need a survivorship-free price
+database such as CRSP.</li>
 <li>Wikipedia lists "selected" index changes. The rebuilt membership is checked by requiring about 400 members on every
 date, but a missed change would not show up.</li>
 <li>The period (2018&ndash;2026) includes the 2020 and 2022 falls but no long bear market. Wikipedia's change history only goes

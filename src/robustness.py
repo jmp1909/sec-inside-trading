@@ -251,7 +251,7 @@ def main():
     md.append("## 5. Market regimes\n")
     md.append("| year | months | strategy | EW benchmark | MDY | strategy - EW |\n|---|---|---|---|---|---|")
     for y, r in reg.iterrows():
-        md.append(f"| {y} | {r['months']} | {r['strategy']:+.1%} | {r['ew_benchmark']:+.1%} | {r['mdy']:+.1%} | {r['strategy_minus_ew']:+.1%} |")
+        md.append(f"| {y} | {int(r['months'])} | {r['strategy']:+.1%} | {r['ew_benchmark']:+.1%} | {r['mdy']:+.1%} | {r['strategy_minus_ew']:+.1%} |")
     md.append(f"\nYears the strategy beat the EW benchmark: {(reg['strategy_minus_ew'] > 0).sum()} of {len(reg)}.\n")
     md.append("| regime | months | strategy avg/mo | EW avg/mo | MDY avg/mo | capture vs MDY | strategy - EW avg/mo |\n|---|---|---|---|---|---|---|")
     for r in capture.itertuples():

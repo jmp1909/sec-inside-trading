@@ -12,7 +12,9 @@ What changed vs the first version, and why:
     same way. --universe current reproduces the original survivorship-biased setup so
     the bias can be measured directly.
   * Delistings: a held stock that stops trading mid-month keeps its last price (cash at
-    the final close) instead of being dropped from the month's average.
+    the final close) instead of being dropped from the month's average. Chapter 11
+    filers are kept too, with a -30% delisting return at the petition (the first version
+    dropped them from the study entirely).
   * Trading costs: target weights are compared with the drifted weights from last month
     to get turnover (sum of |trade| / portfolio value, buys + sells). Net return =
     (1 + gross) * (1 - cost * turnover) - 1. The EW benchmark pays the same costs on
@@ -40,7 +42,6 @@ COSTS_BPS = [0, 10, 25, 50]
 # small account trading S&P 400 names; deliberately on the conservative side
 HEADLINE_COST_BPS = 25
 HEADLINE_CONFIG = (3, 50)
-BANKRUPT_TICKERS = set(pd.read_csv("data/bankruptcies.csv")["ticker"])
 
 
 class BacktestData:
@@ -55,12 +56,10 @@ class BacktestData:
         self.mode = mode
         txs = pd.read_csv("data/form4_with_returns.csv", usecols=[
             "ticker", "filing_date", "trans_code", "trade_value", "owner_cik"], parse_dates=["filing_date"])
-        txs = txs[~txs["ticker"].isin(BANKRUPT_TICKERS)]
         txs["signed_value"] = np.where(txs["trans_code"] == "P", txs["trade_value"], -txs["trade_value"])
         self.txs = txs
 
         prices = load_prices_long()
-        prices = prices[~prices["ticker"].isin(BANKRUPT_TICKERS)]
         panel, last_valid = build_price_panel(prices)
         self.etf = panel[ETF_BENCHMARK] if ETF_BENCHMARK in panel else None
         panel = panel.drop(columns=[ETF_BENCHMARK], errors="ignore")

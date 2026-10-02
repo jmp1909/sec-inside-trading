@@ -65,14 +65,19 @@ def line_chart(dates, series: dict, ylabel_fmt=lambda v: f"${v:.0f}", width=760,
         d = pd.Timestamp(year=yr, month=1, day=1)
         out.append(f'<line x1="{x(d):.1f}" x2="{x(d):.1f}" y1="{mt}" y2="{mt + ph}" stroke="#f0f0f0"/>')
         out.append(f'<text x="{x(d):.1f}" y="{height - 8}" text-anchor="middle" fill="#666">{yr}</text>')
+    labels = []
     for label, (vals, color, dash) in series.items():
         vals = np.asarray(vals, float)
         pts = " ".join(f"{x(d):.1f},{y(v):.1f}" for d, v in zip(dates, vals) if not np.isnan(v))
         da = f' stroke-dasharray="{dash}"' if dash else ""
         out.append(f'<polyline points="{pts}" fill="none" stroke="{color}" stroke-width="1.8"{da}/>')
         last = vals[~np.isnan(vals)][-1]
-        out.append(f'<text x="{x(dates[-1]) + 5:.1f}" y="{y(last) + 4:.1f}" fill="{color}">{html.escape(label)} '
-                   f'{ylabel_fmt(last) if ylabel_fmt else ""}</text>')
+        labels.append([y(last) + 4, color, f"{html.escape(label)} {ylabel_fmt(last)}"])
+    labels.sort()  # push end labels apart so they don't overlap
+    for i in range(1, len(labels)):
+        labels[i][0] = max(labels[i][0], labels[i - 1][0] + 13)
+    for ly, color, text in labels:
+        out.append(f'<text x="{x(dates[-1]) + 5:.1f}" y="{ly:.1f}" fill="{color}">{text}</text>')
     out.append("</svg>")
     return "".join(out)
 
